@@ -6,7 +6,6 @@
 #include <algorithm>
 
 using namespace std;
-jsjsj
 const int N = 100;
 struct duom
 {
