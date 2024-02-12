@@ -22,7 +22,7 @@ struct duom
 duom duomenys[N];
 int main()
 {
-    int n, sum = 0, m;
+    int n, m, s;
     cout << "keliu mokiniu skaiciuosite pazymius? " << endl;
 
     while (!(cin >> n) || n <= 0 || n > N)
@@ -89,11 +89,40 @@ int main()
             duomenys[i].gal_med = pazymiai[size / 2];
         }
     }
-    cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(16) << "GALUTINIS (VID.) " << setw(17) << "GALUTUNIS (MED.)" << endl;
-    cout << "------------------------------------------------------------------------" << endl;
-    for (int i = 0; i <= n-1; i++)
+      cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
+    while (true)
     {
-        cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(16) << duomenys[i].gal_vid << setw(17) << duomenys[i].gal_med << endl;
+        cin >> s;
+        if (cin.fail() || (s != 0 && s != 1))
+        {
+            cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+            cin.clear(); 
+            cin.ignore(10000, '\n'); 
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (s == 1)
+    {
+        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
+        cout << "------------------------------------------------------------------------" << endl;
+        for (int i = 0; i < n; i++)
+        {
+            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(10) << duomenys[i].gal_med << endl;
+        }
+
+    }
+    else if (s == 0)
+    {
+        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
+        cout << "------------------------------------------------------------------------" << endl;
+        for (int i = 0; i < n; i++)
+        {
+            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(10) << duomenys[i].gal_vid << endl;
+        }
     }
 
     return 0;
