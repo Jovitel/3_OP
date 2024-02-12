@@ -10,7 +10,7 @@ using namespace std;
 
 const int N = 100;
 const int MAX_ND = 10;
-struct duom
+struct duomeny
 {
     string pav;
     string vard;
@@ -22,7 +22,7 @@ struct duom
     double gal_bal;
     int gal_med;
 };
-duom duomenys[N];
+duomeny studentai[N];
 int main()
 {
     int m, s, a = 1, n = 0, pazymys, sum = 0, gen = 0;
@@ -31,9 +31,9 @@ int main()
     while (a == 1 && n < 100)
     {
         cout << "iveskite varda: " << endl;
-        cin >> duomenys[n].vard;
+        cin >> studentai[n].vard;
         cout << "iveskite pavarde: " << endl;
-        cin >> duomenys[n].pav;
+        cin >> studentai[n].pav;
         
         cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
         cin>>gen;
@@ -50,9 +50,10 @@ int main()
 
             for (int i = 0; i < MAX_ND; ++i)
             {
-                duomenys[n].nd[i] = distrib(gen); // Generuojame atsitiktinius namų darbų rezultatus
-                duomenys[n].nd_kiekis++;
+                studentai[n].nd[i] = distrib(gen); // Generuojame atsitiktinius namų darbų rezultatus
+                studentai[n].nd_kiekis++;
             }
+            studentai[n].egz = distrib(gen);
         }
         else if (gen == 0)
         {
@@ -64,31 +65,33 @@ int main()
                     cout << "Netinkamas pazymys, iveskite nauja: ";
                     continue;
                 }
-                if (duomenys[n].nd_kiekis < 100)
+                if (studentai[n].nd_kiekis < 100)
                 {
-                    duomenys[n].nd[duomenys[n].nd_kiekis++] = pazymys; // Pridedame naują namų darbo rezultatą
+                    studentai[n].nd[studentai[n].nd_kiekis++] = pazymys; // Pridedame naują namų darbo rezultatą
                 }
                 else
                 {
                     cout << "Pasiekėte maksimalų namų darbų skaičių!" << endl;
                     break;
                 }
+
+                cout << "Iveskite egzamino rezultata: ";
+                cin >> studentai[n].egz;
+                if (studentai[n].egz < 1 || studentai[n].egz > 10)
+                {
+                    cout << "Netinkamas pazymys, iveskite nauja: ";
+                    continue;
+                }
             }
         }
-        cout << "Iveskite egzamino rezultata: ";
-        cin >> duomenys[n].egz;
-        if (duomenys[n].egz < 1 || duomenys[n].egz > 10)
-        {
-            cout << "Netinkamas pazymys, iveskite nauja: ";
-            continue;
-        }
+        
 
-        for (int i = 0; i < duomenys[n].nd_kiekis; ++i)
+        for (int i = 0; i < studentai[n].nd_kiekis; ++i)
         {
-            sum += duomenys[n].nd[i];
+            sum += studentai[n].nd[i];
         }
-        duomenys[n].gal_vid = 0.4 * (static_cast<double>(sum) / duomenys[n].nd_kiekis) + 0.6 * duomenys[n].egz;
-        duomenys[n].gal_bal = 0.4 * duomenys[n].gal_vid + 0.6 * duomenys[n].egz;
+        studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd_kiekis) + 0.6 * studentai[n].egz;
+        studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egz;
         sum = 0; 
 
         // Pradedame naujo studento įrašymą arba baigiame įvedimą
@@ -110,23 +113,23 @@ int main()
     for (int i = 0; i <= n; i++)
     {
         int dydis;
-        dydis = 1 + duomenys[i].nd_kiekis;
+        dydis = 1 + studentai[i].nd_kiekis;
         int pazymiai[101];                         // Rezultatų masyvas, kuriame bus ir namų darbai, ir egzaminas
-        pazymiai[0] = duomenys[i].egz;             // Pirmas elementas yra egzaminas
-        for (int j = 0; j < duomenys[i].nd_kiekis; j++)
+        pazymiai[0] = studentai[i].egz;             // Pirmas elementas yra egzaminas
+        for (int j = 0; j < studentai[i].nd_kiekis; j++)
         {
-            pazymiai[j + 1] = duomenys[i].nd[j]; // Kiti elementai yra namų darbai
+            pazymiai[j + 1] = studentai[i].nd[j]; // Kiti elementai yra namų darbai
         }
 
         sort(pazymiai, pazymiai + dydis); // Surūšiuojame visus rezultatus
 
         if (dydis % 2 == 0) // Tikriname, ar rezultatų skaičius lyginis ar nelyginis
         {
-            duomenys[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2;
+            studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2;
         }
         else
         {
-            duomenys[i].gal_med = pazymiai[dydis / 2];
+            studentai[i].gal_med = pazymiai[dydis / 2];
         }
     }
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
@@ -151,7 +154,7 @@ int main()
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++)
         {
-            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(10) << duomenys[i].gal_med << endl;
+            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_med << endl;
         }
 
     }
@@ -161,7 +164,7 @@ int main()
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++)
         {
-            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(10) << duomenys[i].gal_vid << endl;
+            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_vid << endl;
         }
     }
 
