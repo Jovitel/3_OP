@@ -1,22 +1,22 @@
 # 1_OP
-V.pradinė 
+**V.pradinė**
 
 Programos pradžia.
-Įvedama:
+_Įvedama:_
 
 Kelių mokinių pažymiai bus apskaičiuojami
 Kiek bus įrašoma namų darbų pažymių
 Taip pat įvedami egzamino rezultatai
-Išvedama
+_Išvedama_
 
 Pavardė, vardas
 Galutinis balas arba mediana (pasirenkama)
 Neledžiama vartotojui įvesti nelogiškus atsakymus, tai padarius programa informuoja vartotoją
 (PVZ ten, kur skirta įvesti pažymius nuo 1 iki 10 nebus leidžiama įvesti didesnių skaičių arba raidžių)
 
-v0.1 release
+**v0.1 release**
 
-Atnaujinimai programoje:
+_Atnaujinimai programoje:_
 
 Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
 (tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su masyvais)
