@@ -128,11 +128,7 @@ void func()
             duomenys[i].gal_med = pazymiai[size / 2];
         }
     }
-<<<<<<< HEAD
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
-=======
-      cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
->>>>>>> v.pradinė
     while (true)
     {
         cin >> s;
@@ -171,7 +167,7 @@ void func()
 }
 void func_a()
 {
-     int m, s, a = 1, n = 0, pazymys, sum = 0, gen = 0;
+     int s, a = 1, n = 0, pazymys, sum = 0, pas = 0;
     random_device rd;
     mt19937 gen(rd());
     while (a == 1 && n < 100)
@@ -182,15 +178,15 @@ void func_a()
         cin >> studentai[n].pav;
         
         cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>gen;
-         while (cin.fail() || (gen != 0 && gen != 1))
+        cin>>pas;
+         while (cin.fail() || (pas != 0 && pas != 1))
         {
             cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> gen;
+            cin >> pas;
         }
-         if (gen == 1)
+         if (pas == 1)
         {
             uniform_int_distribution<int> distrib(1, 10);
 
@@ -201,7 +197,7 @@ void func_a()
             }
             studentai[n].egz = distrib(gen);
         }
-        else if (gen == 0)
+        else if (pas == 0)
         {
             cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
             while (cin >> pazymys && pazymys != 0)
