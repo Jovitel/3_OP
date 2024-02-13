@@ -27,6 +27,7 @@ duom duomenys[N];
 
 struct duomeny
 {
+<<<<<<< HEAD
     string pav;
     string vard;
     int nd[MAX_ND];
@@ -62,6 +63,8 @@ string generuojami_vardai(const vector<string>& vard, const vector<string>& pav)
 
 void func()
 {
+=======
+>>>>>>> v.pradinė
     int n, m, s;
     cout << "keliu mokiniu skaiciuosite pazymius? " << endl;
 
@@ -129,15 +132,24 @@ void func()
             duomenys[i].gal_med = pazymiai[size / 2];
         }
     }
+<<<<<<< HEAD
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
+=======
+      cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
+>>>>>>> v.pradinė
     while (true)
     {
         cin >> s;
         if (cin.fail() || (s != 0 && s != 1))
         {
             cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+<<<<<<< HEAD
             cin.clear();
             cin.ignore(10000, '\n');
+=======
+            cin.clear(); 
+            cin.ignore(10000, '\n'); 
+>>>>>>> v.pradinė
         }
         else
         {
