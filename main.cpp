@@ -27,7 +27,6 @@ duom duomenys[N];
 
 struct duomeny
 {
-<<<<<<< HEAD
     string pav;
     string vard;
     int nd[MAX_ND];
@@ -63,11 +62,8 @@ string generuojami_vardai(const vector<string>& vard, const vector<string>& pav)
 
 void func()
 {
-=======
->>>>>>> v.pradinė
     int n, m, s;
     cout << "keliu mokiniu skaiciuosite pazymius? " << endl;
-
     while (!(cin >> n) || n <= 0 || n > N)
     {
         cout << "Netinkamas skaicius, iveskite nauja: ";
@@ -143,13 +139,8 @@ void func()
         if (cin.fail() || (s != 0 && s != 1))
         {
             cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
-<<<<<<< HEAD
             cin.clear();
             cin.ignore(10000, '\n');
-=======
-            cin.clear(); 
-            cin.ignore(10000, '\n'); 
->>>>>>> v.pradinė
         }
         else
         {
