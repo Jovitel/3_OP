@@ -25,9 +25,9 @@ struct duomeny
 duomeny studentai[N];
 int main()
 {
-    int m, s, a = 1, n = 0, pazymys, sum = 0, gen = 0;
+    int m, s, a = 1, n = 0, pazymys, sum = 0, gen_flag = 0;
     random_device rd;
-    mt19937 gen(rd());
+    mt19937 gen_engine(rd()); // Define mt19937 engine
     while (a == 1 && n < 100)
     {
         cout << "iveskite varda: " << endl;
@@ -36,26 +36,26 @@ int main()
         cin >> studentai[n].pav;
         
         cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>gen;
-         while (cin.fail() || (gen != 0 && gen != 1))
+        cin>>gen_flag;
+         while (cin.fail() || (gen_flag != 0 && gen_flag != 1))
         {
             cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> gen;
+            cin >> gen_flag;
         }
-         if (gen == 1)
+         if (gen_flag == 1)
         {
             uniform_int_distribution<int> distrib(1, 10);
 
             for (int i = 0; i < MAX_ND; ++i)
             {
-                studentai[n].nd[i] = distrib(gen); // Generuojame atsitiktinius namų darbų rezultatus
+                studentai[n].nd[i] = distrib(gen_engine); // Changed to use gen_engine
                 studentai[n].nd_kiekis++;
             }
-            studentai[n].egz = distrib(gen);
+            studentai[n].egz = distrib(gen_engine); // Changed to use gen_engine
         }
-        else if (gen == 0)
+        else if (gen_flag == 0)
         {
             cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
             while (cin >> pazymys && pazymys != 0)
@@ -110,7 +110,7 @@ int main()
         
     }
 
-    for (int i = 0; i <= n; i++)
+    for (int i = 0; i < n; i++) // Changed loop condition to i < n
     {
         int dydis;
         dydis = 1 + studentai[i].nd_kiekis;
@@ -170,5 +170,3 @@ int main()
 
     return 0;
 }
-
-

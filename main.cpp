@@ -12,6 +12,7 @@ using namespace std;
 
 const int N = 100;
 const int MAX_ND = 10;
+
 struct duom
 {
     string pav;
@@ -60,48 +61,48 @@ string generuojami_vardai(const vector<string>& vard, const vector<string>& pav)
 }
 
 
-void func()
+void func_input_hands()
 {
     int n, m, s;
     cout << "keliu mokiniu skaiciuosite pazymius? " << endl;
-    while (!(cin >> n) || n <= 0 || n > N)
+    while (!(std::cin >> n) || n <= 0 || n > N)
     {
         cout << "Netinkamas skaicius, iveskite nauja: ";
-        cin.clear();            //panaikina klaida ir galima vel priskirt
-        cin.ignore(10000, '\n');
+        std::cin.clear();            //panaikina klaida ir galima vel priskirt
+        std::cin.ignore(10000, '\n');
     }
     cout << "kiek irasysite namu darbu rezultatu? " << endl;
 
-    while (!(cin >> m) || m <= 0 || m > N)
+    while (!(std::cin >> m) || m <= 0 || m > N)
     {
         cout << "Netinkamas skaicius, iveskite nauja: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
     }
 
     for (int i = 0; i <= n - 1; i++)
     {
         cout << "iveskite varda: " << endl;
-        cin >> duomenys[i].vard;
+        std::cin >> duomenys[i].vard;
         cout << "iveskite pavarde: " << endl;
-        cin >> duomenys[i].pav;
+        std::cin >> duomenys[i].pav;
         for (int j = 0; j <= m - 1; j++)
         {
             cout << "iveskite namu darbu rezultatus (1-10): " << endl;
-            while (!(cin >> duomenys[i].nd) || duomenys[i].nd < 1 || duomenys[i].nd > 10)
+            while (!(std::cin >> duomenys[i].nd) || duomenys[i].nd < 1 || duomenys[i].nd > 10)
             {
                 cout << "Netinkamas skaicius, iveskite nauja: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
             }
             duomenys[i].sum += duomenys[i].nd;
         }
         cout << "iveskite egzamino rezultata (1-10): " << endl;
-        while (!(cin >> duomenys[i].egz) || duomenys[i].egz < 1 || duomenys[i].egz > 10)
+        while (!(std::cin >> duomenys[i].egz) || duomenys[i].egz < 1 || duomenys[i].egz > 10)
         {
             cout << "Netinkamas skaicius, iveskite nauja: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
         }
         duomenys[i].gal_vid = duomenys[i].sum / m;
         duomenys[i].gal_bal = 0.4 * duomenys[i].gal_vid + 0.6 * duomenys[i].egz;
@@ -131,12 +132,12 @@ void func()
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
     while (true)
     {
-        cin >> s;
-        if (cin.fail() || (s != 0 && s != 1))
+        std::cin >> s;
+        if (std::cin.fail() || (s != 0 && s != 1))
         {
             cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
         }
         else
         {
@@ -165,150 +166,152 @@ void func()
     }
 
 }
-void func_a()
+void func_generate_numbers()
 {
-     int s, a = 1, n = 0, pazymys, sum = 0, pas = 0;
-    random_device rd;
-    mt19937 gen(rd());
-    while (a == 1 && n < 100)
+int m, s, a = 1, n = 0, pazymys, sum = 0, gen_flag = 0;
+random_device rd;
+mt19937 gen_engine(rd()); // Define mt19937 engine
+while (a == 1 && n < 100)
+{
+    cout << "iveskite varda: " << endl;
+    std::cin >> studentai[n].vard;
+    cout << "iveskite pavarde: " << endl;
+    std::cin >> studentai[n].pav;
+    
+    cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
+    std::cin>>gen_flag;
+        while (std::cin.fail() || (gen_flag != 0 && gen_flag != 1))
     {
-        cout << "iveskite varda: " << endl;
-        cin >> studentai[n].vard;
-        cout << "iveskite pavarde: " << endl;
-        cin >> studentai[n].pav;
-        
-        cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>pas;
-         while (cin.fail() || (pas != 0 && pas != 1))
-        {
-            cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cin >> pas;
-        }
-         if (pas == 1)
-        {
-            uniform_int_distribution<int> distrib(1, 10);
+        cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cin >> gen_flag;
+    }
+        if (gen_flag == 1)
+    {
+        uniform_int_distribution<int> distrib(1, 10);
 
-            for (int i = 0; i < MAX_ND; ++i)
+        for (int i = 0; i < MAX_ND; ++i)
+        {
+            studentai[n].nd[i] = distrib(gen_engine); // Changed to use gen_engine
+            studentai[n].nd_kiekis++;
+        }
+        studentai[n].egz = distrib(gen_engine); // Changed to use gen_engine
+    }
+    else if (gen_flag == 0)
+    {
+        cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
+        while (std::cin >> pazymys && pazymys != 0)
+        {
+            if (pazymys < 1 || pazymys > 10)
             {
-                studentai[n].nd[i] = distrib(gen); // Generuojame atsitiktinius namų darbų rezultatus
-                studentai[n].nd_kiekis++;
+                cout << "Netinkamas pazymys, iveskite nauja: ";
+                continue;
             }
-            studentai[n].egz = distrib(gen);
-        }
-        else if (pas == 0)
-        {
-            cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
-            while (cin >> pazymys && pazymys != 0)
+            if (studentai[n].nd_kiekis < 100)
             {
-                if (pazymys < 1 || pazymys > 10)
-                {
-                    cout << "Netinkamas pazymys, iveskite nauja: ";
-                    continue;
-                }
-                if (studentai[n].nd_kiekis < 100)
-                {
-                    studentai[n].nd[studentai[n].nd_kiekis++] = pazymys; // Pridedame naują namų darbo rezultatą
-                }
-                else
-                {
-                    cout << "Pasiekėte maksimalų namų darbų skaičių!" << endl;
-                    break;
-                }
+                studentai[n].nd[studentai[n].nd_kiekis++] = pazymys; // Pridedame naują namų darbo rezultatą
+            }
+            else
+            {
+                cout << "Pasiekėte maksimalų namų darbų skaičių!" << endl;
+                break;
+            }
+
+            cout << "Iveskite egzamino rezultata: ";
+            std::cin >> studentai[n].egz;
+            if (studentai[n].egz < 1 || studentai[n].egz > 10)
+            {
+                cout << "Netinkamas pazymys, iveskite nauja: ";
+                continue;
             }
         }
-        cout << "Iveskite egzamino rezultata: ";
-        cin >> studentai[n].egz;
-        if (studentai[n].egz < 1 || studentai[n].egz > 10)
-        {
-            cout << "Netinkamas pazymys, iveskite nauja: ";
-            continue;
-        }
+    }
+    
 
-        for (int i = 0; i < studentai[n].nd_kiekis; ++i)
-        {
-            sum += studentai[n].nd[i];
-        }
-        studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd_kiekis) + 0.6 * studentai[n].egz;
-        studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egz;
-        sum = 0; 
+    for (int i = 0; i < studentai[n].nd_kiekis; ++i)
+    {
+        sum += studentai[n].nd[i];
+    }
+    studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd_kiekis) + 0.6 * studentai[n].egz;
+    studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egz;
+    sum = 0; 
 
-        // Pradedame naujo studento įrašymą arba baigiame įvedimą
-        cout << "Jei vesite toliau, iveskite 1, jei norite uzbaigti iveskite 0: ";
-        cin >> a;
-        while (cin.fail() || (a != 0 && a != 1))
-        {
-            cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cin >> a;
-        }
-        ++n;
-        if (a == 0) // Jei pasirinko baigti, nutraukia ciklą
-            break;
-        
+    // Pradedame naujo studento įrašymą arba baigiame įvedimą
+    cout << "Jei vesite toliau, iveskite 1, jei norite uzbaigti iveskite 0: ";
+    std::cin >> a;
+    while (std::cin.fail() || (a != 0 && a != 1))
+    {
+        cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cin >> a;
+    }
+    ++n;
+    if (a == 0) // Jei pasirinko baigti, nutraukia ciklą
+        break;
+    
+}
+
+for (int i = 0; i < n; i++) // Changed loop condition to i < n
+{
+    int dydis;
+    dydis = 1 + studentai[i].nd_kiekis;
+    int pazymiai[101];                         // Rezultatų masyvas, kuriame bus ir namų darbai, ir egzaminas
+    pazymiai[0] = studentai[i].egz;             // Pirmas elementas yra egzaminas
+    for (int j = 0; j < studentai[i].nd_kiekis; j++)
+    {
+        pazymiai[j + 1] = studentai[i].nd[j]; // Kiti elementai yra namų darbai
     }
 
-    for (int i = 0; i <= n; i++)
+    sort(pazymiai, pazymiai + dydis); // Surūšiuojame visus rezultatus
+
+    if (dydis % 2 == 0) // Tikriname, ar rezultatų skaičius lyginis ar nelyginis
     {
-        int dydis;
-        dydis = 1 + studentai[i].nd_kiekis;
-        int pazymiai[101];                         // Rezultatų masyvas, kuriame bus ir namų darbai, ir egzaminas
-        pazymiai[0] = studentai[i].egz;             // Pirmas elementas yra egzaminas
-        for (int j = 0; j < studentai[i].nd_kiekis; j++)
-        {
-            pazymiai[j + 1] = studentai[i].nd[j]; // Kiti elementai yra namų darbai
-        }
-
-        sort(pazymiai, pazymiai + dydis); // Surūšiuojame visus rezultatus
-
-        if (dydis % 2 == 0) // Tikriname, ar rezultatų skaičius lyginis ar nelyginis
-        {
-            studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2;
-        }
-        else
-        {
-            studentai[i].gal_med = pazymiai[dydis / 2];
-        }
+        studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2;
     }
-    cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
-    while (true)
+    else
     {
-        cin >> s;
-        if (cin.fail() || (s != 0 && s != 1))
-        {
-            cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    if (s == 1)
-    {
-        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
-        cout << "------------------------------------------------------------------------" << endl;
-        for (int i = 0; i < n; i++)
-        {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_med << endl;
-        }
-
-    }
-    else if (s == 0)
-    {
-        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
-        cout << "------------------------------------------------------------------------" << endl;
-        for (int i = 0; i < n; i++)
-        {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_vid << endl;
-        }
+        studentai[i].gal_med = pazymiai[dydis / 2];
     }
 }
-void func_b()
+cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
+while (true)
+{
+    std::cin >> s;
+    if (std::cin.fail() || (s != 0 && s != 1))
+    {
+        cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    }
+    else
+    {
+        break;
+    }
+}
+
+if (s == 1)
+{
+    cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
+    cout << "------------------------------------------------------------------------" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_med << endl;
+    }
+
+}
+else if (s == 0)
+{
+    cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
+    cout << "------------------------------------------------------------------------" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << studentai[i].gal_vid << endl;
+    }
+}
+}
+void func_generate_names()
 {
     vector<string> vard = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     vector<string> pav = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
@@ -316,15 +319,14 @@ void func_b()
     vector<pazy> duomenys;
     char tesis;
     
-    // Seed the random number generator
     srand(time(nullptr));
 
     do
     {
         pazy naujas_studentas;
         cout<< "Ar norite, kad vardai ir pavardės būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>gen;
-        while (cin.fail() || (gen != 0 && gen != 1))
+        std::cin>>gen;
+        while (std::cin.fail() || (gen != 0 && gen != 1))
         {
             cout << "Ivestas netinkamas skaicius, rinkitės iš 1 ir 0: ";
             cin.clear();
@@ -456,16 +458,16 @@ int main()
 
     if (pas == 1)
     {
-        func();
+        func_input_hands();
 
     }
     else if (pas == 2)
     {
-        func_a();
+        func_generate_numbers();
     }
     else if (pas == 3)
     {
-        func_b();
+        func_generate_names();
     }
     else if (pas == 4)
     {
