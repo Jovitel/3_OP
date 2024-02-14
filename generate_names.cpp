@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cstdlib> // For rand() and srand()
-#include <ctime>   // For time()
+#include <random> // Include <random> for uniform_int_distribution
 #include <iomanip>
 
 using namespace std;
@@ -24,8 +23,12 @@ struct pazy
 
 string generuojami_vardai(const vector<string>& vard, const vector<string>& pav) 
 {
-    int first_index = rand() % vard.size();
-    int last_index = rand() % pav.size();
+    random_device rd; // Use random_device to seed the random number generator
+    mt19937 gen(rd()); // Use mt19937 as the random number engine
+    uniform_int_distribution<int> dist(0, vard.size() - 1); // Adjust the distribution range
+
+    int first_index = dist(gen);
+    int last_index = dist(gen);
     
     return vard[first_index] + " " + pav[last_index];
 }
@@ -34,31 +37,32 @@ int main()
 {
     vector<string> vard = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     vector<string> pav = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
-    int pazymys, s, gen, kiek, n;
+    int pazymys, s, kiek;
     vector<pazy> duomenys;
     char tesis;
     
     // Seed the random number generator
-    srand(time(nullptr));
+    random_device rd;
+    mt19937 gen(rd());
 
     do
     {
         pazy naujas_studentas;
         cout<< "Ar norite, kad vardai ir pavardės būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>gen;
-        while (cin.fail() || (gen != 0 && gen != 1))
+        cin>>s; // Changed variable name from gen to s
+        while (cin.fail() || (s != 0 && s != 1)) // Changed variable name from gen to s
         {
             cout << "Ivestas netinkamas skaicius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> gen;
+            cin >> s; // Changed variable name from gen to s
         }
-         if (gen == 1)
+         if (s == 1) // Changed variable name from gen to s
         {
             naujas_studentas.vard = generuojami_vardai(vard, pav);
             naujas_studentas.pav = generuojami_vardai(vard, pav);
         }
-        else if (gen == 0)
+        else if (s == 0) // Changed variable name from gen to s
         {
             cout << "Iveskite varda: ";
             cin >> naujas_studentas.vard;
@@ -67,16 +71,16 @@ int main()
         }
         
         cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>gen;
-        while (cin.fail() || (gen != 0 && gen != 1))
+        cin>>s; // Changed variable name from gen to s
+        while (cin.fail() || (s != 0 && s != 1)) // Changed variable name from gen to s
         {
             cout << "Ivestas netinkamas skaicius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> gen;
+            cin >> s; // Changed variable name from gen to s
         }
         
-        if (gen == 1)
+        if (s == 1) // Changed variable name from gen to s
         {
             uniform_int_distribution<int> distrib(1, 10);
             cout << "Kiek namų darbų rezultatų sugeneruoti? ";
@@ -88,7 +92,7 @@ int main()
             }
             naujas_studentas.egz = distrib(gen);
         }
-        else if (gen == 0)
+        else if (s == 0) // Changed variable name from gen to s
         {
             cout << "Iveskite namu darbu rezultatus (iveskite 0, kai norite baigti): ";
             while (cin >> pazymys && pazymys != 0)
