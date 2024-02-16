@@ -27,7 +27,7 @@ int main()
 {
     int m, s, a = 1, n = 0, pazymys, sum = 0, gen_flag = 0;
     random_device rd;
-    mt19937 gen_engine(rd()); // Define mt19937 engine
+    mt19937 gen_engine(rd()); 
     while (a == 1 && n < 100)
     {
         cout << "iveskite varda: " << endl;
@@ -110,7 +110,7 @@ int main()
         
     }
 
-    for (int i = 0; i < n; i++) // Changed loop condition to i < n
+    for (int i = 0; i < n; i++) 
     {
         int dydis;
         dydis = 1 + studentai[i].nd_kiekis;

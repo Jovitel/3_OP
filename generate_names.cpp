@@ -37,11 +37,10 @@ int main()
 {
     vector<string> vard = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     vector<string> pav = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
-    int pazymys, s, kiek;
+    int pazymys, s, kiek, k;
     vector<pazy> duomenys;
     char tesis;
     
-    // Seed the random number generator
     random_device rd;
     mt19937 gen(rd());
 
@@ -49,20 +48,20 @@ int main()
     {
         pazy naujas_studentas;
         cout<< "Ar norite, kad vardai ir pavardės būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>s; // Changed variable name from gen to s
-        while (cin.fail() || (s != 0 && s != 1)) // Changed variable name from gen to s
+        cin>>k; 
+        while (cin.fail() || (k != 0 && k != 1)) 
         {
             cout << "Ivestas netinkamas skaicius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> s; // Changed variable name from gen to s
+            cin >> s; 
         }
-         if (s == 1) // Changed variable name from gen to s
+         if (k == 1) 
         {
             naujas_studentas.vard = generuojami_vardai(vard, pav);
             naujas_studentas.pav = generuojami_vardai(vard, pav);
         }
-        else if (s == 0) // Changed variable name from gen to s
+        else if (k == 0) 
         {
             cout << "Iveskite varda: ";
             cin >> naujas_studentas.vard;
@@ -71,16 +70,16 @@ int main()
         }
         
         cout<< "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): "<<endl;
-        cin>>s; // Changed variable name from gen to s
-        while (cin.fail() || (s != 0 && s != 1)) // Changed variable name from gen to s
+        cin>>s; 
+        while (cin.fail() || (s != 0 && s != 1)) 
         {
             cout << "Ivestas netinkamas skaicius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> s; // Changed variable name from gen to s
+            cin >> s; 
         }
         
-        if (s == 1) // Changed variable name from gen to s
+        if (s == 1) 
         {
             uniform_int_distribution<int> distrib(1, 10);
             cout << "Kiek namų darbų rezultatų sugeneruoti? ";
@@ -92,7 +91,7 @@ int main()
             }
             naujas_studentas.egz = distrib(gen);
         }
-        else if (s == 0) // Changed variable name from gen to s
+        else if (s == 0)
         {
             cout << "Iveskite namu darbu rezultatus (iveskite 0, kai norite baigti): ";
             while (cin >> pazymys && pazymys != 0)
@@ -154,25 +153,48 @@ int main()
 
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
     cin >> s;
-    if (s == 1)
+    if (k == 1)
     {
-        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS" << setw(15) << "GALUTINE MED." << endl;
-        cout << "-------------------------------------------------------------------------" << endl;
-        for (size_t i = 0; i < duomenys.size(); ++i)
+        if (s == 1)
         {
-            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_med << endl;
-        }
+            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS " << setw(15) << "GALUTINE MED." << endl;
+            cout << "-------------------------------------------------------------------------" << endl;
+            for (size_t i = 0; i < duomenys.size(); ++i)
+            {
+                cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_med << endl;
+            }
 
+        }
+        else if (s == 0)
+        {
+            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS 0" << setw(15) << "GALUTINE VID." << endl;
+            cout << "-------------------------------------------------------------------------" << endl;
+            for (size_t i = 0; i < duomenys.size(); ++i)
+            {
+                cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_vid << endl;
+            }
+        }
     }
-    else if (s == 0)
+    if(k == 0)
     {
-        cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS" << setw(15) << "GALUTINE VID." << endl;
-        cout << "-------------------------------------------------------------------------" << endl;
-        for (size_t i = 0; i < duomenys.size(); ++i)
+        if (s == 1)
         {
-            cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_vid << endl;
-        }
-    }
+            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS " << setw(15) << "GALUTINE MED." << endl;
+            cout << "-------------------------------------------------------------------------" << endl;
+            for (size_t i = 0; i < duomenys.size(); ++i)
+            {
+                cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_med << endl;
+            }
 
+        }
+        else if (s == 0)
+        {
+            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(15) << "GALUTINIS BALAS 0" << setw(15) << "GALUTINE VID." << endl;
+            cout << "-------------------------------------------------------------------------" << endl;
+            for (size_t i = 0; i < duomenys.size(); ++i)
+            {
+                cout << left << setw(20) << duomenys[i].vard << setw(20) << duomenys[i].pav << setw(15) << duomenys[i].gal_bal << setw(15) << duomenys[i].gal_vid << endl;
+            }
+    }
     return 0;
 }

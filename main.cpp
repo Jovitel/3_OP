@@ -168,7 +168,7 @@ void func_input_hands()
 }
 void func_generate_numbers()
 {
-int m, s, a = 1, n = 0, pazymys, sum = 0, gen_flag = 0;
+    int m, s, a = 1, n = 0, pazymys, sum = 0, gen_flag = 0;
     random_device rd;
     mt19937 gen_engine(rd()); // Define mt19937 engine
     while (a == 1 && n < 100)
@@ -469,7 +469,7 @@ int main()
     {
         func_generate_names();
     }
-    else if (pas == 4)
+    else if (pas == 4) 
     {
         cout<<"Baigiama"<<endl;
     }
