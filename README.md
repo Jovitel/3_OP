@@ -1,5 +1,5 @@
 # 1_OP
-Šioje programoje yra skaičiuojami įvedamų mokinių galutinis balas bei mediana, atsižvelgiant į jų namų darbų rezultatus ir egzamino rezultatą. 
+Šioje programoje yra skaičiuojama įvedamų mokinių galutinis balas bei mediana, atsižvelgiant į jų namų darbų rezultatus ir egzamino rezultatą. 
 **V.pradinė**
 
 Programos pradžia.
