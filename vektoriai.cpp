@@ -339,7 +339,7 @@ void func_input_file() {
     try {
         int s, rez;
         vector<duomenys> studentai;
-        ifstream fd("C:/Users/JV/Desktop/nuskaitymui/kursiokai.txt");
+        ifstream fd("C:/Users/JV/Desktop/nuskaitymui/studentai10000.txt"); //studentai10000
         string line;
         duomenys studentas;
 
