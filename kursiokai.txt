@@ -1,0 +1,6 @@
+Vardas   Pavardė       ND1 ND2 ND3 ND4 ND5 Egzaminas
+Jovita   Venčkauskaitė 9   8   7   6   2   9
+Danė     Menkevičiūtė  7   9   10  10  8   10
+Vytautas Venčkauskas   2   4   5   10  7   8
+Jūratė   Pangonytė     10  5   7   6   3   2
+Dovydas  Dovydaitis    2   4   8   10  7   8
