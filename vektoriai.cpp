@@ -8,6 +8,8 @@
 #include <istream>
 #include <sstream>
 #include <numeric>
+#include <stdexcept>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -18,7 +20,7 @@ struct duomenys {
     vector<int> nd;
     int egzaminas;
     double gal_vid, gal_bal, gal_med;
-     int nd_kiekis;
+    int nd_kiekis;
 };
 
 void func_input_hands() {
@@ -333,101 +335,163 @@ void func_generate_names() {
     }
 }
 
-void func_input_file()
-{
-vector<duomenys> studentai;
-    ifstream fd("kursiokai.txt");
-    string line;
-    
-    while (getline(fd, line)) {
-        istringstream iss(line);
+void func_input_file() {
+    try {
+        int s, rez;
+        vector<duomenys> studentai;
+        ifstream fd("C:/Users/JV/Desktop/nuskaitymui/kursiokai.txt");
+        string line;
         duomenys studentas;
-        iss >> studentas.vard >> studentas.pav;
-        int pazymys;
-        while (iss >> pazymys) {
-            studentas.nd.push_back(pazymys);
+
+        // Patikriname, ar failas buvo sėkmingai atidarytas
+        if (!fd.is_open()) {
+            throw runtime_error("Nepavyko atidaryti failo!");
         }
-        iss.clear();
-        iss >> studentas.egzaminas;
-        studentai.push_back(studentas);
-    }
 
-    fd.close();
+        bool firstLine = true; // Kintamasis, nurodantis, ar tai pirmoji eilutė
 
-    // Apskaičiuojame vidurkį ir medianą
-    for (int i = 0; i < studentai.size(); ++i) {
-        vector<int> pazymiai = studentai[i].nd;
-        sort(pazymiai.begin(), pazymiai.end());
+        // Skaitome duomenis iš failo
+        while (getline(fd, line)) {
+            if (firstLine) {
+                firstLine = false;
+                continue; // Praleidžiame pirmą eilutę
+            }
 
-        int dydis = pazymiai.size();
-        if (!pazymiai.empty()) {
-    sort(pazymiai.begin(), pazymiai.end());
+            istringstream iss(line);
+            iss >> studentas.vard >> studentas.pav;
 
-    int dydis = pazymiai.size();
-    if (dydis == 1) {
-        studentai[i].gal_med = pazymiai[0];
-    } else if (dydis % 2 == 0) {
-        studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0;
-    } else {
-        studentai[i].gal_med = pazymiai[dydis / 2];
-    }
-} else {
-    // Handle case when no grades are available
-    studentai[i].gal_med = 0.0; // or any other appropriate value
-}
-    }
-    
-    // Išvestis į failą arba į ekraną
-    ofstream fdd("rezultatai.txt");
-    int s, rez;
+            int pazymys;
+            while (iss >> pazymys) {
+                studentas.nd.push_back(pazymys);
+            }
 
-    cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
-    while (true) {
-        cin >> s;
-        if (cin.fail() || (s != 0 && s != 1)) {
-            cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+            // Skaitome egzamino rezultatą
+            iss.clear();
+            iss >> studentas.egzaminas;
+
+            studentai.push_back(studentas);
+        }
+
+        fd.close();
+
+        // Skaičiuojame medianą ir vidurkį
+        for (int i = 0; i < studentai.size(); ++i) {
+            vector<int> pazymiai = studentai[i].nd;
+            sort(pazymiai.begin(), pazymiai.end());
+
+            int dydis = pazymiai.size();
+            if (!pazymiai.empty()) {
+                if (dydis % 2 == 0) {
+                    int middle1 = dydis / 2 - 1;
+                    int middle2 = dydis / 2;
+                    studentai[i].gal_med = (pazymiai[middle1] + pazymiai[middle2]) / 2.0;
+                } else {
+                    int middle = dydis / 2;
+                    studentai[i].gal_med = pazymiai[middle];
+                }
+            } else {
+                // Tvarkome atvejį, kai nėra įvertinimų
+                studentai[i].gal_med = 0.0; // arba kita tinkama vertė
+            }
+
+            double sum = accumulate(pazymiai.begin(), pazymiai.end(), 0.0);
+            studentai[i].gal_vid = 0.4 * (sum / pazymiai.size()) + 0.6 * studentai[i].egzaminas;
+        }
+
+        int choice;
+        cout << "RYKIUOTI PAGAL: " << endl;
+        cout << "vardą - 1 " << endl;
+        cout << "pavardę - 2" << endl;
+        cout << "Pagal vidurkį - 3" << endl;
+        cout << "Pagal mediana - 4" << endl;
+        cin >> choice;
+        while (cin.fail() || (choice < 1 || choice > 4)) {
+            cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3 arba 4: ";
             cin.clear();
             cin.ignore(10000, '\n');
-        } else {
-            break;
+            cin >> choice;
         }
+
+        switch (choice) {
+            case 1:
+                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
+                    return a.vard < b.vard;
+                });
+                break;
+            case 2:
+                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
+                    return a.pav < b.pav;
+                });
+                break;
+            case 3:
+                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
+                    return a.gal_vid > b.gal_vid;
+                });
+                break;
+            case 4:
+                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
+                    return a.gal_med > b.gal_med;
+                });
+                break;
+        }
+
+        cout << "Jei rezultatus norite išvesti ekrane spauskite 1," << endl;
+        cout << " o jei norite išvesti į failą (rezultatai.txt), spauskite 0" << endl;
+        // Išvedame rezultatus į failą arba į konsolę
+        ofstream fdd("rezultatai.txt");
+        while (true) {
+            cin >> rez;
+            if (cin.fail() || (rez != 0 && rez != 1)) {
+                cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            } else {
+                break;
+            }
+        }
+
+        cout << "Pasirinkite, ar norite išvesti medianą (1) ar vidurkį (0): ";
+        cin >> s;
+        while (cin.fail() || (s != 0 && s != 1)) {
+            cout << "Netinkamas pasirinkimas. Įveskite 1 arba 0: ";
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cin >> s;
+        }
+
+        if (rez == 1) {
+            if (s == 1) {
+                cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (MED.)" << endl;
+                cout << "------------------------------------------------------------------------" << endl;
+                for (int i = 0; i < studentai.size(); i++) {
+                    cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+                }
+            } else if (s == 0) {
+                cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (VID.)" << endl;
+                cout << "------------------------------------------------------------------------" << endl;
+                for (int i = 0; i < studentai.size(); i++) {
+                    cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+                }
+            }
+        } else if (rez == 0) {
+            if (s == 1) {
+                fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (MED.)" << endl;
+                fdd << "------------------------------------------------------------------------" << endl;
+                for (int i = 0; i < studentai.size(); i++) {
+                    fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+                }
+            } else if (s == 0) {
+                fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (VID.)" << endl;
+                fdd << "------------------------------------------------------------------------" << endl;
+                for (int i = 0; i < studentai.size(); i++) {
+                    fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+                }
+            }
+        }
+        fdd.close();
+    } catch (const exception &e) {
+        cerr << "Klaida: " << e.what() << endl;
     }
-
-    cout << "Jei rezultatus norite išvesti ekrane spauskite 1," << endl;
-    cout << " o jei norite išvesti į failą (rezultatai.txt), spauskite 0" << endl;
-    cin >> rez;
-
-    if (rez == 1) {
-        if (s == 1) {
-            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
-            cout << "------------------------------------------------------------------------" << endl;
-            for (int i = 0; i < studentai.size(); i++) {
-                cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_med << endl;
-            }
-        } else if (s == 0) {
-            cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
-            cout << "------------------------------------------------------------------------" << endl;
-            for (int i = 0; i < studentai.size(); i++) {
-                cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
-            }
-        }
-    } else if (rez == 0) {
-        if (s == 1) {
-            fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
-            fdd << "------------------------------------------------------------------------" << endl;
-            for (int i = 0; i < studentai.size(); i++) {
-                fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_med << endl;
-            }
-        } else if (s == 0) {
-            fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
-            fdd << "------------------------------------------------------------------------" << endl;
-            for (int i = 0; i < studentai.size(); i++) {
-                fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
-            }
-        }
-    }
-
-    fdd.close();
 }
 
 int main() {
@@ -459,5 +523,6 @@ int main() {
     } else if (choice == 5) {
         func_input_file();
     }
+
     return 0;
 }
