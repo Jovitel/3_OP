@@ -14,3 +14,10 @@ v0.1 release
 Atnaujinimai programoje:
 
 -Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai (tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su masyvais) -Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
+
+v0.2 release
+
+Atnaujinimai programoje:
+
+-Galima pasirinkti, ar nori, kad duomenys būtų nuskaitomi iš tam tikro failo.
+-Apskaičiuojamas failo generavimo laikas
