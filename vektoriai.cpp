@@ -10,6 +10,7 @@
 #include <numeric>
 #include <stdexcept>
 #include <bits/stdc++.h>
+#include <chrono>
 
 using namespace std;
 
@@ -339,9 +340,39 @@ void func_input_file() {
     try {
         int s, rez;
         vector<duomenys> studentai;
-        ifstream fd("C:/Users/JV/Desktop/nuskaitymui/studentai10000.txt"); //studentai10000
         string line;
         duomenys studentas;
+        int choice = 0;
+        cout << "KURI FAILĄ NAUDOTI: " << endl;
+        cout << "kursiokai.txt - 1 " << endl;
+        cout << "studentai10000.txt - 2 " << endl;
+        cout << "studentai100000 - 3" << endl;
+        cout << "studentai1000000 - 4" << endl;
+        cin >> choice;
+        while (cin.fail() || (choice < 1 || choice > 4)) {
+            cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3 arba 4: ";
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cin >> choice;
+        }
+
+        string file_name;
+        switch (choice) {
+            case 1:
+                file_name = "C:/Users/JV/Desktop/nuskaitymui/kursiokai.txt";
+                break;
+            case 2:
+                file_name = "C:/Users/JV/Desktop/nuskaitymui/studentai10000.txt";
+                break;
+            case 3:
+                file_name = "C:/Users/JV/Desktop/nuskaitymui/studentai100000.txt";
+                break;
+            case 4:
+                file_name = "C:/Users/JV/Desktop/nuskaitymui/studentai1000000.txt";
+                break;
+        }
+
+        ifstream fd(file_name); // Atidarome pasirinktą failą
 
         // Patikriname, ar failas buvo sėkmingai atidarytas
         if (!fd.is_open()) {
@@ -351,6 +382,7 @@ void func_input_file() {
         bool firstLine = true; // Kintamasis, nurodantis, ar tai pirmoji eilutė
 
         // Skaitome duomenis iš failo
+        auto start = chrono::steady_clock::now();
         while (getline(fd, line)) {
             if (firstLine) {
                 firstLine = false;
@@ -373,9 +405,12 @@ void func_input_file() {
         }
 
         fd.close();
+          auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką
+            cout << "Failo nuskaitymo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
 
         // Skaičiuojame medianą ir vidurkį
         for (int i = 0; i < studentai.size(); ++i) {
+            cout<<"skaiciuojama"<<endl;
             vector<int> pazymiai = studentai[i].nd;
             sort(pazymiai.begin(), pazymiai.end());
 
@@ -398,21 +433,21 @@ void func_input_file() {
             studentai[i].gal_vid = 0.4 * (sum / pazymiai.size()) + 0.6 * studentai[i].egzaminas;
         }
 
-        int choice;
+        int choicee = 0;
         cout << "RYKIUOTI PAGAL: " << endl;
         cout << "vardą - 1 " << endl;
         cout << "pavardę - 2" << endl;
         cout << "Pagal vidurkį - 3" << endl;
         cout << "Pagal mediana - 4" << endl;
-        cin >> choice;
-        while (cin.fail() || (choice < 1 || choice > 4)) {
+        cin >> choicee;
+        while (cin.fail() || (choicee < 1 || choicee > 4)) {
             cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3 arba 4: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> choice;
+            cin >> choicee;
         }
 
-        switch (choice) {
+        switch (choicee) {
             case 1:
                 sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
                     return a.vard < b.vard;
@@ -438,7 +473,7 @@ void func_input_file() {
         cout << "Jei rezultatus norite išvesti ekrane spauskite 1," << endl;
         cout << " o jei norite išvesti į failą (rezultatai.txt), spauskite 0" << endl;
         // Išvedame rezultatus į failą arba į konsolę
-        ofstream fdd("rezultatai.txt");
+        ofstream fdd("C:/Users/JV/Desktop/nuskaitymui/rezultatai.txt");
         while (true) {
             cin >> rez;
             if (cin.fail() || (rez != 0 && rez != 1)) {
