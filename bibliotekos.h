@@ -1,0 +1,14 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <iomanip>
+#include <ctime>
+#include <fstream>
+#include <istream>
+#include <sstream>
+#include <numeric>
+#include <stdexcept>
+#include <bits/stdc++.h>
+#include <chrono>
+#include "functions.h"
