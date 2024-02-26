@@ -33,10 +33,10 @@ void func_input_hands() {
         studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egzaminas;
         sum = 0;
 
-        cout << "Jei vesite toliau, iveskite 1, jei norite uzbaigti iveskite 0: ";
+        cout << "Jei vesite toliau, įveskite 1, jei norite užbaigti įveskite 0: ";
         cin >> a;
         while (cin.fail() || (a != 0 && a != 1)) {
-            cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
+            cout << "Įvestas netinkamas skaičius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
             cin >> a;
@@ -93,9 +93,9 @@ void func_generate_numbers() {
     srand(time(0)); 
 
     while (n < m) {
-        cout << "iveskite varda: " << endl;
+        cout << "Įveskite vardą: " << endl;
         cin >> studentai[n].vard;
-        cout << "iveskite pavarde: " << endl;
+        cout << "Įveskite pavardę: " << endl;
         cin >> studentai[n].pav;
 
         cout << "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): " << endl;
