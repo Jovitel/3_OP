@@ -101,7 +101,7 @@ void func_generate_numbers() {
         cout << "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): " << endl;
         cin >> a;
         while (cin.fail() || (a != 0 && a != 1)) {
-            cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
+            cout << "Įvestas netinkamas skaičius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
             cin >> a;
@@ -114,19 +114,19 @@ void func_generate_numbers() {
             }
             studentai[n].egzaminas = rand() % 11;
         } else if (a == 0) {
-            cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
+            cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
             while (cin >> pazymys && pazymys != 0) {
                 if (pazymys < 1 || pazymys > 10) {
-                    cout << "Netinkamas pazymys, iveskite nauja: ";
+                    cout << "Netinkamas pažymys, įveskite naują: ";
                     continue;
                 }
                 studentai[n].nd.push_back(pazymys);
             }
 
-            cout << "Iveskite egzamino rezultata: ";
+            cout << "Įveskite egzamino rezultatą: ";
             cin >> studentai[n].egzaminas;
             if (studentai[n].egzaminas < 1 || studentai[n].egzaminas > 10) {
-                cout << "Netinkamas pazymys, iveskite nauja: ";
+                cout << "Netinkamas pažymys, įveskite naują: ";
                 cin >> studentai[n].egzaminas;
             }
         }
