@@ -15,16 +15,16 @@ void func_input_hands() {
         cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
         while (cin >> pazymys && pazymys != 0) {
             if (pazymys < 1 || pazymys > 10) {
-                cout << "Netinkamas pazymys, iveskite nauja: ";
+                cout << "Netinkamas pažymys, įveskite naują: ";
                 continue;
             }
             studentai[n].nd.push_back(pazymys);
         }
 
-        cout << "Iveskite egzamino rezultata: ";
+        cout << "Įveskite egzamino rezultatą: ";
         cin >> studentai[n].egzaminas;
         if (studentai[n].egzaminas < 1 || studentai[n].egzaminas > 10) {
-            cout << "Netinkamas pazymys, iveskite nauja: ";
+            cout << "Netinkamas pažymys, įveskite naują: ";
             cin >> studentai[n].egzaminas;
         }
 
