@@ -5,9 +5,9 @@ int main() {
 
     cout << "Pasirinkite, kaip norite įvesti studentų duomenis: " << endl;
     cout << "1 - ranka" << endl;
-    cout << "2 - sugeneruoti pažymius" << endl;
-    cout << "3 - sugeneruoti pažymius ir vardus" << endl;
-    cout << "4 - užbaigtii programą" << endl;
+    cout << "2 - Sugeneruoti pažymius" << endl;
+    cout << "3 - Sugeneruoti pažymius ir vardus" << endl;
+    cout << "4 - užbaigti programą" << endl;
     cout << "5 - duomenis nuskaityti iš failo" << endl;
     cin >> choice;
 
