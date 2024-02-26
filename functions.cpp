@@ -12,7 +12,7 @@ void func_input_hands() {
 
         studentai[n].nd.clear();
 
-        cout << "iveskite namu darbu rezultatus (Įveskite 0, kai norite baigti): " << endl;
+        cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
         while (cin >> pazymys && pazymys != 0) {
             if (pazymys < 1 || pazymys > 10) {
                 cout << "Netinkamas pazymys, iveskite nauja: ";
