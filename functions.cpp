@@ -319,6 +319,7 @@ void func_input_file() {
         string line;
         duomenys studentas;
         int choice = 0;
+        
         cout << "KURI FAILĄ NAUDOTI: " << endl;
         cout << "kursiokai.txt - 1 " << endl;
         cout << "studentai10000.txt - 2 " << endl;
@@ -347,14 +348,14 @@ void func_input_file() {
                 file_name = "C:/Users/JV/Desktop/nuskaitymui/studentai1000000.txt";
                 break;
         }
-
+      
         ifstream fd(file_name); // Atidarome pasirinktą failą
 
         // Patikriname, ar failas buvo sėkmingai atidarytas
         if (!fd.is_open()) {
             throw runtime_error("Nepavyko atidaryti failo!");
         }
-
+        
         bool firstLine = true; // Kintamasis, nurodantis, ar tai pirmoji eilutė
 
         // Skaitome duomenis iš failo
