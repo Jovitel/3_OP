@@ -21,3 +21,10 @@ Atnaujinimai programoje:
 
 -Galima pasirinkti, ar nori, kad duomenys būtų nuskaitomi iš tam tikro failo.
 -Apskaičiuojamas failo generavimo laikas
+
+ v0.3 release
+
+ Atnaujinimai programoje:
+
+-Header files
+-try, catch (išimčių valdymas)
