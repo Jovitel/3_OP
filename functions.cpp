@@ -512,12 +512,8 @@ void func_input_file() {
     }
 }
 
-void func_generate(){
-     std::string filename;
-    std::cout << "Įveskite failo pavadinimą: ";
-    std::cin >> filename;
-
-    int numStudents, numMarks;
+void func_generate(const std::string& filename){
+   int numStudents, numMarks;
 
     std::cout << "Įveskite mokinių skaičių: ";
     std::cin >> numStudents;

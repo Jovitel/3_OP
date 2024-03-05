@@ -31,7 +31,7 @@ void func_input_hands();
 void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
-void func_generate();
+void func_generate(const std::string& filename);
 
 #endif /* FUNCTIONS_H */
 
