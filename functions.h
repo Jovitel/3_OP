@@ -25,6 +25,9 @@ struct duomenys {
     int egzaminas;
     double gal_vid, gal_bal, gal_med;
     int nd_kiekis;
+     bool operator<(const duomenys& other) const {
+        return gal_vid > other.gal_vid; // Surūšiuoti mažėjančia tvarka
+     }
 };
 
 void func_input_hands();
