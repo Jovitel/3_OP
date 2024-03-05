@@ -30,10 +30,7 @@ int main() {
     } else if (choice == 5) {
         func_input_file();
     } else if (choice == 6) {
-        std::string filename;
-        std::cout << "Įveskite failo pavadinimą: ";
-        std::cin >> filename;
-        func_generate(filename);
+        func_generate();
     }
 
 

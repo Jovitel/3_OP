@@ -513,7 +513,11 @@ void func_input_file() {
 }
 
 void func_generate(const std::string& filename){
-   int numStudents, numMarks;
+     std::string filename;
+    std::cout << "Įveskite failo pavadinimą: ";
+    std::cin >> filename;
+
+    int numStudents, numMarks;
 
     std::cout << "Įveskite mokinių skaičių: ";
     std::cin >> numStudents;
@@ -536,22 +540,30 @@ void func_generate(const std::string& filename){
     for (int i = 1; i <= numMarks; ++i) {
         file << "\tND" << i;
     }
-    file << "\tEgz." << std::endl;
-
-    // Funkcija, kuri generuoja atsitiktinius pažymius
-    auto generateMark = [&]() { return dis(gen); };
+    file << "\tEgz.\tGalutinis (Vid.)\tKategorija" << std::endl;
 
     // Įrašome duomenis
     for (int i = 1; i <= numStudents; ++i) {
-        file << "Vardas" << i << "\tPavarde" << i;
-        for (int j = 0; j < numMarks; ++j) {
-            file << "\t" << generateMark();
+        std::string name = "Vardas" + std::to_string(i);
+        std::string surname = "Pavarde" + std::to_string(i);
+        std::vector<int> marks(numMarks);
+        double total = 0;
+        for (int& mark : marks) {
+            mark = dis(gen);
+            total += mark;
         }
-        file << "\t" << generateMark(); // Egzamino pažymys
-        file << std::endl;
+        int exam = dis(gen);
+        double finalGrade = 0.4 * (total / numMarks) + 0.6 * exam;
+        std::string category = (finalGrade < 5.0) ? "Vargšiukas" : "Kietiakias";
+        
+        file << name << "\t" << surname;
+        for (int mark : marks) {
+            file << "\t" << mark;
+        }
+        file << "\t" << exam << "\t" << finalGrade << "\t" << category << std::endl;
     }
 
     file.close();
     std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
-}
+  }
 
