@@ -513,26 +513,22 @@ void func_input_file() {
 }
 
 void func_generate(){
-    std::cout << "hello" << endl;
     std::string filename;
     std::cout << "Įveskite pradinio failo pavadinimą: ";
     std::cin >> filename;
 
-    std::string vargsiukaiFilename;
-    std::cout << "Kaip norite pavadinti vargsiukų failą? ";
-    std::cin >> vargsiukaiFilename;
+    std::string vargsiukaiFilename = "vargsiukai_" + filename;
+    std::string kietiakiaiFilename = "kietiakiai_" + filename;
+
     std::ofstream vargsiukaiFile(vargsiukaiFilename);
     if (!vargsiukaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą vargsiukai.txt." << std::endl;
+        std::cerr << "Klaida atidarant failą " << vargsiukaiFilename << std::endl;
         return 1;
     }
 
-    std::string kietiakiaiFilename;
-    std::cout << "Kaip norite pavadinti kietiakiai failą? ";
-    std::cin >> kietiakiaiFilename;
     std::ofstream kietiakiaiFile(kietiakiaiFilename);
     if (!kietiakiaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą kietiakiai.txt." << std::endl;
+        std::cerr << "Klaida atidarant failą " << kietiakiaiFilename << std::endl;
         return 1;
     }
 
@@ -553,7 +549,6 @@ void func_generate(){
         std::cerr << "Klaida atidarant pradinį failą." << std::endl;
         return 1;
     }
-    file << "\tEgz.\tGalutinis (Vid.)" << std::endl;
 
     initialFile << "Vardas\tPavarde";
     for (int i = 1; i <= numMarks; ++i) {
@@ -605,34 +600,13 @@ void func_generate(){
         }
     }
 
-    std::string vargsiukaiFilename = "vargsiukai_" + inputFilename;
-    std::string kietiakiaiFilename = "kietiakiai_" + inputFilename;
-
-    std::ofstream vargsiukaiFile(vargsiukaiFilename);
-    if (!vargsiukaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą " << vargsiukaiFilename << std::endl;
-        return;
-    }
-
-    for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
-    }
-
     vargsiukaiFile.close();
     std::cout << "Failas \"" << vargsiukaiFilename << "\" sukurtas sėkmingai." << std::endl;
 
-    std::ofstream kietiakiaiFile(kietiakiaiFilename);
-    if (!kietiakiaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą " << kietiakiaiFilename << std::endl;
-        return;
-    }
-
-    for (const auto& student : kietiakiai) {
-        kietiakiaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
-    }
-
     kietiakiaiFile.close();
+    std::cout << "Failas \"" << kietiakiaiFilename << "\" sukurtas sėkmingai." << std::endl;
 
     std::cout << "Visi failai sukurti sėkmingai." << std::endl;
+
 }
 
