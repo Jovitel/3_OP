@@ -31,6 +31,7 @@ void func_input_hands();
 void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
+void func_generate();
 
 #endif /* FUNCTIONS_H */
 

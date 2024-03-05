@@ -320,18 +320,24 @@ void func_input_file() {
         duomenys studentas;
         int choice = 0;
         
+        try {
         cout << "KURI FAILĄ NAUDOTI: " << endl;
         cout << "kursiokai.txt - 1 " << endl;
         cout << "studentai10000.txt - 2 " << endl;
         cout << "studentai100000 - 3" << endl;
         cout << "studentai1000000 - 4" << endl;
         cin >> choice;
-        while (cin.fail() || (choice < 1 || choice > 4)) {
-            cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3 arba 4: ";
+        if (cin.fail() || (choice < 1 || choice > 4)) {
+            throw runtime_error("Netinkamas pasirinkimas"); // Sukeliam išimtį, jei pasirinkimas netinkamas
+        }
+        } catch (const runtime_error& e) {
+            cout << e.what() << ". Įveskite 1, 2, 3 arba 4." << endl;
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> choice;
+            exit(1); // Baigiam darbą su klaida
         }
+
+
 
         string file_name;
         switch (choice) {
@@ -506,4 +512,47 @@ void func_input_file() {
     }
 }
 
+void func_generate(){
+    std::string filename = "mokiniai.txt";
+    int numStudents, numMarks;
+
+    std::cout << "Įveskite mokinių skaičių: ";
+    std::cin >> numStudents;
+
+    std::cout << "Įveskite pažymių skaičių: ";
+    std::cin >> numMarks;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 10);
+
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Klaida atidarant failą." << std::endl;
+        return;
+    }
+
+    // Įrašome antraštę
+    file << "Vardas\tPavarde";
+    for (int i = 1; i <= numMarks; ++i) {
+        file << "\tND" << i;
+    }
+    file << "\tEgz." << std::endl;
+
+    // Funkcija, kuri generuoja atsitiktinius pažymius
+    auto generateMark = [&]() { return dis(gen); };
+
+    // Įrašome duomenis
+    for (int i = 1; i <= numStudents; ++i) {
+        file << "Vardas" << i << "\tPavarde" << i;
+        for (int j = 0; j < numMarks; ++j) {
+            file << "\t" << generateMark();
+        }
+        file << "\t" << generateMark(); // Egzamino pažymys
+        file << std::endl;
+    }
+
+    file.close();
+    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
+}
 
