@@ -513,7 +513,9 @@ void func_input_file() {
 }
 
 void func_generate(){
-    std::string filename = "mokiniai.txt";
+    std::string filename;
+    std::cout << "iveskite failo pavadinima: " <<endl;
+    cin >> filename;
     int numStudents, numMarks;
 
     std::cout << "Įveskite mokinių skaičių: ";
