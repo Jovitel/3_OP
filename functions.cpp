@@ -513,8 +513,8 @@ void func_input_file() {
 }
 
 void func_generate(const std::string& filename){
-     std::string filename;
-    std::cout << "Įveskite failo pavadinimą: ";
+    std::string filename;
+    std::cout << "Įveskite pradinio failo pavadinimą: ";
     std::cin >> filename;
 
     int numStudents, numMarks;
@@ -529,20 +529,22 @@ void func_generate(const std::string& filename){
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 10);
 
-    std::ofstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Klaida atidarant failą." << std::endl;
+    std::vector<std::string> vargsiukai;
+    std::vector<std::string> kietiakiai;
+
+    // Įrašome pradinio failo antraštę
+    std::ofstream initialFile(filename);
+    if (!initialFile.is_open()) {
+        std::cerr << "Klaida atidarant pradinį failą." << std::endl;
         return;
     }
-
-    // Įrašome antraštę
-    file << "Vardas\tPavarde";
+    initialFile << "Vardas\tPavarde";
     for (int i = 1; i <= numMarks; ++i) {
-        file << "\tND" << i;
+        initialFile << "\tND" << i;
     }
-    file << "\tEgz.\tGalutinis (Vid.)\tKategorija" << std::endl;
+    initialFile << "\tEgz.\tGalutinis (Vid.)" << std::endl;
 
-    // Įrašome duomenis
+    // Įrašome duomenis į pradinį failą ir padaliname studentus į kategorijas
     for (int i = 1; i <= numStudents; ++i) {
         std::string name = "Vardas" + std::to_string(i);
         std::string surname = "Pavarde" + std::to_string(i);
@@ -554,16 +556,52 @@ void func_generate(const std::string& filename){
         }
         int exam = dis(gen);
         double finalGrade = 0.4 * (total / numMarks) + 0.6 * exam;
-        std::string category = (finalGrade < 5.0) ? "Vargšiukas" : "Kietiakias";
-        
-        file << name << "\t" << surname;
+
+        // Įrašome duomenis į pradinį failą
+        initialFile << name << "\t" << surname;
         for (int mark : marks) {
-            file << "\t" << mark;
+            initialFile << "\t" << mark;
         }
-        file << "\t" << exam << "\t" << finalGrade << "\t" << category << std::endl;
+        initialFile << "\t" << exam << "\t" << finalGrade << std::endl;
+
+        // Padaliname studentus į kategorijas
+        if (finalGrade < 5.0) {
+            vargsiukai.push_back(name + "\t" + surname);
+        } else {
+            kietiakiai.push_back(name + "\t" + surname);
+        }
     }
 
-    file.close();
-    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
+    initialFile.close();
+
+    // Išvedame studentus į dvi naujas kategorijų failus
+    std::string vargsiukaiFilename;
+    std::cout << "kaip uzvadinsite vargsiuku faila?: " << endl;
+    std::cin >> vargsiukaiFilename;
+    std::ofstream vargsiukaiFile(vargsiukaiFilename);
+    if (!vargsiukaiFile.is_open()) {
+        std::cerr << "Klaida atidarant failą vargsiukai.txt." << std::endl;
+        return;
+    }
+    for (const std::string& student : vargsiukai) {
+        vargsiukaiFile << student << std::endl;
+    }
+    vargsiukaiFile.close();
+    std::cout << "Failas \"" << vargsiukaiFilename << "\" sukurtas sėkmingai." << std::endl;
+
+    std::string kietiakiaiFilename;
+    std::cout << "kaip uzvadinsite kietiaku faila? "<< endl;
+    std::cin >> kietiakiaiFilename;
+    std::ofstream kietiakiaiFile(kietiakiaiFilename);
+    if (!kietiakiaiFile.is_open()) {
+        std::cerr << "Klaida atidarant failą kietiakiai.txt." << std::endl;
+        return;
+    }
+    for (const std::string& student : kietiakiai) {
+        kietiakiaiFile << student << std::endl;
+    }
+    kietiakiaiFile.close();
+    std::cout << "Failas \"" << kietiakiaiFilename << "\" sukurtas sėkmingai." << std::endl;
+
   }
 
