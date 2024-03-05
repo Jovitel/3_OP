@@ -513,74 +513,95 @@ void func_input_file() {
 }
 
 void func_generate(){
-    std::string filename = "studentai_" + std::to_string(numStudents) + ".txt";
-    std::ofstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Klaida atidarant failą " << filename << std::endl;
-        return;
+    std::cout << "hello" << endl;
+    std::string filename;
+    std::cout << "Įveskite pradinio failo pavadinimą: ";
+    std::cin >> filename;
+
+    std::string vargsiukaiFilename;
+    std::cout << "Kaip norite pavadinti vargsiukų failą? ";
+    std::cin >> vargsiukaiFilename;
+    std::ofstream vargsiukaiFile(vargsiukaiFilename);
+    if (!vargsiukaiFile.is_open()) {
+        std::cerr << "Klaida atidarant failą vargsiukai.txt." << std::endl;
+        return 1;
     }
+
+    std::string kietiakiaiFilename;
+    std::cout << "Kaip norite pavadinti kietiakiai failą? ";
+    std::cin >> kietiakiaiFilename;
+    std::ofstream kietiakiaiFile(kietiakiaiFilename);
+    if (!kietiakiaiFile.is_open()) {
+        std::cerr << "Klaida atidarant failą kietiakiai.txt." << std::endl;
+        return 1;
+    }
+
+    int numStudents, numMarks;
+
+    std::cout << "Įveskite mokinių skaičių: ";
+    std::cin >> numStudents;
+
+    std::cout << "Įveskite pažymių skaičių: ";
+    std::cin >> numMarks;
 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 10);
 
-    file << "Vardas\tPavarde";
-    for (int i = 1; i <= 5; ++i) {
-        file << "\tND" << i;
+    std::ofstream initialFile(filename);
+    if (!initialFile.is_open()) {
+        std::cerr << "Klaida atidarant pradinį failą." << std::endl;
+        return 1;
     }
     file << "\tEgz.\tGalutinis (Vid.)" << std::endl;
 
-    for (int i = 1; i <= numStudents; ++i) {
-        file << "Vardas" << i << "\tPavarde" << i;
-        double total = 0;
-        for (int j = 0; j < 5; ++j) {
-            int mark = dis(gen);
-            total += mark;
-            file << "\t" << mark;
-        }
-        int exam = dis(gen);
-        double finalGrade = 0.4 * (total / 5) + 0.6 * exam;
-        file << "\t" << exam << "\t" << finalGrade << std::endl;
+    initialFile << "Vardas\tPavarde";
+    for (int i = 1; i <= numMarks; ++i) {
+        initialFile << "\tND" << i;
     }
+    initialFile << "\tEgz.\tGalutinis (Vid.)" << std::endl;
 
-    file.close();
-    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
-}
-
-// Funkcija, kuri padalina studentus į kategorijas ir išveda į naujus failus
-void divideStudents(const std::string& inputFilename) {
-    std::ifstream inputFile(inputFilename);
-    if (!inputFile.is_open()) {
-        std::cerr << "Klaida atidarant failą " << inputFilename << std::endl;
-        return;
+    initialFile << "--------";
+    for (int i = 1; i <= numMarks; ++i) {
+        initialFile << "--------";
     }
+    initialFile << "-----------" << std::endl;
 
     std::vector<duomenys> students;
-    duomenys student;
 
-    while (inputFile >> student.vard >> student.pav) {
-        student.nd.resize(5);
+    for (int i = 1; i <= numStudents; ++i) {
+        duomenys student;
+        student.vard = "Vardas" + std::to_string(i);
+        student.pav = "Pavarde" + std::to_string(i);
+        student.nd.resize(numMarks);
         double total = 0;
         for (int& mark : student.nd) {
-            inputFile >> mark;
+            mark = dis(gen);
             total += mark;
         }
-        inputFile >> student.egzaminas;
-        student.gal_vid = 0.4 * (total / 5) + 0.6 * student.egzaminas;
+        student.egzaminas = dis(gen);
+        student.gal_vid = 0.4 * (total / numMarks) + 0.6 * student.egzaminas;
+
+        initialFile << student.vard << "\t" << student.pav;
+        for (int mark : student.nd) {
+            initialFile << "\t" << mark;
+        }
+        initialFile << "\t" << student.egzaminas << "\t" << student.gal_vid << std::endl;
 
         students.push_back(student);
     }
 
-    inputFile.close();
+    initialFile.close();
 
-    std::vector<duomenys> vargsiukai;
-    std::vector<duomenys> kietiakiai;
+    // Surūšiuoti studentus pagal galutinį vidurkį
+    std::sort(students.begin(), students.end());
 
+    // Išvesti studentus į failus
     for (const auto& student : students) {
         if (student.gal_vid < 5.0) {
-            vargsiukai.push_back(student);
+            vargsiukaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
         } else {
-            kietiakiai.push_back(student);
+            kietiakiaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
         }
     }
 
@@ -611,6 +632,7 @@ void divideStudents(const std::string& inputFilename) {
     }
 
     kietiakiaiFile.close();
-    std::cout << "Failas \"" << kietiakiaiFilename << "\" sukurtas sėkmingai." << std::endl;
+
+    std::cout << "Visi failai sukurti sėkmingai." << std::endl;
 }
 

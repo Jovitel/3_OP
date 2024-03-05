@@ -35,6 +35,7 @@ void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
 void func_generate();
+void divideStudents(const std::string& inputFilename); 
 
 #endif /* FUNCTIONS_H */
 
