@@ -507,8 +507,8 @@ void func_input_file() {
 }
 
 void func_generate(){
-   std::string filename;
-    std::cout << "Įveskite failoo pavadinimą: ";
+  std::string filename;
+    std::cout << "Įveskite failo pavadinimą: ";
     std::cin >> filename;
 
     int numStudents, numMarks;
@@ -529,16 +529,14 @@ void func_generate(){
         return;
     }
 
-    // Įrašome antraštę
     file << "Vardas\tPavarde";
     for (int i = 1; i <= numMarks; ++i) {
         file << "\tND" << i;
     }
     file << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
 
-    // Įrašome duomenis
-
     std::vector<duomenys> students;
+
     for (int i = 1; i <= numStudents; ++i) {
         duomenys student;
         student.vard = "Vardas" + std::to_string(i);
@@ -550,9 +548,9 @@ void func_generate(){
             total += mark;
         }
         student.egzaminas = dis(gen);
+        student.gal_vid = 0.4 * (total / numMarks) + 0.6 * student.egzaminas;
         student.rusis = (student.gal_vid >= 5.0) ? "kietiakas" : "vargšiukas"; // Kategorizacija
 
-        
         file << student.vard << "\t" << student.pav;
         for (int mark : student.nd) {
             file << "\t" << mark;
@@ -562,12 +560,13 @@ void func_generate(){
         students.push_back(student);
     }
 
-    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
     file.close();
+    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
+
     // Padalinimas į dvi kategorijas
     std::vector<duomenys> kietiakai;
     std::vector<duomenys> vargsiukai;
-    std::sort(students.begin(), students.end());
+
     for (const auto& student : students) {
         if (student.rusis == "kietiakas") {
             kietiakai.push_back(student);
@@ -580,22 +579,22 @@ void func_generate(){
     std::ofstream kietiakaiFile("kietiakai_" + filename);
     if (!kietiakaiFile.is_open()) {
         std::cerr << "Klaida atidarant kietiakų failą." << std::endl;
-        std::cerr << "Klaida atidarant failą." << std::endl;
         return;
     }
+
     kietiakaiFile << "Vardas\tPavarde";
-    sortedFile << "Vardas\tPavarde";
+    for (int i = 1; i <= numMarks; ++i) {
         kietiakaiFile << "\tND" << i;
-        sortedFile << "\tND" << i;
+    }
     kietiakaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
-    sortedFile << "\tEgz.\tGalutinis (Vid.)" << std::endl;
+
     for (const auto& student : kietiakai) {
         kietiakaiFile << student.vard << "\t" << student.pav;
-        sortedFile << student.vard << "\t" << student.pav;
+        for (int mark : student.nd) {
             kietiakaiFile << "\t" << mark;
-            sortedFile << "\t" << mark;
+        }
         kietiakaiFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
-        sortedFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
+    }
 
     kietiakaiFile.close();
     std::cout << "Kietiakų failas sukurtas sėkmingai." << std::endl;
@@ -611,7 +610,7 @@ void func_generate(){
         vargsiukaiFile << "\tND" << i;
     }
     vargsiukaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
-    }
+
     for (const auto& student : vargsiukai) {
         vargsiukaiFile << student.vard << "\t" << student.pav;
         for (int mark : student.nd) {
@@ -619,9 +618,8 @@ void func_generate(){
         }
         vargsiukaiFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
     }
-    std::cout << "Failas \"" << filename << "\" sukurtas ir surūšiuotas sėkmingai." << std::endl;
+
     vargsiukaiFile.close();
     std::cout << "Vargšiukų failas sukurtas sėkmingai." << std::endl;
-
 }
 
