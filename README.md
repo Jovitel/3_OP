@@ -28,3 +28,11 @@ Atnaujinimai programoje:
 
 -Header files
 -try, catch (išimčių valdymas)
+
+v0.4 release
+
+- Generuojami failai su mokiniais ir jų pažymiais.
+- Reikia pasirinkti, kiek mokinių generuoti bei jų pažymių skaičių.
+- Mokiniai yra suskirstomi pagal galutinius vidurkius (<5 vargšiukai; >=5 kietiakai) ir padalinami į 2 atskirus failus.
+  
+![Ekrano kopija (251)](https://github.com/Jovitel/1_OP/assets/150922295/e00d3540-1553-478a-b223-af251f427ca4)
