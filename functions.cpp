@@ -507,7 +507,9 @@ void func_input_file() {
 }
 
 void func_generate(){
- string filename;
+    auto start = chrono::steady_clock::now(); // Pradedame matuoti laiką
+    ofstream kietiakaiFile("kietiakai_" + filename);
+    string filename;
     cout << "Įveskite failo pavadinimą: ";
     cin >> filename;
 
@@ -551,8 +553,12 @@ void func_generate(){
         }
         student.egzaminas = dis(gen);
         student.gal_vid = 0.4 * (total / numMarks) + 0.6 * student.egzaminas;
+        auto start = chrono::steady_clock::now(); // Pradedame matuoti laiką
         student.rusis = (student.gal_vid >= 5.0) ? "kietiakas" : "vargšiukas"; // Kategorizacija
 
+        auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
+        cout <<" Rusiavimo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+        
         file << student.vard << "\t" << student.pav;
         for (int mark : student.nd) {
             file << "\t" << mark;
@@ -581,6 +587,7 @@ void func_generate(){
     }
 
     // Išvedimas į atskirus failus
+    auto start = chrono::steady_clock::now(); // Pradedame matuoti laiką
     ofstream kietiakaiFile("kietiakai_" + filename);
     if (!kietiakaiFile.is_open()) {
         cerr << "Klaida atidarant kietiakų failą." << endl;
@@ -625,6 +632,11 @@ void func_generate(){
     }
 
     vargsiukaiFile.close();
-    cout << "Vargšiukų failas sukurtas sėkmingai." << endl;
+    cout << "Vargsiuku failas sukurtas sekmingai." << endl;
+     auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
+    cout <<" Isvedimas i atskirus failus:: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+
+    auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
+    cout <<" Visos programos veikimo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
 }
 
