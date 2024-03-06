@@ -25,6 +25,7 @@ struct duomenys {
     int egzaminas;
     double gal_vid, gal_bal, gal_med;
     int nd_kiekis;
+    string rusis;
 
      bool operator<(const duomenys& other) const {
         return gal_vid < other.gal_vid;
