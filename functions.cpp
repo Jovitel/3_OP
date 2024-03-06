@@ -524,6 +524,7 @@ void func_generate(){
     std::uniform_int_distribution<> dis(1, 10);
 
     std::ofstream file(filename);
+    auto start = chrono::steady_clock::now();
     if (!file.is_open()) {
         std::cerr << "Klaida atidarant failą." << std::endl;
         return;
@@ -562,6 +563,8 @@ void func_generate(){
 
     file.close();
     std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
+     auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundemis
+            cout << filename << "Failo nuskaitymo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
 
     // Padalinimas į dvi kategorijas
     std::vector<duomenys> kietiakai;
