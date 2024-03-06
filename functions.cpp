@@ -633,5 +633,4 @@ void func_generate(){
     cout << "Visos programos veikimo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
 }
 
-}
 
