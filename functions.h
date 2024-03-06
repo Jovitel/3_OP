@@ -25,9 +25,10 @@ struct duomenys {
     int egzaminas;
     double gal_vid, gal_bal, gal_med;
     int nd_kiekis;
+
      bool operator<(const duomenys& other) const {
-        return gal_vid > other.gal_vid; // Surūšiuoti mažėjančia tvarka
-     }
+        return gal_vid < other.gal_vid;
+    }
 };
 
 void func_input_hands();
@@ -35,7 +36,5 @@ void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
 void func_generate();
-void divideStudents(const std::string& inputFilename); 
 
 #endif /* FUNCTIONS_H */
-

@@ -320,24 +320,18 @@ void func_input_file() {
         duomenys studentas;
         int choice = 0;
         
-        try {
         cout << "KURI FAILĄ NAUDOTI: " << endl;
         cout << "kursiokai.txt - 1 " << endl;
         cout << "studentai10000.txt - 2 " << endl;
         cout << "studentai100000 - 3" << endl;
         cout << "studentai1000000 - 4" << endl;
         cin >> choice;
-        if (cin.fail() || (choice < 1 || choice > 4)) {
-            throw runtime_error("Netinkamas pasirinkimas"); // Sukeliam išimtį, jei pasirinkimas netinkamas
-        }
-        } catch (const runtime_error& e) {
-            cout << e.what() << ". Įveskite 1, 2, 3 arba 4." << endl;
+        while (cin.fail() || (choice < 1 || choice > 4)) {
+            cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3 arba 4: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            exit(1); // Baigiam darbą su klaida
+            cin >> choice;
         }
-
-
 
         string file_name;
         switch (choice) {
@@ -513,24 +507,9 @@ void func_input_file() {
 }
 
 void func_generate(){
-    std::string filename;
-    std::cout << "Įveskite pradinio failo pavadinimą: ";
+  std::string filename;
+    std::cout << "Įveskite failo pavadinimą: ";
     std::cin >> filename;
-
-    std::string vargsiukaiFilename = "vargsiukai_" + filename;
-    std::string kietiakiaiFilename = "kietiakiai_" + filename;
-
-    std::ofstream vargsiukaiFile(vargsiukaiFilename);
-    if (!vargsiukaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą " << vargsiukaiFilename << std::endl;
-        return 1;
-    }
-
-    std::ofstream kietiakiaiFile(kietiakiaiFilename);
-    if (!kietiakiaiFile.is_open()) {
-        std::cerr << "Klaida atidarant failą " << kietiakiaiFilename << std::endl;
-        return 1;
-    }
 
     int numStudents, numMarks;
 
@@ -544,26 +523,21 @@ void func_generate(){
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 10);
 
-    std::ofstream initialFile(filename);
-    if (!initialFile.is_open()) {
-        std::cerr << "Klaida atidarant pradinį failą." << std::endl;
-        return 1;
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Klaida atidarant failą." << std::endl;
+        return;
     }
 
-    initialFile << "Vardas\tPavarde";
+    // Įrašome antraštę
+    file << "Vardas\tPavarde";
     for (int i = 1; i <= numMarks; ++i) {
-        initialFile << "\tND" << i;
+        file << "\tND" << i;
     }
-    initialFile << "\tEgz.\tGalutinis (Vid.)" << std::endl;
+    file << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
 
-    initialFile << "--------";
-    for (int i = 1; i <= numMarks; ++i) {
-        initialFile << "--------";
-    }
-    initialFile << "-----------" << std::endl;
-
+    // Įrašome duomenis
     std::vector<duomenys> students;
-
     for (int i = 1; i <= numStudents; ++i) {
         duomenys student;
         student.vard = "Vardas" + std::to_string(i);
@@ -576,37 +550,47 @@ void func_generate(){
         }
         student.egzaminas = dis(gen);
         student.gal_vid = 0.4 * (total / numMarks) + 0.6 * student.egzaminas;
-
-        initialFile << student.vard << "\t" << student.pav;
+        student.rusis = (student.gal_vid >= 5.0) ? "kietiakas" : "vargšiukas";
+        
+        file << student.vard << "\t" << student.pav;
         for (int mark : student.nd) {
-            initialFile << "\t" << mark;
+            file << "\t" << mark;
         }
-        initialFile << "\t" << student.egzaminas << "\t" << student.gal_vid << std::endl;
+        file << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
 
         students.push_back(student);
     }
 
-    initialFile.close();
+    file.close();
 
     // Surūšiuoti studentus pagal galutinį vidurkį
     std::sort(students.begin(), students.end());
 
-    // Išvesti studentus į failus
-    for (const auto& student : students) {
-        if (student.gal_vid < 5.0) {
-            vargsiukaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
-        } else {
-            kietiakiaiFile << student.vard << "\t" << student.pav << "\t" << student.gal_vid << std::endl;
-        }
+    // Atidaryti naują failą su surūšiuotais duomenimis
+    std::ofstream sortedFile("surusiuoti_" + filename);
+    if (!sortedFile.is_open()) {
+        std::cerr << "Klaida atidarant failą." << std::endl;
+        return;
     }
 
-    vargsiukaiFile.close();
-    std::cout << "Failas \"" << vargsiukaiFilename << "\" sukurtas sėkmingai." << std::endl;
+    // Įrašyti antraštę
+    sortedFile << "Vardas\tPavarde";
+    for (int i = 1; i <= numMarks; ++i) {
+        sortedFile << "\tND" << i;
+    }
+    sortedFile << "\tEgz.\tGalutinis (Vid.)" << std::endl;
 
-    kietiakiaiFile.close();
-    std::cout << "Failas \"" << kietiakiaiFilename << "\" sukurtas sėkmingai." << std::endl;
+    // Įrašyti surūšiuotus duomenis
+    for (const auto& student : students) {
+        sortedFile << student.vard << "\t" << student.pav;
+        for (int mark : student.nd) {
+            sortedFile << "\t" << mark;
+        }
+        sortedFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
+    }
 
-    std::cout << "Visi failai sukurti sėkmingai." << std::endl;
+    sortedFile.close();
+    std::cout << "Failas \"" << filename << "\" sukurtas ir surūšiuotas sėkmingai." << std::endl;
 
 }
 
