@@ -507,26 +507,27 @@ void func_input_file() {
 }
 
 void func_generate(){
-  std::string filename;
-    std::cout << "Įveskite failo pavadinimą: ";
-    std::cin >> filename;
+ string filename;
+    cout << "Įveskite failo pavadinimą: ";
+    cin >> filename;
 
     int numStudents, numMarks;
 
-    std::cout << "Įveskite mokinių skaičių: ";
-    std::cin >> numStudents;
+    cout << "Įveskite mokinių skaičių: ";
+    cin >> numStudents;
 
-    std::cout << "Įveskite pažymių skaičių: ";
-    std::cin >> numMarks;
+    cout << "Įveskite pažymių skaičių: ";
+    cin >> numMarks;
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 10);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 10);
 
-    std::ofstream file(filename);
-    auto start = chrono::steady_clock::now();
+    ofstream file(filename);
+    auto start = chrono::steady_clock::now(); // Pradedame matuoti laiką
+
     if (!file.is_open()) {
-        std::cerr << "Klaida atidarant failą." << std::endl;
+        cerr << "Klaida atidarant failą." << endl;
         return;
     }
 
@@ -534,14 +535,14 @@ void func_generate(){
     for (int i = 1; i <= numMarks; ++i) {
         file << "\tND" << i;
     }
-    file << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
+    file << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
 
-    std::vector<duomenys> students;
+    vector<duomenys> students;
 
     for (int i = 1; i <= numStudents; ++i) {
         duomenys student;
-        student.vard = "Vardas" + std::to_string(i);
-        student.pav = "Pavarde" + std::to_string(i);
+        student.vard = "Vardas" + to_string(i);
+        student.pav = "Pavarde" + to_string(i);
         student.nd.resize(numMarks);
         double total = 0;
         for (int& mark : student.nd) {
@@ -562,13 +563,14 @@ void func_generate(){
     }
 
     file.close();
-    std::cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << std::endl;
-     auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundemis
-            cout << filename << "Failo nuskaitymo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+    cout << "Failas \"" << filename << "\" sukurtas sėkmingai." << endl;
+    
+    auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
+    cout << filename << " Failo sukūrimo laikas: " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
 
     // Padalinimas į dvi kategorijas
-    std::vector<duomenys> kietiakai;
-    std::vector<duomenys> vargsiukai;
+    vector<duomenys> kietiakai;
+    vector<duomenys> vargsiukai;
 
     for (const auto& student : students) {
         if (student.rusis == "kietiakas") {
@@ -579,9 +581,9 @@ void func_generate(){
     }
 
     // Išvedimas į atskirus failus
-    std::ofstream kietiakaiFile("kietiakai_" + filename);
+    ofstream kietiakaiFile("kietiakai_" + filename);
     if (!kietiakaiFile.is_open()) {
-        std::cerr << "Klaida atidarant kietiakų failą." << std::endl;
+        cerr << "Klaida atidarant kietiakų failą." << endl;
         return;
     }
 
@@ -589,7 +591,7 @@ void func_generate(){
     for (int i = 1; i <= numMarks; ++i) {
         kietiakaiFile << "\tND" << i;
     }
-    kietiakaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
+    kietiakaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
 
     for (const auto& student : kietiakai) {
         kietiakaiFile << student.vard << "\t" << student.pav;
@@ -600,11 +602,11 @@ void func_generate(){
     }
 
     kietiakaiFile.close();
-    std::cout << "Kietiakų failas sukurtas sėkmingai." << std::endl;
+    cout << "Kietiakų failas sukurtas sėkmingai." << endl;
 
-    std::ofstream vargsiukaiFile("vargsiukai_" + filename);
+    ofstream vargsiukaiFile("vargsiukai_" + filename);
     if (!vargsiukaiFile.is_open()) {
-        std::cerr << "Klaida atidarant vargsiukų failą." << std::endl;
+        cerr << "Klaida atidarant vargsiukų failą." << endl;
         return;
     }
 
@@ -612,7 +614,7 @@ void func_generate(){
     for (int i = 1; i <= numMarks; ++i) {
         vargsiukaiFile << "\tND" << i;
     }
-    vargsiukaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << std::endl;
+    vargsiukaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
 
     for (const auto& student : vargsiukai) {
         vargsiukaiFile << student.vard << "\t" << student.pav;
@@ -623,6 +625,6 @@ void func_generate(){
     }
 
     vargsiukaiFile.close();
-    std::cout << "Vargšiukų failas sukurtas sėkmingai." << std::endl;
+    cout << "Vargšiukų failas sukurtas sėkmingai." << endl;
 }
 
