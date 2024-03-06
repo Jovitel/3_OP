@@ -565,7 +565,7 @@ void func_generate(){
 
     file.close();
     auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
-    cout << "Failo sukūrimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+    cout << "Failo sukūrimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
 
     // Padalinimas į dvi kategorijas
     vector<duomenys> kietiakai;
@@ -627,10 +627,10 @@ void func_generate(){
     vargsiukaiFile.close();
     end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
     cout << "Vargšiukų failas sukurtas sėkmingai." << endl;
-    cout << "Išvedimo į atskirus failus laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+    cout << "Išvedimo į atskirus failus laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
 
     end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
-    cout << "Visos programos veikimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " s" << endl; // Išvedame laiką į ekraną
+    cout << "Visos programos veikimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
 }
 
 
