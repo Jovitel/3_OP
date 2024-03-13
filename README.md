@@ -36,3 +36,10 @@ v0.4 release
 - Mokiniai yra suskirstomi pagal galutinius vidurkius (<5 vargšiukai; >=5 kietiakai) ir padalinami į 2 atskirus failus.
   
 ![Ekrano kopija (251)](https://github.com/Jovitel/1_OP/assets/150922295/e00d3540-1553-478a-b223-af251f427ca4)
+
+v0.4_2 release
+
+-generuojami failai iš anksto
+
+![Ekrano kopija (258)](https://github.com/Jovitel/1_OP/assets/150922295/e6ef3707-15d3-4c8c-9e5f-2c461fa4a523)
+
