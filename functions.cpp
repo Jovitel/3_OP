@@ -506,17 +506,17 @@ void func_input_file() {
     }
 }
 
-void func_generate(){
+void generate_new_file() {
      string filename;
-    cout << "Įveskite failo pavadinimą: ";
+    cout << "Iveskite failo pavadinima: ";
     cin >> filename;
 
     int numStudents, numMarks;
 
-    cout << "Įveskite mokinių skaičių: ";
+    cout << "Iveskite mokiniu skaiciu: ";
     cin >> numStudents;
 
-    cout << "Įveskite pažymių skaičių: ";
+    cout << "Iveskite pazymiu skaiciu: ";
     cin >> numMarks;
 
     random_device rd;
@@ -525,18 +525,13 @@ void func_generate(){
 
     auto start = chrono::steady_clock::now(); // Pradedame matuoti laiką
 
-    ofstream file(filename);
+    ofstream sortedFile(filename);
 
-    if (!file.is_open()) {
-        cerr << "Klaida atidarant failą." << endl;
-        return;
-    }
-
-    file << "Vardas\tPavarde";
+    sortedFile << "Vardas\tPavarde";
     for (int i = 1; i <= numMarks; ++i) {
-        file << "\tND" << i;
+        sortedFile << "\tND" << i;
     }
-    file << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
+    sortedFile << "\tEgz." << endl;
 
     vector<duomenys> students;
 
@@ -545,92 +540,160 @@ void func_generate(){
         student.vard = "Vardas" + to_string(i);
         student.pav = "Pavarde" + to_string(i);
         student.nd.resize(numMarks);
-        double total = 0;
         for (int& mark : student.nd) {
             mark = dis(gen);
-            total += mark;
         }
         student.egzaminas = dis(gen);
-        student.gal_vid = 0.4 * (total / numMarks) + 0.6 * student.egzaminas;
-        student.rusis = (student.gal_vid >= 5.0) ? "kietiakas" : "vargšiukas"; // Kategorizacija
-
-        file << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
-            file << "\t" << mark;
-        }
-        file << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
 
         students.push_back(student);
     }
 
-    file.close();
-    auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
-    cout << "Failo sukūrimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
+    // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
+    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
+        return a.egzaminas < b.egzaminas;
+    });
 
-    // Padalinimas į dvi kategorijas
-    vector<duomenys> kietiakai;
-    vector<duomenys> vargsiukai;
-
+    // Įrašome išrikiuotus duomenis į failą
     for (const auto& student : students) {
-        if (student.rusis == "kietiakas") {
-            kietiakai.push_back(student);
-        } else {
-            vargsiukai.push_back(student);
-        }
-    }
-
-    // Išvedimas į atskirus failus
-    start = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    ofstream kietiakaiFile("kietiakai_" + filename);
-    if (!kietiakaiFile.is_open()) {
-        cerr << "Klaida atidarant kietiakų failą." << endl;
-        return;
-    }
-
-    kietiakaiFile << "Vardas\tPavarde";
-    for (int i = 1; i <= numMarks; ++i) {
-        kietiakaiFile << "\tND" << i;
-    }
-    kietiakaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
-
-    for (const auto& student : kietiakai) {
-        kietiakaiFile << student.vard << "\t" << student.pav;
+        sortedFile << student.vard << "\t" << student.pav;
         for (int mark : student.nd) {
-            kietiakaiFile << "\t" << mark;
+            sortedFile << "\t" << mark;
         }
-        kietiakaiFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
+        sortedFile << "\t" << student.egzaminas << endl;
     }
 
-    kietiakaiFile.close();
-    cout << "Kietiakų failas sukurtas sėkmingai." << endl;
-
-    ofstream vargsiukaiFile("vargsiukai_" + filename);
-    if (!vargsiukaiFile.is_open()) {
-        cerr << "Klaida atidarant vargsiukų failą." << endl;
-        return;
-    }
-
-    vargsiukaiFile << "Vardas\tPavarde";
-    for (int i = 1; i <= numMarks; ++i) {
-        vargsiukaiFile << "\tND" << i;
-    }
-    vargsiukaiFile << "\tEgz.\tGalutinis (Vid.)\tRusis" << endl;
-
-    for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
-            vargsiukaiFile << "\t" << mark;
-        }
-        vargsiukaiFile << "\t" << student.egzaminas << "\t" << student.gal_vid << "\t" << student.rusis << std::endl;
-    }
-
-    vargsiukaiFile.close();
-    end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
-    cout << "Vargšiukų failas sukurtas sėkmingai." << endl;
-    cout << "Išvedimo į atskirus failus laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
-
-    end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
-    cout << "Visos programos veikimo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
+    sortedFile.close();
+    auto end_read = chrono::steady_clock::now();
+    auto duration_read = chrono::duration_cast<chrono::milliseconds>(end_read - start);
+    double seconds_read = duration_read.count() / 1000.0; // Konvertuojame milisekundes į sekundes
+    cout << "Failo kurimas ir jo uzdarymas:  " << seconds_read << " s" << endl;
+   
 }
 
+void use_existing_file() {
+    string file_name;
+    cout << "Kuri faila norite nuskaityti? " << endl;
+    cin >> file_name;
+     ifstream fd(file_name); // Atidarome pasirinktą failą
 
+    vector<duomenys> students;
+    string line;
+    int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
+
+    // Skaitome duomenis iš failo
+    auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
+    while (getline(fd, line)) {
+        istringstream iss(line);
+        duomenys student;
+
+        // Nuskaitome vardą ir pavardę
+        iss >> student.vard >> student.pav;
+
+        // Nuskaitome namų darbų skaičių iš pirmosios eilutės
+        if (numMarks == 0) {
+            string mark;
+            while (iss >> mark) {
+                if (mark != "Vardas" && mark != "Pavarde") {
+                    if (mark != "Egz.") {
+                        numMarks++;
+                    }
+                }
+            }
+            continue; // Praleidžiame pirmą eilutę
+        }
+
+        // Nuskaitome namų darbus
+        for (int i = 0; i < numMarks; ++i) {
+            int mark;
+            iss >> mark;
+            student.nd.push_back(mark);
+        }
+
+        // Nuskaitome egzamino rezultatą
+        iss >> student.egzaminas;
+
+        // Apskaičiuojame galutinį vidurkį
+        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+
+        students.push_back(student);
+    }
+    auto end_read = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundėmis
+    auto duration_read1 = chrono::duration_cast<chrono::milliseconds>(end_read - start_read);
+    double seconds_read1 = duration_read1.count() / 1000.0; // Konvertuojame milisekundes į sekundes
+    cout << "Duomenu nuskaitymas is failo:  " << seconds_read1 << " s" << endl;
+
+    fd.close();
+
+    // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
+    auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
+    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
+        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    });
+    for (auto& student : students) {
+        student.rusis = (student.gal_vid >= 5.0) ? "kietiakas" : "vargsiukas";
+    }
+    auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
+    auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
+    double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
+    cout << "Studentu rusiavimas i dvi grupes:  " << seconds_sort << " s" << endl;
+
+    // Išvedame kietuolius ir vargsiukus į atskirus failus
+    ofstream kietiakaiFile("kietiakai_" + file_name + ".txt");
+    ofstream vargsiukaiFile("vargsiukai_" + file_name + ".txt");
+
+    // Pirmiausia išvedame antrą eilutę
+    kietiakaiFile << "Vardas" << "\t" << "Pavarde";
+    vargsiukaiFile << "Vardas" << "\t" << "Pavarde";
+    auto start_output = chrono::steady_clock::now(); // Pradedame matuoti laiką
+    for (int i = 1; i <= numMarks; ++i) {
+        kietiakaiFile << "\tND" << i;
+        vargsiukaiFile << "\tND" << i;
+    }
+    kietiakaiFile << "\tEgz." << endl;
+    vargsiukaiFile << "\tEgz." << endl;
+
+    // Išvedame likusius duomenis
+    for (const auto& student : students) {
+        if (student.rusis == "kietiakas") {
+            kietiakaiFile << student.vard << "\t" << student.pav;
+            for (int mark : student.nd) {
+                kietiakaiFile << "\t" << mark;
+            }
+            kietiakaiFile << "\t" << student.egzaminas << endl;
+        } else {
+            vargsiukaiFile << student.vard << "\t" << student.pav;
+            for (int mark : student.nd) {
+                vargsiukaiFile << "\t" << mark;
+            }
+            vargsiukaiFile << "\t" << student.egzaminas << endl;
+        }
+    }
+    auto end_output = chrono::steady_clock::now(); // Baigiame matuoti laiką
+    auto duration_output = chrono::duration_cast<chrono::milliseconds>(end_output - start_output);
+    double seconds_output = duration_output.count() / 1000.0; // Konvertuojame milisekundes į sekundes
+    cout << "Surusiuotu studentu isvedimas i du naujus failus:  " << seconds_output << " s" << endl;
+    kietiakaiFile.close();
+    vargsiukaiFile.close();
+
+}
+void func_generate() {
+
+    char d;
+    cout << "Ar norite sugeneruoti faila? (T/N): ";
+    while (true) {
+        cin >> d;
+        if (cin.fail() || (d != 'T' && d != 'N')) {
+            cout << "Ivedete netinkama simboli, prasome pasirinkti 'T' arba 'N': ";
+            cin.clear();
+            cin.ignore(10000, '\n');
+        } else {
+            break;
+        }
+    }
+
+    if (d == 'T') {
+        generate_new_file();
+    } else if (d == 'N') {
+        use_existing_file();
+    }
+}
