@@ -505,12 +505,6 @@ void func_input_file() {
         cerr << "Klaida: " << e.what() << endl;
     }
 }
-ifstream& open_file(ifstream& fd, const string& file_name) {
-    cout << "Kuri faila norite nuskaityti? " << endl;
-    cin >> file_name;
-    fd.open(file_name); // Atidarome pasirinktą failą
-    return fd;
-}
 
 void generate_new_file() {
      string filename;
@@ -576,7 +570,15 @@ void generate_new_file() {
    
 }
 
-void use_existing_file(ifstream& fd, const string& file_name) {
+void use_existing_file() {
+    string file_name;
+    cout << "Koki faila naudosite? " << endl;
+    cin >> file_name;
+    ifstream fd(file_name);
+    if (!fd.is_open()) {
+        cout << "Nepavyko atidaryti failo." << endl;
+    }
+    cout << "VECTOR: " << endl;
     vector<duomenys> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
@@ -689,7 +691,15 @@ void use_existing_file(ifstream& fd, const string& file_name) {
     vargsiukaiFile.close();
 }
 
-void read_list (ifstream& fd, const string& file_name){
+void read_list (){
+    string file_name;
+    cout << "Koki faila naudosite? " << endl;
+    cin >> file_name;
+    ifstream fd(file_name);
+    if (!fd.is_open()) {
+        cout << "Nepavyko atidaryti failo." << endl;
+    }
+    cout << "LIST: " << endl;
     list<duomenys> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
@@ -803,7 +813,15 @@ void read_list (ifstream& fd, const string& file_name){
 
 }
 
-void read_deque (ifstream& fd, const string& file_name){
+void read_deque (){
+    string file_name;
+    cout << "Koki faila naudosite? " << endl;
+    cin >> file_name;
+    ifstream fd(file_name);
+    if (!fd.is_open()) {
+        cout << "Nepavyko atidaryti failo." << endl;
+    }
+    cout << "DEQUE: " << endl;
     deque<duomenys> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
@@ -916,7 +934,7 @@ void read_deque (ifstream& fd, const string& file_name){
     vargsiukaiFile.close();
 }
 
-void func_generate(ifstream& fd, const string& file_name) {
+void func_generate() {
 
     char d;
     cout << "Ar norite sugeneruoti faila? (T/N): ";
@@ -934,9 +952,8 @@ void func_generate(ifstream& fd, const string& file_name) {
     if (d == 'T') {
         generate_new_file();
     } else if (d == 'N') {
-        fd = open_file(fd, file_name); 
-        use_existing_file(fd, file_name);
-        read_list(fd, file_name);
-        read_deque(fd, file_name); 
+        use_existing_file();
+        read_list();
+        read_deque(); 
     }
 }

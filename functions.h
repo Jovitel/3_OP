@@ -38,10 +38,9 @@ void func_input_hands();
 void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
-void func_generate(ifstream& fd, const string& file_name);
-ifstream& open_file(ifstream& fd, const string& file_name);
+void func_generate();
 void generate_new_file();
-void use_existing_file(ifstream& fd, const string& file_name);
-void read_list (ifstream& fd, const string& file_name);
-void read_deque (ifstream& fd, const string& file_name);
+void use_existing_file();
+void read_list ();
+void read_deque ();
 #endif /* FUNCTIONS_H */

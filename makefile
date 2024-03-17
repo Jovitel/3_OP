@@ -1,6 +1,6 @@
 vektoriai:
-	g++ -c Vektoriai.cpp
+	g++ -c vektoriai.cpp
 funkcijos:
-	g++ -c Funkcijos.cpp
+	g++ -c functions.cpp
 programa:
-	g++ -o Vektoriai Vektoriai.o Funkcijos.o
+	g++ -o Vektoriai vektoriai.o functions.o

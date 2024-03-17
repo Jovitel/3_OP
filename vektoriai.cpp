@@ -10,7 +10,6 @@ int main() {
     cout << "4 - Užbaigti programą" << endl;
     cout << "5 - Duomenis nuskaityti iš failo" << endl;
     cout << "6 - Generuoti failus " << endl;
-    cout << "7 - Atlikti testus su kitais konteineriais " << endl;
     cin >> choice;
 
     while (cin.fail() || (choice < 1 || choice > 6)) {
@@ -31,9 +30,7 @@ int main() {
     } else if (choice == 5) {
         func_input_file();
     } else if (choice == 6) {
-        ifstream fd; 
-        string file_name; 
-        func_generate(fd, file_name);
+        func_generate();
     } 
 
 
