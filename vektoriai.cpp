@@ -10,10 +10,11 @@ int main() {
     cout << "4 - Užbaigti programą" << endl;
     cout << "5 - Duomenis nuskaityti iš failo" << endl;
     cout << "6 - Generuoti failus " << endl;
+    cout << "7 - Atlikti testus su kitais konteineriais " << endl;
     cin >> choice;
 
     while (cin.fail() || (choice < 1 || choice > 6)) {
-        cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3, 4, 5 arba 6: ";
+        cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3, 4, 5 arba 6";
         cin.clear();
         cin.ignore(10000, '\n');
         cin >> choice;
@@ -30,8 +31,10 @@ int main() {
     } else if (choice == 5) {
         func_input_file();
     } else if (choice == 6) {
-        func_generate();
-    }
+        ifstream fd; 
+        string file_name; 
+        func_generate(fd, file_name);
+    } 
 
 
     return 0;
