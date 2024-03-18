@@ -1,45 +1,38 @@
-# 1_OP
-Šioje programoje yra skaičiuojama įvedamų mokinių galutinis balas bei mediana, atsižvelgiant į jų namų darbų rezultatus ir egzamino rezultatą. V.pradinė
+APRAŠYMAS:
 
-Programos pradžia. Įvedama:
+Su šia programa yra testuojama programos sparta, naudojant skirtingus konteinerius (std::vector, std::list, std::deque). Matuojama: duomenų nuskaitymas iš failo į atitinkamą konteinerį
+           studentų rūšiavimas didėjimo tvarką konteineryje 
+           studentų skirstymas  į dvi grupes/kategorijas
 
--Kelių mokinių pažymiai bus apskaičiuojami -Kiek bus įrašoma namų darbų pažymių -Taip pat įvedami egzamino rezultatai
+REZULTATAI:
+1000
 
-Išvedama
+![Ekrano kopija (259)](https://github.com/Jovitel/1_OP/assets/150922295/71b0cf1b-6f50-455c-8e46-5f77e61cb27e)
+![Ekrano kopija (260)](https://github.com/Jovitel/1_OP/assets/150922295/de6211c5-07f8-45a3-b8bb-00fa73229921)
 
--Pavardė, vardas -Galutinis balas arba mediana (pasirenkama) -Neledžiama vartotojui įvesti nelogiškus atsakymus, tai padarius programa informuoja vartotoją (PVZ ten, kur skirta įvesti pažymius nuo 1 iki 10 nebus leidžiama įvesti didesnių skaičių arba raidžių)
+10 000
 
-v0.1 release
+![2](https://github.com/Jovitel/1_OP/assets/150922295/8063d316-d155-4f96-a994-d53d7ae6598c)
+![Ekrano kopija (262)](https://github.com/Jovitel/1_OP/assets/150922295/c009ca89-ebd6-49dc-b793-c9f996318d9c)
 
-Atnaujinimai programoje:
+100 000
 
--Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai (tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su masyvais) -Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
+![3](https://github.com/Jovitel/1_OP/assets/150922295/b6cc98b3-f84a-4565-b423-bb2a5736c64e)
+![Ekrano kopija (263)](https://github.com/Jovitel/1_OP/assets/150922295/967158a3-ec7b-4989-a5d6-f381bcd7cb0c)
 
-v0.2 release
+1 000 000
 
-Atnaujinimai programoje:
+![4](https://github.com/Jovitel/1_OP/assets/150922295/205ad437-b3af-4466-ae01-a928e6fb32ed)
+![Ekrano kopija (264)](https://github.com/Jovitel/1_OP/assets/150922295/15f7930b-1a0e-431a-8eec-c8c1f23e4476)
 
--Galima pasirinkti, ar nori, kad duomenys būtų nuskaitomi iš tam tikro failo.
--Apskaičiuojamas failo generavimo laikas
+10 000 000
 
- v0.3 release
+![Ekrano kopija (267)](https://github.com/Jovitel/1_OP/assets/150922295/00973ea7-2fa1-4722-ab7b-27b954534155)
+![Ekrano kopija (266)](https://github.com/Jovitel/1_OP/assets/150922295/fd805374-62c2-4056-ba58-b5f3aa4edf45)
 
- Atnaujinimai programoje:
+APIBENDRINTI:
+![Ekrano kopija (268)](https://github.com/Jovitel/1_OP/assets/150922295/34a7260e-d159-4226-856b-f129c2d4b986)
 
--Header files
--try, catch (išimčių valdymas)
+Atlikti visus šiuos veiksmus greičiausiai pavyko naudojant std::list, o daugiausia buvo sugaišta laiko su std::deque konteineriu. Nuskaitymas trumpiausiai užtruko su std::deque, rūšiavimas žymiai trumpiau su std::list, o mokinių suskirstymas - std::vector. 
 
-v0.4 release
-
-- Generuojami failai su mokiniais ir jų pažymiais.
-- Reikia pasirinkti, kiek mokinių generuoti bei jų pažymių skaičių.
-- Mokiniai yra suskirstomi pagal galutinius vidurkius (<5 vargšiukai; >=5 kietiakai) ir padalinami į 2 atskirus failus.
-  
-![Ekrano kopija (251)](https://github.com/Jovitel/1_OP/assets/150922295/e00d3540-1553-478a-b223-af251f427ca4)
-
-v0.4_2 release
-
--generuojami failai iš anksto
-
-![Ekrano kopija (258)](https://github.com/Jovitel/1_OP/assets/150922295/e6ef3707-15d3-4c8c-9e5f-2c461fa4a523)
 
