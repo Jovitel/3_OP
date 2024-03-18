@@ -40,7 +40,16 @@ void func_generate_names();
 void func_input_file();
 void func_generate();
 void generate_new_file();
+//3 STRATEGIJA
 void use_existing_file();
-void read_list ();
-void read_deque ();
+void read_list();
+void read_deque(); 
+//2 STRATEGIJA
+void use_existing_file_2();
+void read_list_2();
+void read_deque_2(); 
+//3 STRATEGIJA
+void use_existing_file_3();
+void read_list_3();
+void read_deque_3(); 
 #endif /* FUNCTIONS_H */
