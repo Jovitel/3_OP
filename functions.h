@@ -37,5 +37,8 @@ void func_generate_numbers();
 void func_generate_names();
 void func_input_file();
 void func_generate();
+void generate_new_file();
+void use_existing_file();
+
 
 #endif /* FUNCTIONS_H */
