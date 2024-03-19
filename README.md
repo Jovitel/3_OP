@@ -127,7 +127,6 @@ Kelių mokinių pažymiai bus apskaičiuojami
 Kiek bus įrašoma namų darbų pažymių
 Taip pat įvedami egzamino rezultatai
 Išvedama
-
 Pavardė, vardas
 Galutinis balas arba mediana (pasirenkama)
 Neledžiama vartotojui įvesti nelogiškus atsakymus, tai padarius programa informuoja vartotoją
