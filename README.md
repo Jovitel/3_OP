@@ -120,7 +120,8 @@ PVZ: cd  C:\Darbai\1_OP
 8. Terminale pamatysit 6 pasirinkimus, jų pavadinimai nusako, kokie veiksmai bus atlikti, įvykdžius tam tikrą pasirinkimą.
    
 Štai smulkesni pasirinkimų aprašymai:
-1. Programos pradžia.
+1.
+Programos pradžia.
 Įvedama:
 
 Kelių mokinių pažymiai bus apskaičiuojami
@@ -131,15 +132,24 @@ Pavardė, vardas
 Galutinis balas arba mediana (pasirenkama)
 Neledžiama vartotojui įvesti nelogiškus atsakymus, tai padarius programa informuoja vartotoją
 (PVZ ten, kur skirta įvesti pažymius nuo 1 iki 10 nebus leidžiama įvesti didesnių skaičių arba raidžių)
-2. Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
+
+2.
+Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
 (tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su masyvais)
 Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
-3. Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
+
+3.
+Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
 (tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su DINAMINIAIS masyvais)
 Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
-4. Užbaigti programą.
-5. Duomenys nuskaitomi iš failo, apskaičiuojama, per kiek laiko nuskaitoma.
-6. Generuojami failai su mokiniais ir jų pažymiais iš anksto.
+
+4.
+Užbaigti programą.
+5.
+Duomenys nuskaitomi iš failo, apskaičiuojama, per kiek laiko nuskaitoma.
+
+6.
+Generuojami failai su mokiniais ir jų pažymiais iš anksto.
 Reikia pasirinkti, kiek mokinių generuoti bei jų pažymių skaičių.
 Mokiniai yra suskirstomi pagal galutinius vidurkius (<5 vargšiukai; >=5 kietiakai) ir padalinami į 2 atskirus failus.
 Yra 3 strategijos bei 3 skirtingi konteineriai, std::vector; std::list; std::deque
