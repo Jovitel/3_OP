@@ -22,7 +22,7 @@ void func_input_hands() {
                 cout << "Netinkamas pažymys, įveskite naują: ";
                 continue;
             }
-            student.addnd(pazymys);
+            student.addnd(pazymys); // Naudojame addnd metodą
         }
 
         cout << "Įveskite egzamino rezultatą: ";
@@ -350,6 +350,7 @@ void func_generate_names() {
     }
 }
 }
+
 void func_input_file() {
     try {
         int s, rez;
@@ -612,7 +613,7 @@ void generate_new_file() {
 }
 //1 STRATEGIJA
 void use_existing_file() {
-   string file_name;
+    string file_name;
     cout << "Koki faila naudosite? " << endl;
     cin >> file_name;
 
@@ -634,11 +635,10 @@ void use_existing_file() {
         Studentas student;
 
         // Nuskaitome vardą ir pavardę
-            istringstream iss(line);
-            string vardas, pavarde;
-            iss >> vardas >> pavarde;
-            studentas.setVardas(vardas);
-            studentas.setPavarde(pavarde);
+        string vardas, pavarde;
+        iss >> vardas >> pavarde;
+        studentas.setVardas(vardas);
+        studentas.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -758,7 +758,6 @@ void read_list (){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
 
         // Nuskaitome vardą ir pavardę
             istringstream iss(line);
@@ -872,7 +871,7 @@ void read_list (){
 }
 
 void read_deque (){
-    list<Studentas> students;
+    deque<Studentas> students;
     Studentas student;
     string file_name;
     cout << "Koki faila naudosite? " << endl;
@@ -882,15 +881,12 @@ void read_deque (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "DEQUE: " << endl;
-    deque<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
-        Studentas student;
 
          // Nuskaitome vardą ir pavardę
             istringstream iss(line);
@@ -1019,8 +1015,6 @@ void use_existing_file_2(){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
-        Studentas student;
 
         // Nuskaitome vardą ir pavardę
              istringstream iss(line);
@@ -1134,8 +1128,6 @@ void read_list_2 (){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
-        Studentas student;
 
         // Nuskaitome vardą ir pavardę
             istringstream iss(line);
@@ -1248,15 +1240,13 @@ void read_deque_2 (){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
-        Studentas student;
 
         // Nuskaitome vardą ir pavardę
             istringstream iss(line);
             string vardas, pavarde;
             iss >> vardas >> pavarde;
-            student.setVardas(vardas);
-            student.setPavarde(pavarde);
+            studentas.setVardas(vardas);
+            studentas.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -1288,18 +1278,18 @@ void read_deque_2 (){
        for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.addnd(mark);
+            studentas.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
         int egzaminas;
         iss >> egzaminas;
-        student.setEgzaminas(egzaminas);
+        studentas.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
+        studentas.setGalutinisVid(0.4 * (accumulate(studentas.getNd().begin(), studentas.getNd().end(), 0.0) / numMarks) + 0.6 * studentas.getEgzaminas());
 
-        students.push_back(student);
+        students.push_back(studentas);
     }
     auto end_read = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_read = chrono::duration_cast<chrono::milliseconds>(end_read - start_read);
@@ -1371,7 +1361,6 @@ void use_existing_file_3(){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
         Studentas student;
 
         // Nuskaitome vardą ir pavardę
@@ -1496,7 +1485,6 @@ void read_list_3 (){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
         Studentas student;
 
         // Nuskaitome vardą ir pavardę
@@ -1622,7 +1610,6 @@ void read_deque_3 (){
     // Skaitome duomenis iš failo
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
-        istringstream iss(line);
         Studentas student;
 
         // Nuskaitome vardą ir pavardę
