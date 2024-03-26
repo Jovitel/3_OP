@@ -16,23 +16,9 @@
 #include <chrono>
 #include <list>
 #include <deque>
+#include "studentas.h"
 
 using namespace std;
-
-const int MAX_ND = 100;
-
-struct duomenys {
-    std::string vard, pav;
-    std::vector<int> nd;
-    int egzaminas;
-    double gal_vid, gal_bal, gal_med;
-    int nd_kiekis;
-    string rusis;
-
-     bool operator<(const duomenys& other) const {
-        return gal_vid < other.gal_vid;
-    }
-};
 
 void func_input_hands();
 void func_generate_numbers();

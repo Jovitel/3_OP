@@ -1,16 +1,20 @@
 #include "functions.h"
-
 void func_input_hands() {
     int m = 100, n = 0, pazymys, sum = 0, a, s;
-    vector<duomenys> studentai(m);
+    vector<Studentas> studentai;
 
     while (n < m) {
-        cout << "iveskite varda: " << endl;
-        cin >> studentai[n].vard;
-        cout << "iveskite pavarde: " << endl;
-        cin >> studentai[n].pav;
+        Studentas student;
 
-        studentai[n].nd.clear();
+        cout << "Įveskite vardą: " << endl;
+        string vardas;
+        cin >> vardas;
+        student.setVardas(vardas);
+
+        cout << "Įveskite pavardę: " << endl;
+        string pavarde;
+        cin >> pavarde;
+        student.setPavarde(pavarde);
 
         cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
         while (cin >> pazymys && pazymys != 0) {
@@ -18,19 +22,22 @@ void func_input_hands() {
                 cout << "Netinkamas pažymys, įveskite naują: ";
                 continue;
             }
-            studentai[n].nd.push_back(pazymys);
+            student.addnd(pazymys);
         }
 
         cout << "Įveskite egzamino rezultatą: ";
-        cin >> studentai[n].egzaminas;
-        if (studentai[n].egzaminas < 1 || studentai[n].egzaminas > 10) {
+        int egzaminas;
+        cin >> egzaminas;
+        student.setEgzaminas(egzaminas);
+        if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
             cout << "Netinkamas pažymys, įveskite naują: ";
-            cin >> studentai[n].egzaminas;
+            cin >> egzaminas;
+            student.setEgzaminas(egzaminas);
         }
 
-        sum = accumulate(studentai[n].nd.begin(), studentai[n].nd.end(), 0);
-        studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd.size()) + 0.6 * studentai[n].egzaminas;
-        studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egzaminas;
+        sum = accumulate(student.getNd().begin(), student.getNd().end(), 0);
+        student.setGalutinisVid(0.4 * (static_cast<double>(sum) / student.getNd().size()) + 0.6 * student.getEgzaminas());
+        student.setGalutinisBal(0.4 * student.getGalutinisVid() + 0.6 * student.getEgzaminas());
         sum = 0;
 
         cout << "Jei vesite toliau, įveskite 1, jei norite užbaigti įveskite 0: ";
@@ -44,18 +51,20 @@ void func_input_hands() {
         ++n;
         if (a == 0)
             break;
+
+        studentai.push_back(student);
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].nd;
+        vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
         int dydis = pazymiai.size();
         if (dydis % 2 == 0) {
-            studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0;
+            studentai[i].setGalutineMed((pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0);
         } else {
-            studentai[i].gal_med = pazymiai[dydis / 2];
+            studentai[i].setGalutineMed(pazymiai[dydis / 2]);
         }
     }
 
@@ -75,28 +84,35 @@ void func_input_hands() {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+            cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutineMed() << endl;
         }
     } else if (s == 0) {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+            cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutinisVid() << endl;
         }
     }
 }
 
 void func_generate_numbers() {
-    int m = 100, n = 0, pazymys, sum = 0, a, s;
-    vector<duomenys> studentai(m);
+      int m = 100, n = 0, pazymys, sum = 0, a, s;
+    vector<Studentas> studentai;
 
     srand(time(0)); 
 
     while (n < m) {
+        Studentas student;
+
         cout << "Įveskite vardą: " << endl;
-        cin >> studentai[n].vard;
+        string vardas;
+        cin >> vardas;
+        student.setVardas(vardas);
+
         cout << "Įveskite pavardę: " << endl;
-        cin >> studentai[n].pav;
+        string pavarde;
+        cin >> pavarde;
+        student.setPavarde(pavarde);
 
         cout << "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): " << endl;
         cin >> a;
@@ -108,11 +124,11 @@ void func_generate_numbers() {
         }
 
         if (a == 1) {
-            studentai[n].nd_kiekis = rand() % (MAX_ND + 1);
-            for (int j = 0; j < studentai[n].nd_kiekis; j++) {
-                studentai[n].nd.push_back(rand() % 11);
+            student.setNdKiekis(rand() % (MAX_ND + 1));
+            for (int j = 0; j < student.getNdKiekis(); j++) {
+                student.addnd(rand() % 11);
             }
-            studentai[n].egzaminas = rand() % 11;
+            student.setEgzaminas(rand() % 11);
         } else if (a == 0) {
             cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
             while (cin >> pazymys && pazymys != 0) {
@@ -120,20 +136,22 @@ void func_generate_numbers() {
                     cout << "Netinkamas pažymys, įveskite naują: ";
                     continue;
                 }
-                studentai[n].nd.push_back(pazymys);
+                student.addnd(pazymys);
             }
 
             cout << "Įveskite egzamino rezultatą: ";
-            cin >> studentai[n].egzaminas;
-            if (studentai[n].egzaminas < 1 || studentai[n].egzaminas > 10) {
+            cin >> pazymys;
+            student.setEgzaminas(pazymys);
+            if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
                 cout << "Netinkamas pažymys, įveskite naują: ";
-                cin >> studentai[n].egzaminas;
+                cin >> pazymys;
+                student.setEgzaminas(pazymys);
             }
         }
 
-        sum = accumulate(studentai[n].nd.begin(), studentai[n].nd.end(), 0);
-        studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd.size()) + 0.6 * studentai[n].egzaminas;
-        studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egzaminas;
+        sum = accumulate(student.getNd().begin(), student.getNd().end(), 0);
+        student.setGalutinisVid(0.4 * (static_cast<double>(sum) / student.getNd().size()) + 0.6 * student.getEgzaminas());
+        student.setGalutinisBal(0.4 * student.getGalutinisVid() + 0.6 * student.getEgzaminas());
         sum = 0;
 
         cout << "Jei vesite toliau, įveskite 1, jei norite užbaigti įveskite 0: ";
@@ -150,15 +168,15 @@ void func_generate_numbers() {
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].nd;
+        vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
         int dydis = pazymiai.size();
         if (dydis % 2 == 0) {
-            studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0;
+            studentai[i].setGalutineMed((pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0);
         } else {
-            studentai[i].gal_med = pazymiai[dydis / 2];
+            studentai[i].setGalutineMed(pazymiai[dydis / 2]);
         }
     }
 
@@ -172,26 +190,27 @@ void func_generate_numbers() {
         } else {
             break;
         }
-    }
-
-    if (s == 1) {
+    }  if (s == 1) {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+            cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutineMed() << endl;
         }
     } else if (s == 0) {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+            cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutinisVid() << endl;
         }
     }
+
+    
 }
 
 void func_generate_names() {
     int m = 100, n = 0, pazymys, sum = 0, a, s, w;
-    vector<duomenys> studentai(m);
+    Studentas student;
+    vector<Studentas> studentai(m);
     string vard[] = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     string pav[] = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
 
@@ -208,20 +227,26 @@ void func_generate_names() {
         }
 
         if (w == 1) {
-            studentai[n].vard = vard[rand() % 10];
-            studentai[n].pav = pav[rand() % 10];
-            studentai[n].nd_kiekis = rand() % (MAX_ND + 1);
-            for (int j = 0; j < studentai[n].nd_kiekis; j++) {
-                studentai[n].nd.push_back(rand() % 11);
+            studentai[n].setVardas(vard[rand() % 10]);
+            studentai[n].setPavarde(pav[rand() % 10]);
+            studentai[n].setNdKiekis(rand() % (MAX_ND + 1));
+            for (int j = 0; j < studentai[n].getNdKiekis(); j++) {
+                studentai[n].addnd(rand() % 11);
             }
         } else if (w == 0) {
-            cout << "Įveskite vardą: " << endl;
-            cin >> studentai[n].vard;
-            cout << "Įveskite pavardę: " << endl;
-            cin >> studentai[n].pav;
+                Studentas student;
+
+                cout << "Įveskite vardą: " << endl;
+                string vardas;
+                cin >> vardas;
+                student.setVardas(vardas);
+
+                cout << "Įveskite pavardę: " << endl;
+                string pavarde;
+                cin >> pavarde;
         }
 
-        cout << "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): " << endl;
+         cout << "Ar norite, kad namų darbai būtu sugeneruoti? (taip - 1, ne - 0): " << endl;
         cin >> a;
         while (cin.fail() || (a != 0 && a != 1)) {
             cout << "Įvestas netinkamas skaičius, rinkitės iš 1 ir 0: ";
@@ -231,59 +256,72 @@ void func_generate_names() {
         }
 
         if (a == 1) {
-            studentai[n].nd_kiekis = rand() % (MAX_ND + 1);
-            for (int j = 0; j < studentai[n].nd_kiekis; j++) {
-                studentai[n].nd.push_back(rand() % 11);
+            student.setNdKiekis(rand() % (MAX_ND + 1));
+            for (int j = 0; j < student.getNdKiekis(); j++) {
+                student.addnd(rand() % 11);
             }
-            studentai[n].egzaminas = rand() % 11;
+            student.setEgzaminas(rand() % 11);
         } else if (a == 0) {
-            cout << "įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
+            cout << "Įveskite namų darbų rezultatus (Įveskite 0, kai norite baigti): " << endl;
             while (cin >> pazymys && pazymys != 0) {
                 if (pazymys < 1 || pazymys > 10) {
                     cout << "Netinkamas pažymys, įveskite naują: ";
                     continue;
                 }
-                studentai[n].nd.push_back(pazymys);
+                student.addnd(pazymys);
+            }
 
-                cout << "Įveskite egzamino rezultatą: ";
-                cin >> studentai[n].egzaminas;
-                if (studentai[n].egzaminas < 1 || studentai[n].egzaminas > 10) {
-                    cout << "Netinkamas pažymys, įveskite naują: ";
-                    continue;
-                }
+            cout << "Įveskite egzamino rezultatą: ";
+            cin >> pazymys;
+            student.setEgzaminas(pazymys);
+            if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
+                cout << "Netinkamas pažymys, įveskite naują: ";
+                cin >> pazymys;
+                student.setEgzaminas(pazymys);
             }
         }
 
-        sum = accumulate(studentai[n].nd.begin(), studentai[n].nd.end(), 0);
-        studentai[n].gal_vid = 0.4 * (static_cast<double>(sum) / studentai[n].nd.size()) + 0.6 * studentai[n].egzaminas;
-        studentai[n].gal_bal = 0.4 * studentai[n].gal_vid + 0.6 * studentai[n].egzaminas;
+        sum = accumulate(student.getNd().begin(), student.getNd().end(), 0);
+        student.setGalutinisVid(0.4 * (static_cast<double>(sum) / student.getNd().size()) + 0.6 * student.getEgzaminas());
+        student.setGalutinisBal(0.4 * student.getGalutinisVid() + 0.6 * student.getEgzaminas());
         sum = 0;
 
-        cout << "Jei vesite toliau, iveskite 1, jei norite uzbaigti iveskite 0: ";
-        cin >> s;
-        while (cin.fail() || (s != 0 && s != 1)) {
-            cout << "Ivestas netinkamas skaicius, rinkites is 1 ir 0: ";
+        cout << "Jei vesite toliau, įveskite 1, jei norite užbaigti įveskite 0: ";
+        cin >> a;
+        while (cin.fail() || (a != 0 && a != 1)) {
+            cout << "Įvestas netinkamas skaičius, rinkitės iš 1 ir 0: ";
             cin.clear();
             cin.ignore(10000, '\n');
-            cin >> s;
+            cin >> a;
         }
         ++n;
-        if (s == 0)
+        if (a == 0)
             break;
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].nd;
+        vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
         int dydis = pazymiai.size();
         if (dydis % 2 == 0) {
-            studentai[i].gal_med = (pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0;
+            studentai[i].setGalutineMed((pazymiai[dydis / 2 - 1] + pazymiai[dydis / 2]) / 2.0);
         } else {
-            studentai[i].gal_med = pazymiai[dydis / 2];
+            studentai[i].setGalutineMed(pazymiai[dydis / 2]);
         }
     }
+
+    cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
+    while (true) {
+        cin >> s;
+        if (cin.fail() || (s != 0 && s != 1)) {
+            cout << "Įrašėte netinkamą skaičių, rinkitės iš 1 ir 0: ";
+            cin.clear();
+            cin.ignore(10000, '\n');
+        } else {
+            break;
+        }
 
     cout << "Jei norite išvesti MEDIANĄ, įrašykite 1, o jei norite išvesti GALUTINĮ BALĄ, įrašykite 0" << endl;
     while (true) {
@@ -301,23 +339,23 @@ void func_generate_names() {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (MED.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+           cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutineMed() << endl;
         }
     } else if (s == 0) {
         cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(10) << "GALUTUNIS (VID.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
         for (int i = 0; i < n; i++) {
-            cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(10) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+            cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutinisVid() << endl;
         }
     }
 }
-
+}
 void func_input_file() {
     try {
         int s, rez;
-        vector<duomenys> studentai;
+        vector<Studentas> studentai;
         string line;
-        duomenys studentas;
+        Studentas studentas;
         int choice = 0;
         
         cout << "KURI FAILĄ NAUDOTI: " << endl;
@@ -367,28 +405,31 @@ void func_input_file() {
             }
 
             istringstream iss(line);
-            iss >> studentas.vard >> studentas.pav;
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            studentas.setVardas(vardas);
+            studentas.setPavarde(pavarde);
 
             int pazymys;
             while (iss >> pazymys) {
-                studentas.nd.push_back(pazymys);
+                studentas.addnd(pazymys);
             }
 
             // Skaitome egzamino rezultatą
             iss.clear();
-            iss >> studentas.egzaminas;
+            iss >> pazymys;
+            studentas.setEgzaminas(pazymys);
 
             studentai.push_back(studentas);
         }
 
         fd.close();
-          auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundemis
-            cout << "Failo nuskaitymo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
+        auto end = chrono::steady_clock::now(); // Baigiame matuoti laiką sekundemis
+        cout << "Failo nuskaitymo laikas: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl; // Išvedame laiką į ekraną
 
         // Skaičiuojame medianą ir vidurkį
         for (int i = 0; i < studentai.size(); ++i) {
-            //cout<<"skaiciuojama"<<endl;
-            vector<int> pazymiai = studentai[i].nd;
+            vector<int> pazymiai = studentai[i].getNd();
             sort(pazymiai.begin(), pazymiai.end());
 
             int dydis = pazymiai.size();
@@ -396,18 +437,18 @@ void func_input_file() {
                 if (dydis % 2 == 0) {
                     int middle1 = dydis / 2 - 1;
                     int middle2 = dydis / 2;
-                    studentai[i].gal_med = (pazymiai[middle1] + pazymiai[middle2]) / 2.0;
+                    studentai[i].setGalutineMed((pazymiai[middle1] + pazymiai[middle2]) / 2.0);
                 } else {
                     int middle = dydis / 2;
-                    studentai[i].gal_med = pazymiai[middle];
+                    studentai[i].setGalutineMed(pazymiai[middle]);
                 }
             } else {
                 // Tvarkome atvejį, kai nėra įvertinimų
-                studentai[i].gal_med = 0.0; // arba kita tinkama vertė
+                studentai[i].setGalutineMed(0.0); // arba kita tinkama vertė
             }
 
             double sum = accumulate(pazymiai.begin(), pazymiai.end(), 0.0);
-            studentai[i].gal_vid = 0.4 * (sum / pazymiai.size()) + 0.6 * studentai[i].egzaminas;
+            studentai[i].setGalutinisVid(0.4 * (sum / pazymiai.size()) + 0.6 * studentai[i].getEgzaminas());
         }
 
         int choicee = 0;
@@ -425,27 +466,27 @@ void func_input_file() {
         }
 
         switch (choicee) {
-            case 1:
-                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
-                    return a.vard < b.vard;
-                });
-                break;
-            case 2:
-                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
-                    return a.pav < b.pav;
-                });
-                break;
-            case 3:
-                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
-                    return a.gal_vid > b.gal_vid;
-                });
-                break;
-            case 4:
-                sort(studentai.begin(), studentai.end(), [](const duomenys &a, const duomenys &b) {
-                    return a.gal_med > b.gal_med;
-                });
-                break;
-        }
+        case 1:
+            sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+                return a.getVardas() < b.getVardas();
+            });
+            break;
+        case 2:
+            sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+                return a.getPavarde() < b.getPavarde();
+            });
+            break;
+        case 3:
+            sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+                return a.getGalutinisVid() > b.getGalutinisVid();
+            });
+            break;
+        case 4:
+            sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+                return a.getGalutineMed() > b.getGalutineMed();
+            });
+            break;
+    }
 
         cout << "Jei rezultatus norite išvesti ekrane spauskite 1," << endl;
         cout << " o jei norite išvesti į failą (rezultatai.txt), spauskite 0" << endl;
@@ -476,13 +517,13 @@ void func_input_file() {
                 cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (MED.)" << endl;
                 cout << "------------------------------------------------------------------------" << endl;
                 for (int i = 0; i < studentai.size(); i++) {
-                    cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+                   cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(10) << fixed << setprecision(2) << studentai[i].getGalutineMed() << endl;
                 }
             } else if (s == 0) {
                 cout << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (VID.)" << endl;
                 cout << "------------------------------------------------------------------------" << endl;
                 for (int i = 0; i < studentai.size(); i++) {
-                    cout << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+                    cout << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(20) << fixed << setprecision(2) << studentai[i].getGalutinisVid() << endl;
                 }
             }
         } else if (rez == 0) {
@@ -490,13 +531,13 @@ void func_input_file() {
                 fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (MED.)" << endl;
                 fdd << "------------------------------------------------------------------------" << endl;
                 for (int i = 0; i < studentai.size(); i++) {
-                    fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_med << endl;
+                    fdd << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(20) << fixed << setprecision(2) << studentai[i].getGalutineMed() << endl;
                 }
             } else if (s == 0) {
                 fdd << left << setw(20) << "VARDAS" << setw(20) << "PAVARDĖ" << setw(20) << "GALUTUNIS (VID.)" << endl;
                 fdd << "------------------------------------------------------------------------" << endl;
                 for (int i = 0; i < studentai.size(); i++) {
-                    fdd << left << setw(20) << studentai[i].vard << setw(20) << studentai[i].pav << setw(20) << fixed << setprecision(2) << studentai[i].gal_vid << endl;
+                    fdd << left << setw(20) << studentai[i].getVardas() << setw(20) << studentai[i].getPavarde() << setw(20) << fixed << setprecision(2) << studentai[i].getGalutinisVid() << endl;
                 }
             }
         }
@@ -507,7 +548,7 @@ void func_input_file() {
 }
 
 void generate_new_file() {
-     string filename;
+    string filename;
     cout << "Iveskite failo pavadinima: ";
     cin >> filename;
 
@@ -533,33 +574,33 @@ void generate_new_file() {
     }
     sortedFile << "\tEgz." << endl;
 
-    vector<duomenys> students;
+    vector<Studentas> students;
 
     for (int i = 1; i <= numStudents; ++i) {
-        duomenys student;
-        student.vard = "Vardas" + to_string(i);
-        student.pav = "Pavarde" + to_string(i);
-        student.nd.resize(numMarks);
-        for (int& mark : student.nd) {
-            mark = dis(gen);
+        Studentas student;
+        student.setVardas("Vardas" + to_string(i));
+        student.setPavarde("Pavarde" + to_string(i));
+        student.setNdKiekis(numMarks);
+        for (int j = 0; j < numMarks; ++j) {
+            student.addnd(dis(gen));
         }
-        student.egzaminas = dis(gen);
+        student.setEgzaminas(dis(gen));
 
         students.push_back(student);
     }
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.egzaminas < b.egzaminas;
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getEgzaminas() < b.getEgzaminas();
     });
 
     // Įrašome išrikiuotus duomenis į failą
     for (const auto& student : students) {
-        sortedFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        sortedFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             sortedFile << "\t" << mark;
         }
-        sortedFile << "\t" << student.egzaminas << endl;
+        sortedFile << "\t" << student.getEgzaminas() << endl;
     }
 
     sortedFile.close();
@@ -567,19 +608,22 @@ void generate_new_file() {
     auto duration_read = chrono::duration_cast<chrono::milliseconds>(end_read - start);
     double seconds_read = duration_read.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Failo kurimas ir jo uzdarymas:  " << seconds_read << " s" << endl;
-   
+    
 }
 //1 STRATEGIJA
 void use_existing_file() {
-    string file_name;
+   string file_name;
     cout << "Koki faila naudosite? " << endl;
     cin >> file_name;
+
     ifstream fd(file_name);
     if (!fd.is_open()) {
         cout << "Nepavyko atidaryti failo." << endl;
     }
+
     cout << "VECTOR: " << endl;
-    vector<duomenys> students;
+    vector<Studentas> students;
+    Studentas studentas;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -587,10 +631,14 @@ void use_existing_file() {
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            studentas.setVardas(vardas);
+            studentas.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -609,14 +657,16 @@ void use_existing_file() {
         for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -629,8 +679,8 @@ void use_existing_file() {
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
@@ -638,13 +688,13 @@ void use_existing_file() {
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
     // Sukurkime naujus konteinerius kietuoliams ir vargsiukams
-    vector<duomenys> kietiakai;
-    vector<duomenys> vargsiukai;
+    vector<Studentas> kietiakai;
+    vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į kietuolius ir vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
     for (const auto& student : students) {
-        if (student.gal_vid >= 5.0) {
+        if (student.getGalutinisVid() >= 5.0) {
             kietiakai.push_back(student);
         } else {
             vargsiukai.push_back(student);
@@ -672,19 +722,19 @@ void use_existing_file() {
 
     // Išvedame likusius duomenis
     for (const auto& student : kietiakai) {
-        kietiakaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        kietiakaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             kietiakaiFile << "\t" << mark;
         }
-        kietiakaiFile << "\t" << student.egzaminas << endl;
+        kietiakaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     kietiakaiFile.close();
@@ -700,7 +750,8 @@ void read_list (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "LIST: " << endl;
-    list<duomenys> students;
+    list<Studentas> students;
+    Studentas student;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -708,10 +759,13 @@ void read_list (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -730,14 +784,18 @@ void read_list (){
         for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
+
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
+
 
         students.push_back(student);
     }
@@ -750,8 +808,8 @@ void read_list (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    students.sort([](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    students.sort([](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
@@ -759,13 +817,13 @@ void read_list (){
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
     // Sukurkime naujus sąrašus kietuoliams ir vargsiukams
-    list<duomenys> kietiakai;
-    list<duomenys> vargsiukai;
+    list<Studentas> kietiakai;
+    list<Studentas> vargsiukai;
 
     // Perskirstome studentus į kietuolius ir vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
     for (const auto& student : students) {
-        if (student.gal_vid >= 5.0) {
+        if (student.getGalutinisVid() >= 5.0) {
             kietiakai.push_back(student);
         } else {
             vargsiukai.push_back(student);
@@ -793,19 +851,19 @@ void read_list (){
 
     // Išvedame likusius duomenis
     for (const auto& student : kietiakai) {
-        kietiakaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        kietiakaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             kietiakaiFile << "\t" << mark;
         }
-        kietiakaiFile << "\t" << student.egzaminas << endl;
+        kietiakaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     kietiakaiFile.close();
@@ -814,6 +872,8 @@ void read_list (){
 }
 
 void read_deque (){
+    list<Studentas> students;
+    Studentas student;
     string file_name;
     cout << "Koki faila naudosite? " << endl;
     cin >> file_name;
@@ -822,7 +882,7 @@ void read_deque (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "DEQUE: " << endl;
-    deque<duomenys> students;
+    deque<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -830,10 +890,14 @@ void read_deque (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
-        // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+         // Nuskaitome vardą ir pavardę
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -852,14 +916,18 @@ void read_deque (){
         for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
+
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
+
 
         students.push_back(student);
     }
@@ -872,8 +940,8 @@ void read_deque (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
@@ -881,13 +949,13 @@ void read_deque (){
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
     // Sukurkime naujus sąrašus kietuoliams ir vargsiukams
-    deque<duomenys> kietiakai;
-    deque<duomenys> vargsiukai;
+    deque<Studentas> kietiakai;
+    deque<Studentas> vargsiukai;
 
     // Perskirstome studentus į kietuolius ir vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
     for (const auto& student : students) {
-        if (student.gal_vid >= 5.0) {
+        if (student.getGalutinisVid() >= 5.0) {
             kietiakai.push_back(student);
         } else {
             vargsiukai.push_back(student);
@@ -914,20 +982,20 @@ void read_deque (){
     vargsiukaiFile << "\tEgz." << endl;
 
     // Išvedame likusius duomenis
-    for (const auto& student : kietiakai) {
-        kietiakaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+   for (const auto& student : kietiakai) {
+        kietiakaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             kietiakaiFile << "\t" << mark;
         }
-        kietiakaiFile << "\t" << student.egzaminas << endl;
+        kietiakaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     kietiakaiFile.close();
@@ -943,7 +1011,8 @@ void use_existing_file_2(){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "VECTOR: " << endl;
-    vector<duomenys> students;
+    vector<Studentas> students;
+    Studentas student;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -951,10 +1020,14 @@ void use_existing_file_2(){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+             istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -969,18 +1042,22 @@ void use_existing_file_2(){
             continue; // Praleidžiame pirmą eilutę
         }
 
-        // Nuskaitome namų darbus
+         // Nuskaitome namų darbus
         for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
+
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
+
 
         students.push_back(student);
     }
@@ -993,20 +1070,20 @@ void use_existing_file_2(){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-  vector<duomenys> vargsiukai;
+  vector<Studentas> vargsiukai;
 
 // Perskirstome studentus į vargsiukus
 auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-auto partition_point = partition(students.begin(), students.end(), [](const duomenys& student) {
-    return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+auto partition_point = partition(students.begin(), students.end(), [](const Studentas& student) {
+    return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
 });
 // Perskirstėme studentus į vargsiukus ir kietiakus, grąžindami pirmą kietiakų iteratorių
 
@@ -1030,11 +1107,11 @@ vargsiukaiFile << "\tEgz." << endl;
 
 // Išvedame likusius duomenis
 for (const auto& student : vargsiukai) {
-    vargsiukaiFile << student.vard << "\t" << student.pav;
-    for (int mark : student.nd) {
+    vargsiukaiFile << student.getVardas()<< "\t" << student.getPavarde();
+    for (int mark : student.getNd()) {
         vargsiukaiFile << "\t" << mark;
     }
-    vargsiukaiFile << "\t" << student.egzaminas << endl;
+    vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
 }
 
 vargsiukaiFile.close();
@@ -1049,7 +1126,8 @@ void read_list_2 (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "LIST: " << endl;
-    list<duomenys> students;
+    list<Studentas> students;
+    Studentas student;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1057,10 +1135,14 @@ void read_list_2 (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -1076,17 +1158,19 @@ void read_list_2 (){
         }
 
         // Nuskaitome namų darbus
-        for (int i = 0; i < numMarks; ++i) {
+       for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -1099,20 +1183,20 @@ void read_list_2 (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    students.sort([](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    students.sort([](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid()> b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-     list<duomenys> vargsiukai;
+     list<Studentas> vargsiukai;
 
     // Perskirstome studentus į vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    auto partition_point = partition(students.begin(), students.end(), [](const duomenys& student) {
-        return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+    auto partition_point = partition(students.begin(), students.end(), [](const Studentas& student) {
+        return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
     });
     // Perskirstėme studentus į vargsiukus ir kietiakus, grąžindami pirmą kietiakų iteratorių
 
@@ -1136,11 +1220,11 @@ void read_list_2 (){
 
     // Išvedame likusius duomenis
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     vargsiukaiFile.close();
@@ -1156,7 +1240,8 @@ void read_deque_2 (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "DEQUE: " << endl;
-    deque<duomenys> students;
+    deque<Studentas> students;
+    Studentas studentas;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1164,10 +1249,27 @@ void read_deque_2 (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
+
+        // Nuskaitome namų darbų skaičių iš pirmosios eilutės
+        if (numMarks == 0) {
+            string mark;
+            while (iss >> mark) {
+                if (mark != "Vardas" && mark != "Pavarde") {
+                    if (mark != "Egz.") {
+                        numMarks++;
+                    }
+                }
+            }
+            continue; // Praleidžiame pirmą eilutę
+        }
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -1183,17 +1285,19 @@ void read_deque_2 (){
         }
 
         // Nuskaitome namų darbus
-        for (int i = 0; i < numMarks; ++i) {
+       for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -1206,20 +1310,20 @@ void read_deque_2 (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-    deque<duomenys> vargsiukai;
+    deque<Studentas> vargsiukai;
 
     // Perskirstome studentus į vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    auto partition_point = partition(students.begin(), students.end(), [](const duomenys& student) {
-        return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+    auto partition_point = partition(students.begin(), students.end(), [](const Studentas& student) {
+        return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
     });
     // Perskirstėme studentus į vargsiukus ir kietiakus, grąžindami pirmą kietiakų iteratorių
 
@@ -1243,11 +1347,11 @@ void read_deque_2 (){
 
     // Išvedame likusius duomenis
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     vargsiukaiFile.close();
@@ -1260,7 +1364,7 @@ void use_existing_file_3(){
     ifstream fd(file_name);
     
     cout << "VECTOR: " << endl;
-    vector<duomenys> students;
+    vector<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1268,11 +1372,14 @@ void use_existing_file_3(){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
-
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
             string mark;
@@ -1286,18 +1393,33 @@ void use_existing_file_3(){
             continue; // Praleidžiame pirmą eilutę
         }
 
+         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
+        if (numMarks == 0) {
+            string mark;
+            while (iss >> mark) {
+                if (mark != "Vardas" && mark != "Pavarde") {
+                    if (mark != "Egz.") {
+                        numMarks++;
+                    }
+                }
+            }
+            continue; // Praleidžiame pirmą eilutę
+        }
+
         // Nuskaitome namų darbus
-        for (int i = 0; i < numMarks; ++i) {
+       for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -1310,20 +1432,20 @@ void use_existing_file_3(){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-    vector<duomenys> vargsiukai;
+    vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į vargsiukus naudodami std::remove_if
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    auto remove_point = remove_if(students.begin(), students.end(), [](const duomenys& student) {
-        return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+    auto remove_point = remove_if(students.begin(), students.end(), [](const Studentas& student) {
+        return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
     });
 
     // Kopijuojame pašalintus vargsiukus į vargsiukai konteinerį
@@ -1348,11 +1470,11 @@ void use_existing_file_3(){
 
     // Išvedame likusius duomenis
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas()<< "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     vargsiukaiFile.close();
@@ -1367,7 +1489,7 @@ void read_list_3 (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "LIST: " << endl;
-    list<duomenys> students;
+    list<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1375,10 +1497,26 @@ void read_list_3 (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+            istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
+        // Nuskaitome namų darbų skaičių iš pirmosios eilutės
+        if (numMarks == 0) {
+            string mark;
+            while (iss >> mark) {
+                if (mark != "Vardas" && mark != "Pavarde") {
+                    if (mark != "Egz.") {
+                        numMarks++;
+                    }
+                }
+            }
+            continue; // Praleidžiame pirmą eilutę
+        }
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -1394,17 +1532,19 @@ void read_list_3 (){
         }
 
         // Nuskaitome namų darbus
-        for (int i = 0; i < numMarks; ++i) {
+       for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -1417,20 +1557,20 @@ void read_list_3 (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    students.sort([](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    students.sort([](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-     list<duomenys> vargsiukai;
+     list<Studentas> vargsiukai;
 
      // Perskirstome studentus į vargsiukus naudodami std::remove_if
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    auto remove_point = remove_if(students.begin(), students.end(), [](const duomenys& student) {
-        return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+    auto remove_point = remove_if(students.begin(), students.end(), [](const Studentas& student) {
+        return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
     });
 
     // Kopijuojame pašalintus vargsiukus į vargsiukai konteinerį
@@ -1455,11 +1595,11 @@ void read_list_3 (){
 
     // Išvedame likusius duomenis
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     vargsiukaiFile.close();
@@ -1475,7 +1615,7 @@ void read_deque_3 (){
         cout << "Nepavyko atidaryti failo." << endl;
     }
     cout << "DEQUE: " << endl;
-    deque<duomenys> students;
+    deque<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1483,10 +1623,14 @@ void read_deque_3 (){
     auto start_read = chrono::steady_clock::now(); // Pradedame matuoti laiką
     while (getline(fd, line)) {
         istringstream iss(line);
-        duomenys student;
+        Studentas student;
 
         // Nuskaitome vardą ir pavardę
-        iss >> student.vard >> student.pav;
+             istringstream iss(line);
+            string vardas, pavarde;
+            iss >> vardas >> pavarde;
+            student.setVardas(vardas);
+            student.setPavarde(pavarde);
 
         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
         if (numMarks == 0) {
@@ -1501,18 +1645,33 @@ void read_deque_3 (){
             continue; // Praleidžiame pirmą eilutę
         }
 
+         // Nuskaitome namų darbų skaičių iš pirmosios eilutės
+        if (numMarks == 0) {
+            string mark;
+            while (iss >> mark) {
+                if (mark != "Vardas" && mark != "Pavarde") {
+                    if (mark != "Egz.") {
+                        numMarks++;
+                    }
+                }
+            }
+            continue; // Praleidžiame pirmą eilutę
+        }
+
         // Nuskaitome namų darbus
-        for (int i = 0; i < numMarks; ++i) {
+       for (int i = 0; i < numMarks; ++i) {
             int mark;
             iss >> mark;
-            student.nd.push_back(mark);
+            student.addnd(mark);
         }
 
         // Nuskaitome egzamino rezultatą
-        iss >> student.egzaminas;
+        int egzaminas;
+        iss >> egzaminas;
+        student.setEgzaminas(egzaminas);
 
         // Apskaičiuojame galutinį vidurkį
-        student.gal_vid = 0.4 * (accumulate(student.nd.begin(), student.nd.end(), 0.0) / numMarks) + 0.6 * student.egzaminas;
+        student.setGalutinisVid(0.4 * (accumulate(student.getNd().begin(), student.getNd().end(), 0.0) / numMarks) + 0.6 * student.getEgzaminas());
 
         students.push_back(student);
     }
@@ -1525,20 +1684,20 @@ void read_deque_3 (){
 
     // Rikiuojame studentus pagal galutinį vidurkį didėjančia tvarka
     auto start_sort = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    sort(students.begin(), students.end(), [](const duomenys& a, const duomenys& b) {
-        return a.gal_vid > b.gal_vid; // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
+    sort(students.begin(), students.end(), [](const Studentas& a, const Studentas& b) {
+        return a.getGalutinisVid() > b.getGalutinisVid(); // Rūšiuojame nuo didžiausio iki mažiausio galutinio balo
     });
     auto end_sort = chrono::steady_clock::now(); // Baigiame matuoti laiką
     auto duration_sort = chrono::duration_cast<chrono::milliseconds>(end_sort - start_sort);
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-    deque<duomenys> vargsiukai;
+    deque<Studentas> vargsiukai;
 
      // Perskirstome studentus į vargsiukus naudodami std::remove_if
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
-    auto remove_point = remove_if(students.begin(), students.end(), [](const duomenys& student) {
-        return student.gal_vid < 5.0; // Studentai su galutiniu vidurkiu < 5.0 eina į priekį
+    auto remove_point = remove_if(students.begin(), students.end(), [](const Studentas& student) {
+        return student.getGalutinisVid() < 5.0; // Studentas su galutiniu vidurkiu < 5.0 eina į priekį
     });
 
     // Kopijuojame pašalintus vargsiukus į vargsiukai konteinerį
@@ -1563,11 +1722,11 @@ void read_deque_3 (){
 
     // Išvedame likusius duomenis
     for (const auto& student : vargsiukai) {
-        vargsiukaiFile << student.vard << "\t" << student.pav;
-        for (int mark : student.nd) {
+        vargsiukaiFile << student.getVardas() << "\t" << student.getPavarde();
+        for (int mark : student.getNd()) {
             vargsiukaiFile << "\t" << mark;
         }
-        vargsiukaiFile << "\t" << student.egzaminas << endl;
+        vargsiukaiFile << "\t" << student.getEgzaminas() << endl;
     }
 
     vargsiukaiFile.close();
