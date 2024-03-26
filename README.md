@@ -11,16 +11,19 @@
 Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector, 1 strategiją ir failus 100 000.txt ir 1 000 000.txt
 
 ----STRUCT:----
+
 100 000.txt
 
 ![Ekrano kopija (273)](https://github.com/Jovitel/2_OP/assets/150922295/4899aefe-3bc0-4120-87bc-aafac44eba74)
 
 1 000 000.txt
+
 ![Ekrano kopija (274)f](https://github.com/Jovitel/2_OP/assets/150922295/62ec5627-81b7-49ff-9d73-67abfa48e915)
 
 /-/-/-/APIBENDRINIMAS/-/-/-/
 
 ----CLASS:-----
+
 100 000.txt
 
 ![Ekrano kopija (287)](https://github.com/Jovitel/2_OP/assets/150922295/254e4015-bd74-4d84-8a7c-6e9924eaac39)
@@ -33,6 +36,7 @@ Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector
 Atliekame ekspermentinę analizę priklausomai nuo kompiliatoriaus optimizavimo lygio, nurodomo per flag'sus: o1, o2, o3.
 
 ----STRUCT:----
+
 O1 
 100 000.txt
 
