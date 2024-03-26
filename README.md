@@ -65,6 +65,7 @@ O3
 ![Ekrano kopija (296)](https://github.com/Jovitel/2_OP/assets/150922295/a487ede8-182d-4291-9495-0629e67695d2)
 
 -----CLASS:-----
+
 O1
 100 000.txt
 
@@ -80,6 +81,7 @@ O1
 ![Ekrano kopija (299)](https://github.com/Jovitel/2_OP/assets/150922295/2db37259-bfa3-4d86-9ecf-7e3981ad1817)
 
 1 000 000.txt
+
 ![Ekrano kopija (300)](https://github.com/Jovitel/2_OP/assets/150922295/8e6346c6-3fe6-48df-bae6-22aef99b19dc)
 
 03
