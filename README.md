@@ -35,6 +35,7 @@ Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector
 ![Ekrano kopija (306)](https://github.com/Jovitel/2_OP/assets/150922295/9ac4cd6e-30f0-456f-9335-f6da05b3f981)
 
 --
+
 Mano atveju, su STRUCT kodas veikia greičiau.
 
 --
@@ -140,6 +141,7 @@ Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
 --
+
 Galima teigti, jog, nauodajant STRUCT su didesniais failais efektyviau naudoti O2, o su mažensiais O1.
 
 Tačiau, naudojant CLASS su įvairaus didumo failais efektyviausia naudoti O3.
