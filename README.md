@@ -42,6 +42,7 @@ Atliekame ekspermentinę analizę priklausomai nuo kompiliatoriaus optimizavimo 
 ----STRUCT:----
 
 O1 
+
 100 000.txt
 
 ![Ekrano kopija (290)](https://github.com/Jovitel/2_OP/assets/150922295/c0cb1ac5-b086-4c8a-a231-3ec1b8849ead)
@@ -51,6 +52,7 @@ O1
 ![Ekrano kopija (292)](https://github.com/Jovitel/2_OP/assets/150922295/4aba7635-7904-4ef7-8acc-8a2eeed0a256)
 
 O2
+
 100 000.txt
 
 ![Ekrano kopija (308)](https://github.com/Jovitel/2_OP/assets/150922295/82fed380-07b2-45a6-a2a6-568574dabb1c)
@@ -60,6 +62,7 @@ O2
 ![Ekrano kopija (294)](https://github.com/Jovitel/2_OP/assets/150922295/4d07abf0-c2b1-4b80-964a-a002f8c77975)
 
 O3
+
 100 000.txt
 
 ![Ekrano kopija (295)](https://github.com/Jovitel/2_OP/assets/150922295/02a43665-0aaf-4f9d-b907-1e7ccd6464fd)
