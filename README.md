@@ -30,6 +30,12 @@ Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector
 
 ![Ekrano kopija (288)](https://github.com/Jovitel/2_OP/assets/150922295/2186ed06-3261-4783-b564-1485e971af7d)
 
+/-/-/-/APIBENDRINIMAS/-/-/-/
+
+![Ekrano kopija (306)](https://github.com/Jovitel/2_OP/assets/150922295/9ac4cd6e-30f0-456f-9335-f6da05b3f981)
+
+Mano atveju, su STRUCT kodas veikia greičiau.
+
 //2 TESTAS://
 Atliekame ekspermentinę analizę priklausomai nuo kompiliatoriaus optimizavimo lygio, nurodomo per flag'sus: o1, o2, o3.
 
@@ -47,7 +53,7 @@ O1
 O2
 100 000.txt
 
-![Ekrano kopija (292)](https://github.com/Jovitel/2_OP/assets/150922295/b53d3f36-c66b-4627-8048-a42cc4b18d4e)
+![Ekrano kopija (308)](https://github.com/Jovitel/2_OP/assets/150922295/82fed380-07b2-45a6-a2a6-568574dabb1c)
 
 1 000 000.txT
 
@@ -62,9 +68,6 @@ O3
 
 ![Ekrano kopija (296)](https://github.com/Jovitel/2_OP/assets/150922295/a487ede8-182d-4291-9495-0629e67695d2)
 
-/-/-/-/APIBENDRINIMAS/-/-/-/
-
-![Ekrano kopija (306)](https://github.com/Jovitel/2_OP/assets/150922295/9ac4cd6e-30f0-456f-9335-f6da05b3f981)
 
 -----CLASS:-----
 
@@ -97,5 +100,29 @@ O1
 
 /-/-/-/APIBENDRINIMAS/-/-/-/
 
+![Ekrano kopija (309)](https://github.com/Jovitel/2_OP/assets/150922295/71047d31-d284-43e4-a1ff-c24d38cc56eb)
 
+Naudojant STRUCT:
+100 000.txt failu:
+Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O1
+Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O2
+
+1 000 000.txt failu:
+Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O2
+Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
+
+Naudojant CLASS:
+100 000.txt failu:
+Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
+Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
+
+1 000 000.txt failu:
+Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
+Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
+
+Galima teigti, jog, nauodajant STRUCT su didesniais failais efektyviau naudoti O2, o su mažensiais O1.
+
+Tačiau, naudojant CLASS su įvairaus didumo failais efektyviausia naudoti O3.
+
+![Ekrano kopija (307)](https://github.com/Jovitel/2_OP/assets/150922295/58efd865-4c2d-48f1-8236-5a8ca2c2f1de)
 
