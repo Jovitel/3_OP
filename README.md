@@ -108,29 +108,29 @@ O1
 
 ![Ekrano kopija (309)](https://github.com/Jovitel/2_OP/assets/150922295/71047d31-d284-43e4-a1ff-c24d38cc56eb)
 
-Naudojant STRUCT:
+\\Naudojant STRUCT:\\
 
-100 000.txt failu:
+-- 100 000.txt failu: --
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O2
 
-1 000 000.txt failu:
+-- 1 000 000.txt failu: --
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O2
 
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
-Naudojant CLASS:
+\\Naudojant CLASS:\\
 
-100 000.txt failu:
+-- 100 000.txt failu: --
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
 
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
-1 000 000.txt failu:
+-- 1 000 000.txt failu: --
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
 
