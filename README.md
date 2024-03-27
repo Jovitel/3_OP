@@ -113,11 +113,13 @@ Naudojant STRUCT:
 100 000.txt failu:
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O1
+
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O2
 
 1 000 000.txt failu:
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O2
+
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
 Naudojant CLASS:
@@ -125,11 +127,13 @@ Naudojant CLASS:
 100 000.txt failu:
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
+
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
 1 000 000.txt failu:
 
 Greičiausiai atliekama programa naudojant kompiliatoriais flag'są O3
+
 Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 
 Galima teigti, jog, nauodajant STRUCT su didesniais failais efektyviau naudoti O2, o su mažensiais O1.
