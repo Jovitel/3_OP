@@ -72,6 +72,7 @@ O3
 -----CLASS:-----
 
 O1
+
 100 000.txt
 
 ![Ekrano kopija (297)](https://github.com/Jovitel/2_OP/assets/150922295/7bb1fb5b-f075-418b-b7f5-421ed515c6d9)
@@ -81,6 +82,7 @@ O1
 ![Ekrano kopija (298)](https://github.com/Jovitel/2_OP/assets/150922295/df05010b-bb05-4e82-aee7-d5a5d2a82928)
 
 02
+
 100 000.txt
 
 ![Ekrano kopija (299)](https://github.com/Jovitel/2_OP/assets/150922295/2db37259-bfa3-4d86-9ecf-7e3981ad1817)
@@ -90,6 +92,7 @@ O1
 ![Ekrano kopija (300)](https://github.com/Jovitel/2_OP/assets/150922295/8e6346c6-3fe6-48df-bae6-22aef99b19dc)
 
 03
+
 100 000.txt
 
 ![Ekrano kopija (301)](https://github.com/Jovitel/2_OP/assets/150922295/6edb9d00-4cfd-4c96-98d0-396c7f0f1373)
@@ -129,6 +132,8 @@ Lėčiausiai atliekama programa naudojant kompiliatoriais flag'są O1
 Galima teigti, jog, nauodajant STRUCT su didesniais failais efektyviau naudoti O2, o su mažensiais O1.
 
 Tačiau, naudojant CLASS su įvairaus didumo failais efektyviausia naudoti O3.
+
+/// EXE FAILO DYDŽIAI ///
 
 ![Ekrano kopija (307)](https://github.com/Jovitel/2_OP/assets/150922295/58efd865-4c2d-48f1-8236-5a8ca2c2f1de)
 
