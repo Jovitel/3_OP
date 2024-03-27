@@ -1,4 +1,5 @@
 #include "functions.h"
+Studentas ::~Studentas() {};
 void func_input_hands() {
     int m = 100, n = 0, pazymys, sum = 0, a, s;
     vector<Studentas> studentai;
