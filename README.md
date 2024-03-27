@@ -20,9 +20,6 @@ Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector
 
 ![Ekrano kopija (303)](https://github.com/Jovitel/2_OP/assets/150922295/c1c55559-50f2-49bb-b4c2-e37076605b2d)
 
-
-/-/-/-/APIBENDRINIMAS/-/-/-/
-
 ----CLASS:-----
 
 100 000.txt
@@ -65,6 +62,10 @@ O3
 
 ![Ekrano kopija (296)](https://github.com/Jovitel/2_OP/assets/150922295/a487ede8-182d-4291-9495-0629e67695d2)
 
+/-/-/-/APIBENDRINIMAS/-/-/-/
+
+![Ekrano kopija (306)](https://github.com/Jovitel/2_OP/assets/150922295/9ac4cd6e-30f0-456f-9335-f6da05b3f981)
+
 -----CLASS:-----
 
 O1
@@ -95,3 +96,6 @@ O1
 ![Ekrano kopija (302)](https://github.com/Jovitel/2_OP/assets/150922295/2b7b5139-ccf5-409f-a350-4c904fe4e6a2)
 
 /-/-/-/APIBENDRINIMAS/-/-/-/
+
+
+
