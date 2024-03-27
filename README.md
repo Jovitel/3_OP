@@ -1,155 +1,96 @@
-// 1 DALIS //
-APRAŠYMAS:
+//ANTRA UŽDUOTIS//
+1-osios užduoties pagrindu susikūriau 2-ąją repoziciją. Terminale naudojau šias komandas:
+1. git clone --mirror https://github.com/Jovitel/1_OP.git
+2. git clone --bare https://github.com/Jovitel/1_OP.git 2_OP
+3. cd 2_OP
+4. git branch -a
+5. remote set-url origin https://github.com/Jovitel/2_OP.git
+6. git push --mirror
 
-Su šia programa yra testuojama programos sparta, naudojant skirtingus konteinerius (std::vector, std::list, std::deque). Matuojama: duomenų nuskaitymas iš failo į atitinkamą konteinerį
-           studentų rūšiavimas didėjimo tvarką konteineryje 
-           studentų skirstymas  į dvi grupes/kategorijas
+//1 TESTAS://
+Lyginame struct ir class realizacijos spartą, naudojant konteinerį std::vector, 1 strategiją ir failus 100 000.txt ir 1 000 000.txt
 
-REZULTATAI:
-1000
+----STRUCT:----
 
-![Ekrano kopija (259)](https://github.com/Jovitel/1_OP/assets/150922295/71b0cf1b-6f50-455c-8e46-5f77e61cb27e)
-![Ekrano kopija (260)](https://github.com/Jovitel/1_OP/assets/150922295/de6211c5-07f8-45a3-b8bb-00fa73229921)
+100 000.txt
 
-10 000
+![Ekrano kopija (273)](https://github.com/Jovitel/2_OP/assets/150922295/4899aefe-3bc0-4120-87bc-aafac44eba74)
 
-![2](https://github.com/Jovitel/1_OP/assets/150922295/8063d316-d155-4f96-a994-d53d7ae6598c)
-![Ekrano kopija (262)](https://github.com/Jovitel/1_OP/assets/150922295/c009ca89-ebd6-49dc-b793-c9f996318d9c)
+1 000 000.txt
 
-100 000
+![Ekrano kopija (274)f](https://github.com/Jovitel/2_OP/assets/150922295/62ec5627-81b7-49ff-9d73-67abfa48e915)
 
-![3](https://github.com/Jovitel/1_OP/assets/150922295/b6cc98b3-f84a-4565-b423-bb2a5736c64e)
-![Ekrano kopija (263)](https://github.com/Jovitel/1_OP/assets/150922295/967158a3-ec7b-4989-a5d6-f381bcd7cb0c)
+/-/-/-/APIBENDRINIMAS/-/-/-/
 
-1 000 000
+----CLASS:-----
 
-![4](https://github.com/Jovitel/1_OP/assets/150922295/205ad437-b3af-4466-ae01-a928e6fb32ed)
-![Ekrano kopija (264)](https://github.com/Jovitel/1_OP/assets/150922295/15f7930b-1a0e-431a-8eec-c8c1f23e4476)
+100 000.txt
 
-10 000 000
+![Ekrano kopija (287)](https://github.com/Jovitel/2_OP/assets/150922295/254e4015-bd74-4d84-8a7c-6e9924eaac39)
 
-![Ekrano kopija (267)](https://github.com/Jovitel/1_OP/assets/150922295/00973ea7-2fa1-4722-ab7b-27b954534155)
-![Ekrano kopija (266)](https://github.com/Jovitel/1_OP/assets/150922295/fd805374-62c2-4056-ba58-b5f3aa4edf45)
+1 000 000.txt
 
-APIBENDRINIMAS:
+![Ekrano kopija (288)](https://github.com/Jovitel/2_OP/assets/150922295/2186ed06-3261-4783-b564-1485e971af7d)
 
-![Ekrano kopija (268)](https://github.com/Jovitel/1_OP/assets/150922295/34a7260e-d159-4226-856b-f129c2d4b986)
+//2 TESTAS://
+Atliekame ekspermentinę analizę priklausomai nuo kompiliatoriaus optimizavimo lygio, nurodomo per flag'sus: o1, o2, o3.
 
-Atlikti visus šiuos veiksmus greičiausiai pavyko naudojant std::list, o daugiausia buvo sugaišta laiko su std::deque konteineriu. Nuskaitymas trumpiausiai užtruko su std::deque, rūšiavimas žymiai trumpiau su std::list, o mokinių suskirstymas - std::vector. 
-// 2 DALIS //
-APRAŠYMAS:
+----STRUCT:----
 
-Optimizuojama studentų rūšiavimo į 2 kategorijas ("Vargšiukai"; "Kietiakai") realizacija. Visiems trims konteinerių tipams (vector, list ir deque) išmatuojame programos veikimo spartą priklausomai nuo studentų dalijimo strategijos.
+O1 
+100 000.txt
 
-REZULTATAI:
-1 strategija
-Bendro studentai konteinerio (vector, list ir deque tipų) skaidymas (rūšiavimas) į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų". 
+![Ekrano kopija (290)](https://github.com/Jovitel/2_OP/assets/150922295/c0cb1ac5-b086-4c8a-a231-3ec1b8849ead)
 
-![Ekrano kopija (271)](https://github.com/Jovitel/1_OP/assets/150922295/648c122f-e652-4bb9-832f-b50277ad12e7)
+1 000 000.txt
 
-![Ekrano kopija (272)](https://github.com/Jovitel/1_OP/assets/150922295/4fe8f38d-f3ad-49dd-8985-619ae0616ff1)
+![Ekrano kopija (292)](https://github.com/Jovitel/2_OP/assets/150922295/4aba7635-7904-4ef7-8acc-8a2eeed0a256)
 
-![Ekrano kopija (273)](https://github.com/Jovitel/1_OP/assets/150922295/73193f69-b8bc-4133-88ec-b11c7c8eaea7)
+O2
+100 000.txt
 
-![Ekrano kopija (275)](https://github.com/Jovitel/1_OP/assets/150922295/e725a02c-98a9-4464-9e6c-1c33aa57b54a)
+![Ekrano kopija (292)](https://github.com/Jovitel/2_OP/assets/150922295/b53d3f36-c66b-4627-8048-a42cc4b18d4e)
 
-![Ekrano kopija (274)](https://github.com/Jovitel/1_OP/assets/150922295/12919eed-1e4b-4789-9a08-433e9cdca396)
+1 000 000.txT
 
-2 strategija
-Bendro studentų konteinerio (vector, list ir deque) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "vargšiukai".
+![Ekrano kopija (294)](https://github.com/Jovitel/2_OP/assets/150922295/4d07abf0-c2b1-4b80-964a-a002f8c77975)
 
-![Ekrano kopija (276)](https://github.com/Jovitel/1_OP/assets/150922295/06b383ba-973f-43e9-92f5-a9f197103acd)
+O3
+100 000.txt
 
-![Ekrano kopija (277)](https://github.com/Jovitel/1_OP/assets/150922295/12c591be-7dad-4e2d-ac70-9105a7a648f0)
+![Ekrano kopija (295)](https://github.com/Jovitel/2_OP/assets/150922295/02a43665-0aaf-4f9d-b907-1e7ccd6464fd)
 
-![Ekrano kopija (278)](https://github.com/Jovitel/1_OP/assets/150922295/4fbe09f8-02bb-4ee2-8d19-68ea1999fad8)
+1 000 000.txt
 
-![Ekrano kopija (279)](https://github.com/Jovitel/1_OP/assets/150922295/f0735bb9-ce9e-4721-bb20-b5d49fba2026)
+![Ekrano kopija (296)](https://github.com/Jovitel/2_OP/assets/150922295/a487ede8-182d-4291-9495-0629e67695d2)
 
-![Ekrano kopija (280)](https://github.com/Jovitel/1_OP/assets/150922295/2a32d8f0-1c7f-4346-8ba2-c523ce3ba99a)
+-----CLASS:-----
 
-3 strategija
-Bendro studentų konteinerio (vector, list ir deque) skaidymas (rūšiavimas) panaudojant greičiausiai veikianti 1 arba 2 strategiją  įtraukiant į ją "efektyvius" darbo su konteineriais metodus (std::copy, std::remove, std::remove_if, std::partition)
+O1
+100 000.txt
 
-![Ekrano kopija (281)](https://github.com/Jovitel/1_OP/assets/150922295/edd5bde6-da50-4c8d-abaf-ab7eaa2545c5)
+![Ekrano kopija (297)](https://github.com/Jovitel/2_OP/assets/150922295/7bb1fb5b-f075-418b-b7f5-421ed515c6d9)
 
-![Ekrano kopija (282)](https://github.com/Jovitel/1_OP/assets/150922295/da3ba13a-088b-4bc1-8b86-38358282fa7f)
+1 000 000.txt
 
-![Ekrano kopija (283)](https://github.com/Jovitel/1_OP/assets/150922295/9501aaf6-14fc-4d96-8a67-2b86f617873a)
+![Ekrano kopija (298)](https://github.com/Jovitel/2_OP/assets/150922295/df05010b-bb05-4e82-aee7-d5a5d2a82928)
 
-![Ekrano kopija (284)](https://github.com/Jovitel/1_OP/assets/150922295/7b890b9c-862d-4f31-bd31-2f520a35bc34)
+02
+100 000.txt
 
-![Ekrano kopija (285)](https://github.com/Jovitel/1_OP/assets/150922295/23dfd549-0989-40d5-9ac6-a65ca3dfe9ba)
+![Ekrano kopija (299)](https://github.com/Jovitel/2_OP/assets/150922295/2db37259-bfa3-4d86-9ecf-7e3981ad1817)
 
+1 000 000.txt
 
-APIBENDRINIMAS:
+![Ekrano kopija (300)](https://github.com/Jovitel/2_OP/assets/150922295/8e6346c6-3fe6-48df-bae6-22aef99b19dc)
 
-![Ekrano kopija (286)](https://github.com/Jovitel/1_OP/assets/150922295/18402131-e465-42eb-93da-ae219c9dc4a1)
+03
+100 000.txt
 
-GREIČIAUSIAI ATLIKTA:
+![Ekrano kopija (301)](https://github.com/Jovitel/2_OP/assets/150922295/6edb9d00-4cfd-4c96-98d0-396c7f0f1373)
 
-VECTOR NUSKAITYMAS - 1 strategija
-VECTOR RŪŠIAVIMAS - 1 strategija
-VECTOR SUSKIRSTYMAS - 3 strategija
+1 000 000.txt
 
-LIST NUSKAITYMAS - 1 strategija
-LIST RŪŠIAVIMAS - 1 strategija
-LIST SUSKIRSTYMAS - 1 strategija
+![Ekrano kopija (302)](https://github.com/Jovitel/2_OP/assets/150922295/2b7b5139-ccf5-409f-a350-4c904fe4e6a2)
 
-DEQUE NUSKAITYMAS - 1 strategija
-DEQUE RŪŠIAVIMAS - 1 strategija
-DEQUE SUSKIRSTYMAS - 1 strategija
-
-Taigi galima teigti, jog šioje programoje laiko atžvilgiu naudingiausia naudoti 1 strategiją (bet svarbu paminėti, kad ši strategija nėra efektyvi užimamos atminties atžvilgiu), 
-2-oji strategija garantuoja atminties efektyvumą, teoriškai mąstant turėjo sutaupyti laiko, palyginant rūšiavime ir nuskaityme tam tikrose vietose (iki 1000 000 failo) sugaištas laikas tikrai yra mažesnis, bet pasiekus 10 000 000 failą, efektyvumas ženkliai sumažėjo, todėl ir bendri rezultatai yra šiek tiek blogesni už 1-ąją strategiją,
-o 3-oje strategijoje naudojami algoritmai leidžia supaprastinti kodą, nors mano atveju rezultatai yra panašūs į 2-osios strategijos rezultatus, galbūt, kad dalis algoritmų jau buvo naudojami 2-oje strategijoje.
-Atsižvelgiant į konteinerius, iš 1-ojo testo išsiaiškinome, jog std::list nuskaityme ir suskirstyme yra pranašiausias, todėl yra pravartu pasirinkti jį.
-
-PROGRAMOS NAUDOJIMOSI INSTRUKCIJA:
-1. Prisijungiame prie Github paskyros, jei jos neturime, susikuriame ir susikonfiguruojam Github.
-https://docs.github.com/en/get-started/getting-started-with-git/set-up-git
-2. Tuomet, parsisiunčiam Visual Studio Code (galima naudoti ir kitą aplinką, bet instrukciją tęsiu su VS Code)
-https://code.visualstudio.com/download
-3. Parsisiunčiame paketus. Atsidarius VS Code kairėje, 5 mygtukas vertikaliai, jį paspaudus randame visus paketus. ("CMake"; "CMake Tools"; "C/C++ Themes"; "C/C++ Runner"; "C/C++ Extension Pack"; "C/C++")
-4. Parsisiunčiam šį kodą, įsidedame į norimą folderį pvz:(C:\Darbai\1_OP) ir atidarome jį Visual Studio Code aplinkoje.
-https://github.com/Jovitel/1_OP/tree/v1.0_1
-5. Terminale (jeigu jo nėra, viršuje paspaudžiame ant 3 taškiukų ir paspaudžiame "New terminal") paspaudžiame kairėje prie "+" esančia rodyklę, rodančią į apačią. Pasirenkame "Command Prompt".
-6. Naudojant cd pasiekiame vietą, kur yra kodas.
-PVZ: cd  C:\Darbai\1_OP
-7. Norint paleisti kodą, terminale, Command Prompt, įrašome "vektoriai"
-8. Terminale pamatysit 6 pasirinkimus, jų pavadinimai nusako, kokie veiksmai bus atlikti, įvykdžius tam tikrą pasirinkimą.
-   
-Štai smulkesni pasirinkimų aprašymai:
-1.
-Programos pradžia.
-Įvedama:
-
-Kelių mokinių pažymiai bus apskaičiuojami
-Kiek bus įrašoma namų darbų pažymių
-Taip pat įvedami egzamino rezultatai
-Išvedama
-Pavardė, vardas
-Galutinis balas arba mediana (pasirenkama)
-Neledžiama vartotojui įvesti nelogiškus atsakymus, tai padarius programa informuoja vartotoją
-(PVZ ten, kur skirta įvesti pažymius nuo 1 iki 10 nebus leidžiama įvesti didesnių skaičių arba raidžių)
-
-2.
-Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
-(tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su masyvais)
-Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
-
-3.
-Galima pasirinkti, ar nori, kad pažymiai ir vardai būtų sugeneruojami atsitiktinai
-(tai buvo įgyvendinta 2 atskiruose failuose, tik su vektoriais ir tik su DINAMINIAIS masyvais)
-Yra meniu skirtingos programos eigos pasirinkimui (1 - ranką, 2 - generuoti pažymius, 3 - generuoti ir pažymius ir studentų vardus, pavardės, 4 - baigti darbą).
-
-4.
-Užbaigti programą.
-5.
-Duomenys nuskaitomi iš failo, apskaičiuojama, per kiek laiko nuskaitoma.
-
-6.
-Generuojami failai su mokiniais ir jų pažymiais iš anksto.
-Reikia pasirinkti, kiek mokinių generuoti bei jų pažymių skaičių.
-Mokiniai yra suskirstomi pagal galutinius vidurkius (<5 vargšiukai; >=5 kietiakai) ir padalinami į 2 atskirus failus.
-Yra 3 strategijos bei 3 skirtingi konteineriai, std::vector; std::list; std::deque
+/-/-/-/APIBENDRINIMAS/-/-/-/
