@@ -27,12 +27,17 @@
 
 **ĮVESTIS:**
 Naudojame set... 
+
 cout << "Įveskite pavardę: " << endl;
+
 cin >> pavarde;
+
 student.setPavarde(pavarde); //pavarde įrašoma klasės student privačiame konstruktoriuje pavarde.
+
 Tuo pačiu metodu reikšmė gali būti įrašoma iš failo arba sugeneruojama automatiškai.
 
 **IŠVESTIS:**
 Naudojame get...
+
 cout << student.getpavarde() << endl; //Pavarde nuskaitoma iš student klasės privataus konstruktoriaus.
 
