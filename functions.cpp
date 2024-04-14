@@ -1766,26 +1766,23 @@ void func_tests(){
         double gal_med = 7.5;
 
         // Sukuriame studento objektą naudodami konstruktorių
-        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
-
-        // Pridedame pažymius studento objektui naudodami addnd metodą
-        for (int pazymys : nd) {
-            studentas.addnd(pazymys);
-        }
+        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
 
         // Gauti duomenys iš studento objekto
-        const std::vector<int>& get_nd = studentas.getNd();
         const std::string& get_vardas = studentas.getVardas();
         const std::string& get_pavarde = studentas.getPavarde();
+        const std::vector<int>& get_nd = studentas.getNd();
         int get_egzaminas = studentas.getEgzaminas();
+        int get_nd_kiekis = studentas.getNdKiekis();
         double get_gal_vid = studentas.getGalutinisVid();
         double get_gal_med = studentas.getGalutineMed();
 
         // Patikriname, ar gauti duomenys atitinka nurodytas reikšmes
-        assert(get_nd == nd);
         assert(get_vardas == vardas);
         assert(get_pavarde == pav);
+        assert(get_nd == nd);
         assert(get_egzaminas == egzaminas);
+        assert(get_nd_kiekis == nd_kiekis);
         assert(get_gal_vid == gal_vid);
         assert(get_gal_med == gal_med);
     }
@@ -1799,20 +1796,21 @@ void func_tests(){
         double gal_vid = 9.9;
         double gal_med = 7.5;
 
-        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
+        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
         Studentas copy(studentas);
 
-        assert(copy.getNd() == nd);
         assert(copy.getVardas() == vardas);
         assert(copy.getPavarde() == pav);
+        assert(copy.getNd() == nd);
         assert(copy.getEgzaminas() == egzaminas);
+        assert(copy.getNdKiekis() == nd_kiekis);
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
     }
 
     // MOVE KONTRUKTORIUS
     {
-        std::string vardas = "Vardenis";
+         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
         std::vector<int> nd = {2, 9, 7};
         int egzaminas = 4;
@@ -1820,14 +1818,15 @@ void func_tests(){
         double gal_vid = 9.9;
         double gal_med = 7.5;
 
-        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
-        Studentas copy(move(studentas));
+        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
+        Studentas copy(std::move(studentas)); // Pridėtas std::move
 
         // assert tikrina ar salyga yra teisinga
-        assert(copy.getNd() == nd);
         assert(copy.getVardas() == vardas);
         assert(copy.getPavarde() == pav);
+        assert(copy.getNd() == nd);
         assert(copy.getEgzaminas() == egzaminas);
+        assert(copy.getNdKiekis() == nd_kiekis);
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
     }
@@ -1854,6 +1853,6 @@ void func_tests(){
     assert(SStudentas.getNd().empty());
     }
 
-    cout << "Visi testai sekmingi!" << endl;
+    cout << "Visi testai sekmingi." << endl;
 
 }

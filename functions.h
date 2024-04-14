@@ -17,6 +17,7 @@
 #include <list>
 #include <deque>
 #include "studentas.h"
+#include <cassert>
 
 using namespace std;
 
@@ -38,4 +39,6 @@ void read_deque_2();
 void use_existing_file_3();
 void read_list_3();
 void read_deque_3(); 
+
+void func_tests();
 #endif /* FUNCTIONS_H */
