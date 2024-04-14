@@ -1,5 +1,5 @@
 #include "functions.h"
-Studentas ::~Studentas() {};
+
 void func_input_hands() {
     int m = 100, n = 0, pazymys, sum = 0, a, s;
     vector<Studentas> studentai;
@@ -1753,3 +1753,107 @@ void func_generate() {
     }
 }
 
+void func_tests(){
+    //KONSTRUKTORIUS
+    {    
+        // Inicializuojame kintamuosius su testinėmis reikšmėmis
+        std::string vardas = "Vardenis";
+        std::string pav = "Pavardenis";
+        std::vector<int> nd = {2, 9, 7};
+        int egzaminas = 4;
+        int nd_kiekis = 3;
+        double gal_vid = 9.9;
+        double gal_med = 7.5;
+
+        // Sukuriame studento objektą naudodami konstruktorių
+        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
+
+        // Pridedame pažymius studento objektui naudodami addnd metodą
+        for (int pazymys : nd) {
+            studentas.addnd(pazymys);
+        }
+
+        // Gauti duomenys iš studento objekto
+        const std::vector<int>& get_nd = studentas.getNd();
+        const std::string& get_vardas = studentas.getVardas();
+        const std::string& get_pavarde = studentas.getPavarde();
+        int get_egzaminas = studentas.getEgzaminas();
+        double get_gal_vid = studentas.getGalutinisVid();
+        double get_gal_med = studentas.getGalutineMed();
+
+        // Patikriname, ar gauti duomenys atitinka nurodytas reikšmes
+        assert(get_nd == nd);
+        assert(get_vardas == vardas);
+        assert(get_pavarde == pav);
+        assert(get_egzaminas == egzaminas);
+        assert(get_gal_vid == gal_vid);
+        assert(get_gal_med == gal_med);
+    }
+    // COPY KONTRUKSTORIUS
+    {
+        std::string vardas = "Vardenis";
+        std::string pav = "Pavardenis";
+        std::vector<int> nd = {2, 9, 7};
+        int egzaminas = 4;
+        int nd_kiekis = 3;
+        double gal_vid = 9.9;
+        double gal_med = 7.5;
+
+        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
+        Studentas copy(studentas);
+
+        assert(copy.getNd() == nd);
+        assert(copy.getVardas() == vardas);
+        assert(copy.getPavarde() == pav);
+        assert(copy.getEgzaminas() == egzaminas);
+        assert(copy.getGalutinisVid() == gal_vid);
+        assert(copy.getGalutineMed() == gal_med);
+    }
+
+    // MOVE KONTRUKTORIUS
+    {
+        std::string vardas = "Vardenis";
+        std::string pav = "Pavardenis";
+        std::vector<int> nd = {2, 9, 7};
+        int egzaminas = 4;
+        int nd_kiekis = 3;
+        double gal_vid = 9.9;
+        double gal_med = 7.5;
+
+        Studentas studentas(vardas, pav, egzaminas, nd_kiekis, gal_vid, gal_med);
+        Studentas copy(move(studentas));
+
+        // assert tikrina ar salyga yra teisinga
+        assert(copy.getNd() == nd);
+        assert(copy.getVardas() == vardas);
+        assert(copy.getPavarde() == pav);
+        assert(copy.getEgzaminas() == egzaminas);
+        assert(copy.getGalutinisVid() == gal_vid);
+        assert(copy.getGalutineMed() == gal_med);
+    }
+    // Destruktoriaus patikrinimas
+    {
+    // Sukuriamas dinaminis studento objektas
+    Studentas* studentas = new Studentas();
+
+    // Pridedami pažymiai
+    studentas->addnd(8);
+    studentas->addnd(9);
+    studentas->addnd(10);
+
+    // Patikrinama, ar studento objekto pažymiai ne tušti
+    assert(!studentas->getNd().empty()); 
+
+    // Studento objektas sunaikinamas
+    delete studentas; 
+
+    // Sukuriamas naujas studento objektas naudojant default konstruktorių
+    Studentas SStudentas;
+
+    // Patikrinama, ar studento objekto pažymiai ne tušti
+    assert(SStudentas.getNd().empty());
+    }
+
+    cout << "Visi testai sekmingi!" << endl;
+
+}
