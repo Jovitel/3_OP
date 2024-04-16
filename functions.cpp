@@ -1764,10 +1764,8 @@ void func_tests(){
         int nd_kiekis = 3;
         double gal_vid = 9.9;
         double gal_med = 7.5;
-
         // Sukuriame studento objektą naudodami konstruktorių
         Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
-
         // Gauti duomenys iš studento objekto
         const std::string& get_vardas = studentas.getVardas();
         const std::string& get_pavarde = studentas.getPavarde();
@@ -1776,7 +1774,6 @@ void func_tests(){
         int get_nd_kiekis = studentas.getNdKiekis();
         double get_gal_vid = studentas.getGalutinisVid();
         double get_gal_med = studentas.getGalutineMed();
-
         // Patikriname, ar gauti duomenys atitinka nurodytas reikšmes
         assert(get_vardas == vardas);
         assert(get_pavarde == pav);
@@ -1786,7 +1783,7 @@ void func_tests(){
         assert(get_gal_vid == gal_vid);
         assert(get_gal_med == gal_med);
     }
-    // COPY KONTRUKSTORIUS
+    // COPY KONTRUKTORIUS
     {
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
