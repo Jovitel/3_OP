@@ -1,43 +1,30 @@
-//UŽDUOTIS// Praplėsti v1.1 versiją ir realizuoti "Rule of five". Pavyzdys: https://en.cppreference.com/w/cpp/language/rule_of_three
+//UŽDUOTIS// Vietoje klasės Studentai reikia sukurti dvi: 
+bazinę (abstrakti) klasę, skirtą bendrai aprašyti žmogų ir tuomet iš jos išvestinę (derived) klasę - Studentas.
 
-**"Rule of five" sudaro:**
-1. Kopijavimo konstruktorius
-2. Kopijavimo priskyrimo operatorius
-3. Perkėlimo konstruktorius
-4. Perkėlimo priskyrimo operatorius
-5. Įvesties/Išvesties operatoriai, turimai Studentas klasei
+Abstrakčioji klasė - tai negalima sukurti žmogaus tipo objektų, o tik objektus gautus iš išvestinių klasių (pvz: Studentas)
 
-**"Rule of five" pritaikymas kode:**
+Klasė Zmogus:
 
-![Ekrano kopija (312)](https://github.com/Jovitel/2_OP/assets/150922295/7e794bce-fde7-4917-904e-6e2aa70d2f48)
+![Ekrano kopija (359)](https://github.com/Jovitel/2_OP/assets/150922295/dc4d7a59-36af-4360-8e2f-2432cbc71261)
 
-![Ekrano kopija (313)](https://github.com/Jovitel/2_OP/assets/150922295/d957f80a-789b-4384-817a-b98fe2d22df0)
+Pataisyta klasė Studentas:
 
-**Taip pat sukūriau testą, kuris patikrina, ar pritaikyta taisyklė veikia:**
+![Ekrano kopija (360)](https://github.com/Jovitel/2_OP/assets/150922295/abd1789c-4c5e-4af0-85f3-b1dab436e805)
 
-![Ekrano kopija (314)](https://github.com/Jovitel/2_OP/assets/150922295/7a2dc6ce-a8d7-4044-a29a-f124c538dbe4)
+![Ekrano kopija (361)](https://github.com/Jovitel/2_OP/assets/150922295/94a29ce3-644e-4163-b367-78bf2bf1a363)
 
-![Ekrano kopija (315)](https://github.com/Jovitel/2_OP/assets/150922295/970d1f7f-99a4-49f7-8d8e-86967d9dd27c)
+Patikriname, ar programa veikia: 
 
-![Ekrano kopija (316)](https://github.com/Jovitel/2_OP/assets/150922295/56b80e64-9ee9-4bdc-a3c2-d130d906a9e1)
+![Ekrano kopija (362)](https://github.com/Jovitel/2_OP/assets/150922295/ecb3694d-e775-4b8f-a00e-0f9f67359847)
 
-![Ekrano kopija (317)](https://github.com/Jovitel/2_OP/assets/150922295/c67dc413-ae1b-477f-a7a0-083fa842a9bb)
+Patikriname, ar veikia įvestis/išvestis:
 
-**ĮVESTIES/IŠVESTIES METODAI:**
+Pasirenku 1 - duomenų įvedimas ranka:
 
-**ĮVESTIS:**
-Naudojame set... 
+![Ekrano kopija (364)](https://github.com/Jovitel/2_OP/assets/150922295/55b87371-0014-45b2-aea8-feeac977ecd7)
 
-cout << "Įveskite pavardę: " << endl;
+Pasirenku 5 -  duomenų nuskaitymą iš failo:
 
-cin >> pavarde;
+![Ekrano kopija (365)](https://github.com/Jovitel/2_OP/assets/150922295/5f24fbf5-beb1-434e-be97-6715b266e5c7)
 
-student.setPavarde(pavarde); //pavarde įrašoma klasės student privačiame konstruktoriuje pavarde.
-
-Tuo pačiu metodu reikšmė gali būti įrašoma iš failo arba sugeneruojama automatiškai.
-
-**IŠVESTIS:**
-Naudojame get...
-
-cout << student.getpavarde() << endl; //Pavarde nuskaitoma iš student klasės privataus konstruktoriaus.
-
+Viskas veikia!
