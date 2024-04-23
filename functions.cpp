@@ -353,6 +353,7 @@ void func_generate_names() {
 }
 
 void func_input_file() {
+
     try {
         int s, rez;
         vector<Studentas> studentai;
@@ -1753,8 +1754,9 @@ void func_generate() {
     }
 }
 
+
 void func_tests(){
-    //KONSTRUKTORIUS
+    // KONSTRUKTORIUS
     {    
         // Inicializuojame kintamuosius su testinėmis reikšmėmis
         std::string vardas = "Vardenis";
@@ -1786,7 +1788,7 @@ void func_tests(){
         assert(get_gal_vid == gal_vid);
         assert(get_gal_med == gal_med);
     }
-    // COPY KONTRUKSTORIUS
+    // COPY KONSTRUKSTORIUS
     {
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
@@ -1810,7 +1812,7 @@ void func_tests(){
 
     // MOVE KONTRUKTORIUS
     {
-         std::string vardas = "Vardenis";
+        std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
         std::vector<int> nd = {2, 9, 7};
         int egzaminas = 4;
@@ -1819,7 +1821,7 @@ void func_tests(){
         double gal_med = 7.5;
 
         Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
-        Studentas copy(std::move(studentas)); // Pridėtas std::move
+        Studentas copy(std::move(studentas)); 
 
         // assert tikrina ar salyga yra teisinga
         assert(copy.getVardas() == vardas);
@@ -1829,6 +1831,15 @@ void func_tests(){
         assert(copy.getNdKiekis() == nd_kiekis);
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
+
+        // Patikriname, ar perkeltas objektas yra tuščias
+        assert(studentas.getVardas().empty());
+        assert(studentas.getPavarde().empty());
+        assert(studentas.getNd().empty());
+        assert(studentas.getEgzaminas() == 0);
+        assert(studentas.getNdKiekis() == 0);
+        assert(studentas.getGalutinisVid() == 0);
+        assert(studentas.getGalutineMed() == 0);
     }
     // Destruktoriaus patikrinimas
     {
@@ -1855,4 +1866,48 @@ void func_tests(){
 
     cout << "Visi testai sekmingi." << endl;
 
+}
+
+void func_input_output() {
+    Studentas student;
+
+    std::string vardas, pav;
+    std::cout << "Iveskite varda: " << std::endl;
+    std::cin >> vardas;
+    student.setVardas(vardas);
+
+    std::cout << "Iveskite pavarde: " << std::endl;
+    std::cin >> pav;
+    student.setPavarde(pav);
+
+    int pazymys;
+
+    std::cout << "Iveskite namu darbu rezultatus (Iveskite 0, kai norite baigti): " << std::endl;
+    while (std::cin >> pazymys && pazymys != 0) {
+        if (pazymys < 1 || pazymys > 10) {
+            std::cout << "Netinkamas pazymys, iveskite nauja: ";
+            continue;
+        }
+        student.addnd(pazymys); // Naudojame addnd metodą
+    }
+
+    std::cout << "Iveskite egzamino rezultata: ";
+    std::cin >> pazymys;
+    student.setEgzaminas(pazymys);
+    if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
+        std::cout << "Netinkamas pazymys, iveskite nauja: ";
+        std::cin >> pazymys;
+        student.setEgzaminas(pazymys);
+    }
+
+    // Patikrinimas, ar įvesti duomenys yra tinkami
+    std::cout << "Patikrinkime ivestus duomenis:" << std::endl;
+    std::cout << "Vardas: " << student.getVardas() << std::endl;
+    std::cout << "Pavarde: " << student.getPavarde() << std::endl;
+    std::cout << "Namu darbai: ";
+    for (int pazymys : student.getNd()) {
+        std::cout << pazymys << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Egzamino rezultatas: " << student.getEgzaminas() << std::endl;
 }

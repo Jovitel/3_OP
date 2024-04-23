@@ -41,4 +41,5 @@ void read_list_3();
 void read_deque_3(); 
 
 void func_tests();
+void func_input_output();
 #endif /* FUNCTIONS_H */
