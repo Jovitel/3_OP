@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 const int MAX_ND = 100;
 
@@ -18,13 +19,14 @@ protected:
     virtual ~Zmogus() {}
 
 public:
-    // Virtualus get metodai, gražinantys varda arba pavarde
+    // Virtualus get metodai, gražinantys vardą arba pavarde
     virtual const std::string& getVardas() const { return vardas_; }
     virtual const std::string& getPavarde() const { return pav_; }
     // Virtualus set metodai, nustatantys varda arba pavarde
     virtual void setVardas(const std::string& vardas) { vardas_ = vardas; }
     virtual void setPavarde(const std::string& pavarde) { pav_ = pavarde; }
 };
+
 class Studentas : public Zmogus {
 private:
     std::vector<int> nd_;
@@ -42,17 +44,19 @@ public:
         : Zmogus(vardas, pav), nd_(nd), egzaminas_(egzaminas), nd_kiekis_(nd_kiekis), 
         gal_vid_(gal_vid), gal_med_(gal_med) {}
 
-    ~Studentas() {nd_.clear(); vardas_.clear(), pav_.clear();}
-    //COPY KONSTRUKTORIUS
+    ~Studentas() {}
+
+    // COPY KONSTRUKTORIUS
     Studentas(const Studentas& other)
         : Zmogus(other.getVardas(), other.getPavarde()), nd_(other.nd_), egzaminas_(other.egzaminas_), 
-        nd_kiekis_(other.nd_kiekis_),gal_vid_(other.gal_vid_), gal_bal_(other.gal_bal_), gal_med_(other.gal_med_) {}
-    //COPY PRISKYRIMO OPERATORIUS
-    Studentas& operator = (const Studentas& other)
+        nd_kiekis_(other.nd_kiekis_), gal_vid_(other.gal_vid_), gal_bal_(other.gal_bal_), gal_med_(other.gal_med_) {}
+
+    // COPY PRISKYRIMO OPERATORIUS
+    Studentas& operator=(const Studentas& other)
     {
-         if (this != &other) {
-            vardas_ = other.vardas_;
-            pav_ = other.pav_;
+        if (this != &other) {
+            setVardas(other.getVardas());
+            setPavarde(other.getPavarde());
             nd_ = other.nd_;
             egzaminas_ = other.egzaminas_;
             nd_kiekis_ = other.nd_kiekis_;
@@ -62,23 +66,42 @@ public:
         }
         return *this;
     }
-    //MOVE KONSTRUKTORIUS
-    Studentas(const Studentas&& other) noexcept
+
+    // MOVE KONSTRUKTORIUS
+    Studentas(Studentas&& other) noexcept
         : Zmogus(std::move(other.vardas_), std::move(other.pav_)), nd_(std::move(other.nd_)), 
         egzaminas_(std::move(other.egzaminas_)), nd_kiekis_(std::move(other.nd_kiekis_)), 
-        gal_vid_(std::move(other.gal_vid_)), gal_bal_(std::move(other.gal_bal_)), gal_med_(std::move(other.gal_med_)) {}
-    //MOVE PRISKYRIMO OPERATORIUS
+        gal_vid_(std::move(other.gal_vid_)), gal_bal_(std::move(other.gal_bal_)), gal_med_(std::move(other.gal_med_))
+    {
+        other.vardas_ = "";
+        other.pav_ = "";
+        other.egzaminas_ = 0;
+        other.nd_kiekis_ = 0;
+        other.gal_vid_ = 0;
+        other.gal_bal_ = 0;
+        other.gal_med_ = 0;
+    }
+
+    // MOVE PRISKYRIMO OPERATORIUS
     Studentas& operator=(Studentas&& other) noexcept
     {
-        if (this != &other){
-            Zmogus::setVardas(std::move(other.getVardas()));
-            Zmogus::setPavarde(std::move(other.getPavarde()));
+        if (this != &other) {
+            setVardas(std::move(other.getVardas()));
+            setPavarde(std::move(other.getPavarde()));
             nd_ = std::move(other.nd_);
             egzaminas_ = std::move(other.egzaminas_);
             nd_kiekis_ = std::move(other.nd_kiekis_);
             gal_vid_ = std::move(other.gal_vid_);
             gal_bal_ = std::move(other.gal_bal_);
             gal_med_ = std::move(other.gal_med_);
+
+            other.vardas_ = "";
+            other.pav_ = "";
+            other.egzaminas_ = 0;
+            other.nd_kiekis_ = 0;
+            other.gal_vid_ = 0;
+            other.gal_bal_ = 0;
+            other.gal_med_ = 0;
         }
         return *this;
     }
@@ -115,15 +138,13 @@ public:
         gal_bal_ = 0.4 * (suma / nd_.size()) + 0.6 * egzaminas_;
     }
 
-    friend void func_input_output();
-    //Input
+    // Input
     friend std::istream& operator>>(std::istream& in, Studentas& studentas) {
         in >> studentas.vardas_ >> studentas.pav_;
 
         int pazymys;
         studentas.nd_.clear(); // Išvalome namų darbų sąrašą
-        while (in >> pazymys && pazymys >= 0)
-        {
+        while (in >> pazymys && pazymys >= 0) {
             studentas.addnd(pazymys); // Pridedame naują namų darbo pažymį
         }
 
@@ -132,8 +153,7 @@ public:
         return in;
     }
 
-
-    //Output
+    // Output
     friend std::ostream& operator<<(std::ostream& out, const Studentas& studentas) {
         out << "Vardas: " << studentas.vardas_ << std::endl;
         out << "Pavarde: " << studentas.pav_ << std::endl;

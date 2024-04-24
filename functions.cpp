@@ -1833,13 +1833,13 @@ void func_tests(){
         assert(copy.getGalutineMed() == gal_med);
 
         // Patikriname, ar perkeltas objektas yra tuščias
-       // assert(studentas.getVardas().empty());
-        //assert(studentas.getPavarde().empty());
-       // assert(studentas.getNd().empty());
-        // assert(studentas.getEgzaminas() == 0);
-        // assert(studentas.getNdKiekis() == 0);
-        // assert(studentas.getGalutinisVid() == 0);
-        // assert(studentas.getGalutineMed() == 0);
+        assert(studentas.getVardas().empty());
+        assert(studentas.getPavarde().empty());
+        assert(studentas.getNd().empty());
+        assert(studentas.getEgzaminas() == 0);
+        assert(studentas.getNdKiekis() == 0);
+        assert(studentas.getGalutinisVid() == 0);
+        assert(studentas.getGalutineMed() == 0);
     }
     // Destruktoriaus patikrinimas
     {
@@ -1868,41 +1868,46 @@ void func_tests(){
 
 }
 
-void func_input_output(){
+void func_input_output() {
     Studentas student;
 
-    cout << "Iveskite varda: " << endl;
-    cin >> student.vardas_;
+    std::string vardas, pav;
+    std::cout << "Iveskite varda: " << std::endl;
+    std::cin >> vardas;
+    student.setVardas(vardas);
 
-    cout << "Iveskite pavarde: " << endl;
-    cin >> student.pav_;
+    std::cout << "Iveskite pavarde: " << std::endl;
+    std::cin >> pav;
+    student.setPavarde(pav);
 
     int pazymys;
 
-    cout << "Iveskite namu darbu rezultatus (Iveskite 0, kai norite baigti): " << endl;
-    while (cin >> pazymys && pazymys != 0) {
+    std::cout << "Iveskite namu darbu rezultatus (Iveskite 0, kai norite baigti): " << std::endl;
+    while (std::cin >> pazymys && pazymys != 0) {
         if (pazymys < 1 || pazymys > 10) {
-            cout << "Netinkamas pazymys, iveskite nauja: ";
+            std::cout << "Netinkamas pazymys, iveskite nauja: ";
             continue;
         }
         student.addnd(pazymys); // Naudojame addnd metodą
     }
 
-    cout << "Iveskite egzamino rezultata: ";
-    cin >> student.egzaminas_;
+    std::cout << "Iveskite egzamino rezultata: ";
+    std::cin >> pazymys;
+    student.setEgzaminas(pazymys);
     if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
-        cout << "Netinkamas pazymys, iveskite nauja: ";
-        cin >> student.egzaminas_;
+        std::cout << "Netinkamas pazymys, iveskite nauja: ";
+        std::cin >> pazymys;
+        student.setEgzaminas(pazymys);
     }
 
     // Patikrinimas, ar įvesti duomenys yra tinkami
-    cout << "Patikrinkime ivestus duomenis:" << endl;
-    cout << "Vardas: " << student.vardas_ << endl;
-    cout << "Pavarde: " << student.pav_ << endl;
-    cout << "Namu darbai: ";
-    for (int pazymys : student.nd_) {
-        cout << pazymys << " ";
+    std::cout << "Patikrinkime ivestus duomenis:" << std::endl;
+    std::cout << "Vardas: " << student.getVardas() << std::endl;
+    std::cout << "Pavarde: " << student.getPavarde() << std::endl;
+    std::cout << "Namu darbai: ";
+    for (int pazymys : student.getNd()) {
+        std::cout << pazymys << " ";
     }
-    cout << endl;
-    cout << "Egzamino rezultatas: " << student.egzaminas_ << endl;
+    std::cout << std::endl;
+    std::cout << "Egzamino rezultatas: " << student.getEgzaminas() << std::endl;
 }
