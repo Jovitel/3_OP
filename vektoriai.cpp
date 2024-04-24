@@ -34,6 +34,7 @@ int main() {
         func_generate();
     } else if (choice == 7) {
         func_tests();
+        func_input_output();
     } 
 
 

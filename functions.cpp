@@ -353,6 +353,7 @@ void func_generate_names() {
 }
 
 void func_input_file() {
+
     try {
         int s, rez;
         vector<Studentas> studentai;
@@ -1753,8 +1754,9 @@ void func_generate() {
     }
 }
 
+
 void func_tests(){
-    //KONSTRUKTORIUS
+    // KONSTRUKTORIUS
     {    
         // Inicializuojame kintamuosius su testinėmis reikšmėmis
         std::string vardas = "Vardenis";
@@ -1764,8 +1766,10 @@ void func_tests(){
         int nd_kiekis = 3;
         double gal_vid = 9.9;
         double gal_med = 7.5;
+
         // Sukuriame studento objektą naudodami konstruktorių
         Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
+
         // Gauti duomenys iš studento objekto
         const std::string& get_vardas = studentas.getVardas();
         const std::string& get_pavarde = studentas.getPavarde();
@@ -1774,6 +1778,7 @@ void func_tests(){
         int get_nd_kiekis = studentas.getNdKiekis();
         double get_gal_vid = studentas.getGalutinisVid();
         double get_gal_med = studentas.getGalutineMed();
+
         // Patikriname, ar gauti duomenys atitinka nurodytas reikšmes
         assert(get_vardas == vardas);
         assert(get_pavarde == pav);
@@ -1783,7 +1788,7 @@ void func_tests(){
         assert(get_gal_vid == gal_vid);
         assert(get_gal_med == gal_med);
     }
-    // COPY KONTRUKTORIUS
+    // COPY KONSTRUKSTORIUS
     {
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
@@ -1807,7 +1812,7 @@ void func_tests(){
 
     // MOVE KONTRUKTORIUS
     {
-         std::string vardas = "Vardenis";
+        std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
         std::vector<int> nd = {2, 9, 7};
         int egzaminas = 4;
@@ -1816,7 +1821,7 @@ void func_tests(){
         double gal_med = 7.5;
 
         Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
-        Studentas copy(std::move(studentas)); // Pridėtas std::move
+        Studentas copy(std::move(studentas)); 
 
         // assert tikrina ar salyga yra teisinga
         assert(copy.getVardas() == vardas);
@@ -1826,6 +1831,15 @@ void func_tests(){
         assert(copy.getNdKiekis() == nd_kiekis);
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
+
+        // Patikriname, ar perkeltas objektas yra tuščias
+       // assert(studentas.getVardas().empty());
+        //assert(studentas.getPavarde().empty());
+       // assert(studentas.getNd().empty());
+        // assert(studentas.getEgzaminas() == 0);
+        // assert(studentas.getNdKiekis() == 0);
+        // assert(studentas.getGalutinisVid() == 0);
+        // assert(studentas.getGalutineMed() == 0);
     }
     // Destruktoriaus patikrinimas
     {
@@ -1852,4 +1866,43 @@ void func_tests(){
 
     cout << "Visi testai sekmingi." << endl;
 
+}
+
+void func_input_output(){
+    Studentas student;
+
+    cout << "Iveskite varda: " << endl;
+    cin >> student.vardas_;
+
+    cout << "Iveskite pavarde: " << endl;
+    cin >> student.pav_;
+
+    int pazymys;
+
+    cout << "Iveskite namu darbu rezultatus (Iveskite 0, kai norite baigti): " << endl;
+    while (cin >> pazymys && pazymys != 0) {
+        if (pazymys < 1 || pazymys > 10) {
+            cout << "Netinkamas pazymys, iveskite nauja: ";
+            continue;
+        }
+        student.addnd(pazymys); // Naudojame addnd metodą
+    }
+
+    cout << "Iveskite egzamino rezultata: ";
+    cin >> student.egzaminas_;
+    if (student.getEgzaminas() < 1 || student.getEgzaminas() > 10) {
+        cout << "Netinkamas pazymys, iveskite nauja: ";
+        cin >> student.egzaminas_;
+    }
+
+    // Patikrinimas, ar įvesti duomenys yra tinkami
+    cout << "Patikrinkime ivestus duomenis:" << endl;
+    cout << "Vardas: " << student.vardas_ << endl;
+    cout << "Pavarde: " << student.pav_ << endl;
+    cout << "Namu darbai: ";
+    for (int pazymys : student.nd_) {
+        cout << pazymys << " ";
+    }
+    cout << endl;
+    cout << "Egzamino rezultatas: " << student.egzaminas_ << endl;
 }
