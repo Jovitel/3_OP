@@ -71,10 +71,10 @@ Parašyti testai veikia ir su pakeista, abstrakčia klase.
 
 5. Show HTML output
 
-<img src="https://github.com/Jovitel/2_OP/assets/150922295/54dd6c76-b01e-4fb0-9617-f0f94cc46db4" width="600" />
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/54dd6c76-b01e-4fb0-9617-f0f94cc46db4" width="400" />
 
 6. HTML ir LATEX
 
-<img src="https://github.com/Jovitel/2_OP/assets/150922295/0e7af6fd-b5e7-45cb-9821-5a4de5e8f930" width="600" />
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/0e7af6fd-b5e7-45cb-9821-5a4de5e8f930" width="400" />
 
 // UNIT TESTS //
