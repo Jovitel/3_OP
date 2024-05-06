@@ -33,8 +33,6 @@ Praplėsti v1.1 versiją ir realizuoti "Rule of five".
 
 Įvestis/išvestis
 
-![Ekrano kopija (381)](https://github.com/Jovitel/2_OP/assets/150922295/7fa861cc-0689-4829-9f3e-0f759b1e4e7a)
-
 <img src="https://github.com/Jovitel/2_OP/assets/150922295/7fa861cc-0689-4829-9f3e-0f759b1e4e7a" width="700" />
 
 -- Rezultatas --
@@ -58,24 +56,25 @@ Parašyti testai veikia ir su pakeista, abstrakčia klase.
 1. Instaliavau Doxygen https://www.doxygen.nl/download.html
 2. Pakeitimai Wizard skiltyje:
 
-![Ekrano kopija (372)](https://github.com/Jovitel/2_OP/assets/150922295/36df219b-34a7-4aa2-8877-c429ba408be5)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/36df219b-34a7-4aa2-8877-c429ba408be5" width="700" />
 
-![Ekrano kopija (373)](https://github.com/Jovitel/2_OP/assets/150922295/e199690d-aebd-4c17-93fe-cbf118b59c2c)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/e199690d-aebd-4c17-93fe-cbf118b59c2c" width="700" />
 
 3. Pakeitimai Expert skiltyje:
 
-![Ekrano kopija (375)](https://github.com/Jovitel/2_OP/assets/150922295/6e6798ff-2b33-4ea0-8dca-9bb13d9ee89b)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/6e6798ff-2b33-4ea0-8dca-9bb13d9ee89b" width="700" />
 
 4. Run Doxygen
 
-![Ekrano kopija (376)](https://github.com/Jovitel/2_OP/assets/150922295/a7985430-97ab-48ef-92bc-e77ad44863b7)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/a7985430-97ab-48ef-92bc-e77ad44863b7" width="700" />
+
 
 5. Show HTML output
 
-![Ekrano kopija (377)](https://github.com/Jovitel/2_OP/assets/150922295/54dd6c76-b01e-4fb0-9617-f0f94cc46db4)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/54dd6c76-b01e-4fb0-9617-f0f94cc46db4" width="700" />
 
 6. HTML ir LATEX
 
-![Ekrano kopija (378)](https://github.com/Jovitel/2_OP/assets/150922295/0e7af6fd-b5e7-45cb-9821-5a4de5e8f930)
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/0e7af6fd-b5e7-45cb-9821-5a4de5e8f930" width="700" />
 
 // UNIT TESTS //
