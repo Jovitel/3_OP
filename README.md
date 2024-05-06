@@ -6,7 +6,6 @@ Abstrakčioji klasė - tai negalima sukurti žmogaus tipo objektų, o tik objekt
 Klasė Zmogus:
 
 ![Ekrano kopija (359)](https://github.com/Jovitel/2_OP/assets/150922295/dc4d7a59-36af-4360-8e2f-2432cbc71261)
-<img src="[Ekrano kopija (359)].png" width="300" />
 
 Pataisyta klasė Studentas:
 
