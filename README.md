@@ -103,6 +103,29 @@ Realizavau UNIT Testus naudodama Catch frameworką.
 
 <img src="https://github.com/Jovitel/2_OP/assets/150922295/54e06095-b42d-4006-88d6-9b5dbe21b311" width="400" />
 
+# Naudojimosi instrukcija
 
+Terminale įveskite:  g++ -o Vektoriai vektoriai.o functions.o
+Norėdami paleisti programą įrašykite Powershell terminale: ./vektoriai
 
+# Pasirinkimai
+
+1. Įvedate vardą, pavardę, namų darbus (kai norite įvedimą sustabdyti įrašote 0), egzamino rezultatą. Jei pasirenkate 1 galite vesti kito studento duomenis, jei 0 nutraukiate įvedimą ir pasirenkate 1 - tuo pačiu išvesite medianą, 0 - galutinį balą. Terminale matote išvestą lentelę su jūsų pateiktais duomenimis.
+2. Įvedate vardą, pavardę, 1 - pažymiai bus sugeneruoti, 0 - pažymius įvesite jūs.  Jei pasirenkate 1 galite vesti kito studento duomenis, jei 0 nutraukiate įvedimą ir pasirenkate 1 - tuo pačiu išvesite medianą, 0 - galutinį balą.  Terminale matote išvestą lentelę su jūsų pateiktais duomenimis ir sugeneruotais duomenimis (jei tai pasirinkote).
+3. 1 - bus sugeneruoti vardai, pavardės ir pažymiai, 0 - įvesite duomenis jūs.  Jei pasirenkate 1 gali sugeneruoti kito studento duomenis, jei 0 nutraukiate įvedimą ir pasirenkate 1 - tuo pačiu išvesite medianą, 0 - galutinį balą.  Terminale matote išvestą lentelę su jūsų pateiktais duomenimis ir sugeneruotais duomenimis (jei tai pasirinkote).
+4. Užbaigia programą.
+5. Duomenis nuskaito iš pasirinkto failo.
+   kursiokai.txt
+   studentai10000.txt
+   studentai100000.txt
+   studentai1000000.txt
+7. T - Galite sugeneruoti naują failą, N - pasirinksite naujo failo negeneruoti. Turėsite įvesti failo pavadinimą, mokinių bei pažymių skaičių. Terminale galėsite matyti failo kūrimo ir jo uždarymo laiką.
+
+# Įdiegimo instrukcija
+
+1. Github svetainėje parsisiųskite šiuos failus: https://github.com/Jovitel/2_OP/tree/v2.0
+2. Parsisiųskite norimą programinę įrangą. pvz: Visual Studio Code.
+3. Parsisiųskite reikiamus "Extensions", kad galėtumėte naudotis C++ ir CMake. Jei naudojate Visual Studio Code: "C/C++ Extension Pack", "CMake Tools" 
+4. Atsidarykite Powershell terminalą.
+5. Pateiktoje nuorodoje susiraskite README ir naudokitės aprašyta naudojimosi instrukcija.
 
