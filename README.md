@@ -35,6 +35,8 @@ Praplėsti v1.1 versiją ir realizuoti "Rule of five".
 
 ![Ekrano kopija (381)](https://github.com/Jovitel/2_OP/assets/150922295/7fa861cc-0689-4829-9f3e-0f759b1e4e7a)
 
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/7fa861cc-0689-4829-9f3e-0f759b1e4e7a" width="300" />
+
 -- Rezultatas --
 
 Parašyti testai suveikė. 
