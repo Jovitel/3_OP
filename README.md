@@ -96,7 +96,12 @@ Realizavau UNIT Testus naudodama Catch frameworką.
 
 <img src="https://github.com/Jovitel/2_OP/assets/150922295/dd961a76-c118-4f45-83e1-048bb5c9ab89" width="550" />
 
+4. Sukompiliuoju terminale įrašydama g++ *.cpp -o test.
+   Noredama paleisti testą įrašau test.
+   
 --- Rezultatas ---
+
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/54e06095-b42d-4006-88d6-9b5dbe21b311" width="400" />
 
 
 
