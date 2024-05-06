@@ -77,4 +77,27 @@ Parašyti testai veikia ir su pakeista, abstrakčia klase.
 
 <img src="https://github.com/Jovitel/2_OP/assets/150922295/0e7af6fd-b5e7-45cb-9821-5a4de5e8f930" width="400" />
 
+
 // UNIT TESTS //
+
+Realizavau UNIT Testus naudodama Catch frameworką. 
+
+1. Parsisiunčiau šiuos failus:
+
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/c95defc6-3fd9-48b8-9fd7-e9e64df3df0c" width="400" />
+
+2. Susikūriau aplankalą "Catch2" į kurį įdėjau parsisiųstus failus. "Catch2" įdėjau į aplankalą "Testai" kartu su .cpp ir .h failais.
+
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/76fbafb1-90e3-4ab0-ba79-bfefc566dc05" width="400" />
+
+3. Susikūriau Main.cpp ir jame parašiau testus:
+
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/ec88cfe0-20e6-4a13-971d-7c1b91248401" width="550" />
+
+<img src="https://github.com/Jovitel/2_OP/assets/150922295/dd961a76-c118-4f45-83e1-048bb5c9ab89" width="550" />
+
+--- Rezultatas ---
+
+
+
+
