@@ -106,6 +106,7 @@ Realizavau UNIT Testus naudodama Catch frameworką.
 # Naudojimosi instrukcija
 
 Terminale įveskite:  g++ -o Vektoriai vektoriai.o functions.o
+
 Norėdami paleisti programą įrašykite Powershell terminale: ./vektoriai
 
 # Pasirinkimai
@@ -127,5 +128,5 @@ Norėdami paleisti programą įrašykite Powershell terminale: ./vektoriai
 2. Parsisiųskite norimą programinę įrangą. pvz: Visual Studio Code.
 3. Parsisiųskite reikiamus "Extensions", kad galėtumėte naudotis C++ ir CMake. Jei naudojate Visual Studio Code: "C/C++ Extension Pack", "CMake Tools" 
 4. Atsidarykite Powershell terminalą.
-5. Pateiktoje nuorodoje susiraskite README ir naudokitės aprašyta naudojimosi instrukcija.
+5. Pateiktoje nuorodoje susiraskite README ir naudokitės aprašyta naudojimosi instrukcija. Taip pat perskaitykite apie galimus pasirinkimus.
 
