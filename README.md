@@ -19,6 +19,8 @@ Pasirinkau 5 funkcijas ir stebėjau, ar gauti rezultatai su Vector konteineriu a
          << std::hex << q.max_size() << '\n';
 ```
 
+#### (TEISINGAS) OUTPUT:
+
 ```p.max_size() = 9,223,372,036,854,775,807 = 0x7,FFF,FFF,FFF,FFF,FFF
    q.max_size() = 1,152,921,504,606,846,975 = 0xFFF,FFF,FFF,FFF,FFF
 ```
