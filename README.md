@@ -67,46 +67,23 @@ Moved-from string s holds: ""
 **CAPACITY():**
 
 ```
-int sz = 100;
-    Vector<int> v;
- 
-    auto cap = v.capacity();
-    cout << "Initial size: " << v.size() << ", capacity: " << cap << '\n';
- 
-    cout << "\nDemonstrate the capacity's growth policy."
-            "\nSize:  Capacity:  Ratio:\n" << left;
-    while (sz-- > 0)
-    {
-        v.push_back(sz);
-        if (cap != v.capacity())
-        {
-            cout << setw( 7) << v.size()
-                 << setw(11) << v.capacity()
-                 << setw(10) << v.capacity() / static_cast<float>(cap) << '\n';
-            cap = v.capacity();
-        }
-    }
- 
-    cout << "\nFinal size: " << v.size() << ", capacity: " << v.capacity() << '\n';
+    Vector<int> foo (3,0);
+    Vector<int> bar (5,0);
+
+    bar = foo;
+    foo = Vector<int>();
+
+    cout << "Size of foo: " << int(foo.size()) << '\n';
+    cout << "Size of bar: " << int(bar.size()) << '\n';
+
 ```
 
 #### (TEISINGAS) OUTPUT:
 
 ```
-Initial size: 0, capacity: 0
- 
-Demonstrate the capacity's growth policy.
-Size:  Capacity:  Ratio:
-1      1          inf
-2      2          2
-3      4          2
-5      8          2
-9      16         2
-17     32         2
-33     64         2
-65     128        2
- 
-Final size: 100, capacity: 128
+Size of foo: 0
+Size of bar: 3
+
 ```
 **SWAP():**
 
