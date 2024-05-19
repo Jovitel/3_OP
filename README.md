@@ -6,8 +6,20 @@ Sukūriau Vector klasę, kuri yra pilnavertė alternatyva std::vector konteineri
 
 Pasirinkau 5 funkcijas ir stebėjau, ar gauti rezultatai su Vector konteineriu atitinka std::vector rezultatus.
 
-**POP_BACK**
+**MAZ_SIZE()**
 
-<img src="https://github.com/Jovitel/3_OP/assets/150922295/bb164801-71a3-42de-a826-5c32bb2e4da7" width="400" />
+``` Vector<char> p;
+    Vector<long> q;
+ 
+    cout.imbue(locale("en_US.UTF-8"));
+    cout << uppercase
+         << "p.max_size() = " << std::dec << p.max_size() << " = 0x"
+         << std::hex << p.max_size() << '\n'
+         << "q.max_size() = " << std::dec << q.max_size() << " = 0x"
+         << std::hex << q.max_size() << '\n';
+```
 
-``` pop_back() veikia tinkamai. ```
+```p.max_size() = 9,223,372,036,854,775,807 = 0x7,FFF,FFF,FFF,FFF,FFF
+   q.max_size() = 1,152,921,504,606,846,975 = 0xFFF,FFF,FFF,FFF,FFF
+```
+
