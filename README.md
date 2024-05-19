@@ -10,5 +10,4 @@ Pasirinkau 5 funkcijas ir stebėjau, ar gauti rezultatai su Vector konteineriu a
 
 <img src="https://github.com/Jovitel/3_OP/assets/150922295/bb164801-71a3-42de-a826-5c32bb2e4da7" width="400" />
 
-###Rezultatai: 
-pop_back() veikia tinkamai.
+#### Rezultatai: pop_back() veikia tinkamai.
