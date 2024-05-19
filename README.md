@@ -64,7 +64,7 @@ After adding elements, numbers.empty(): false
 std::vector letters holds: "abc" "def"
 Moved-from string s holds: ""
 ```
-**CAPACITY():**
+**OPERATOR = :**
 
 ```
     Vector<int> foo (3,0);
