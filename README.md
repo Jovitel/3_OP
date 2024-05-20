@@ -125,7 +125,8 @@ Visi rezultatai sutampa.
 
 # Efektyvumo/spartos analizė std::vector vs Vector
 
-Skaičiuoju, kiek vidutiniškai laiko užtrunka užpildyti tuščius vektorius: 10 000, 100 000, 1 000 000, 10 000 000 ir 100 000 000 int elementų naudojant push_back() funkciją.
+Skaičiuoju, kiek vidutiniškai laiko užtrunka užpildyti tuščius vektorius: 10 000, 100 000, 1 000 000, 10 000 000 
+ir 100 000 000 int elementų naudojant push_back() funkciją. 
 
 |                 |   10 000   |   100 000  |  1 000 000 | 10 000 000 | 100 000 000 |  iš viso   |
 |:---------------:|:----------:|-----------:| ----------:|-----------:|------------:|-----------:|
@@ -134,4 +135,50 @@ Skaičiuoju, kiek vidutiniškai laiko užtrunka užpildyti tuščius vektorius: 
 
 #### Rezultatai:
 
-Mažiausiau laiko uztrunka su Vector.
+Mažiausia laiko uztrunka su Vector.
+
+# Kiek kartų įvyksta konteinerių (Vector ir std::vector) atminties perskirstymai užpildant 100000000 elementų.
+
+Perskirstymas įvyksta tada, kai yra patenkinama sąlyga: capacity() == size(), t.y. kai nelieka vietos capacity()`naujiems elementams.
+
+#### Naudotas kodas:
+
+```
+ auto start = std::chrono::steady_clock::now();
+    unsigned int sz = 100000000;  // 100000, 1000000, 10000000, 100000000
+    int std_vector = 0;
+    std::vector<int> v1;
+    for (int i = 1; i <= sz; ++i){
+        v1.push_back(i);
+        if (v1.capacity() == v1.size()){
+            std_vector++;
+        } 
+    }
+    auto end = std::chrono::steady_clock::now();
+
+    auto start_2 = std::chrono::steady_clock::now();
+    int Vector_2 = 0;
+    Vector<int> v2;
+    for (int i = 1; i <= sz; ++i){
+        v2.push_back(i);
+         if (v2.capacity() == v2.size()){
+            Vector_2++;
+        }
+    }
+    auto end_2 = std::chrono::steady_clock::now();
+
+    // Laukiam, kol procesorius laiko
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::chrono::duration<double> elapsed_seconds_2 = end_2 - start_2;
+
+    cout << "std::vector: " << elapsed_seconds.count() << "s\n";
+    cout << "std::vector atmintis perskirstyta: " << std_vector << " kartus" << endl;
+    cout << "Vector: " << elapsed_seconds_2.count() << "s\n";
+    cout << "Vector atmintis perskirstyta: " << Vector_2 << " kartus" << endl;
+```
+
+#### Rezultatai:
+```
+std::vector atmintis perskirstyta: 27 kartus
+Vector atmintis perskirstyta: 26 kartus
+```
