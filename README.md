@@ -2,7 +2,7 @@
 
 Sukūriau Vector klasę, kuri yra pilnavertė alternatyva std::vector konteineriui, t.y. visi fonkciunalumai (Member types, Member functions, Non-member functions). Naudojausi: https://en.cppreference.com/w/cpp/container/vector
 
-**Įsitikinti, ar Vector konteineris veikia (funkcionalumo prasme) lygiai taip, kaip std::vector**
+# Įsitikinti, ar Vector konteineris veikia (funkcionalumo prasme) lygiai taip, kaip std::vector
 
 Pasirinkau 5 funkcijas ir stebėjau, ar gauti rezultatai su Vector konteineriu atitinka std::vector rezultatus. Naudojausi: https://en.cppreference.com/w/cpp/container/vector
 
@@ -121,4 +121,17 @@ Alice: 7 8 9 10
 Bob  : 1 2 3
 ```
 
+Visi rezultatai sutampa.
 
+# Efektyvumo/spartos analizė std::vector vs Vector
+
+Skaičiuoju, kiek vidutiniškai laiko užtrunka užpildyti tuščius vektorius: 10 000, 100 000, 1 000 000, 10 000 000 ir 100 000 000 int elementų naudojant push_back() funkciją.
+
+|                 |   10 000   |   100 000  |  1 000 000 | 10 000 000 | 100 000 000 |  iš viso   |
+|:---------------:|:----------:|-----------:| ----------:|-----------:|------------:|-----------:|
+| _std::vector_   | 0.0008438s | 0.0059773s | 0.0387429s | 0.184515s  |  1.4759s    | 1,705979s  |
+| _Vector_        | 0.000569s  | 0.0061737s | 0.0113419s | 0.118442s  |  1.14663s   | 1,2831566s |
+
+#### Rezultatai:
+
+Mažiausiau laiko uztrunka su Vector.
