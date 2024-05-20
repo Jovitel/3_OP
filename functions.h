@@ -42,4 +42,7 @@ void read_deque_3();
 
 void func_tests();
 void func_input_output();
+
+void func_vector();
+void func_time();
 #endif /* FUNCTIONS_H */
