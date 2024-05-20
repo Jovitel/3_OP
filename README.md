@@ -182,3 +182,57 @@ Perskirstymas įvyksta tada, kai yra patenkinama sąlyga: capacity() == size(), 
 std::vector atmintis perskirstyta: 27 kartus
 Vector atmintis perskirstyta: 26 kartus
 ```
+# Programos veikimas, naudojant std::vector ir Vector realizacijas (naudojant duomenų failą su 100 000, 1 000 000         ir 10 000 000 studentų įrašų)
+
+#### 100 000 
+
+|  _Vector_                            |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   0.236s   | 
+| Studentų rūšiavimas didėjimo tvarka: |   0.34s    | 
+| Studentų suskirstymas i dvi grupes:  |   0.053s   |
+| Iš viso:                             |   0.629s   |
+
+|   _std::vector_                      |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   0.245s   | 
+| Studentų rūšiavimas didėjimo tvarka: |   0.335s   | 
+| Studentų suskirstymas i dvi grupes:  |   0.05s    |
+| Iš viso:                             |   0.63s    |
+
+#### 1 000 000 
+
+|  _Vector_                            |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   1.995s   | 
+| Studentų rūšiavimas didėjimo tvarka: |   4.539s   | 
+| Studentų suskirstymas i dvi grupes:  |   0.666s   |
+| Iš viso:                             |   7.2s     |
+
+|  _std::vector_                       |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   2.017s   | 
+| Studentų rūšiavimas didėjimo tvarka: |   4.915s   | 
+| Studentų suskirstymas i dvi grupes:  |   0.551s   |
+| Iš viso:                             |   7.483s   |
+
+#### 10 000 000 
+
+|  _Vector_                            |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   20.986s  | 
+| Studentų rūšiavimas didėjimo tvarka: |   54.59s   | 
+| Studentų suskirstymas i dvi grupes:  |    5.627s  |
+| Iš viso:                             |   81.203s  |
+
+|  _std::vector_                       |   Laikas   |   
+|:------------------------------------:|:----------:|
+| Duomenu nuskaitymas iš failo:        |   24.705s  | 
+| Studentų rūšiavimas didėjimo tvarka: |   69.182s  | 
+| Studentų suskirstymas i dvi grupes:  |    5.872s  |
+| Iš viso:                             |   99.759s  |
+
+#### Rezultatai:
+
+Palyginant bendrą laiką, galima matyti, kad naudojant Vector užtrunkame mažiau laiko nei naudojant std::vector.
+
