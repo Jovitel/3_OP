@@ -1,4 +1,6 @@
 #include "functions.h"
+#include "vector.h"
+
 
 int main() {
     int choice;
@@ -11,10 +13,12 @@ int main() {
     cout << "5 - Duomenis nuskaityti iš failo" << endl;
     cout << "6 - Generuoti failus " << endl;
     cout << "7 - Rule of 5" << endl;
+    cout << "8 - Vector funkcionalumas" << endl;
+    cout << "9 - Vector vs std::vector laikas" << endl;
     cin >> choice;
 
-    while (cin.fail() || (choice < 1 || choice > 7)) {
-        cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3, 4, 5, 6 arba 7";
+    while (cin.fail() || (choice < 1 || choice > 9)) {
+        cout << "Netinkamas pasirinkimas. Įveskite 1, 2, 3, 4, 5, 6, 7, 8 arba 9";
         cin.clear();
         cin.ignore(10000, '\n');
         cin >> choice;
@@ -35,7 +39,12 @@ int main() {
     } else if (choice == 7) {
         func_tests();
         func_input_output();
+    } else if (choice == 8) {
+        func_vector();
+    } else if (choice == 9) {
+        func_time();
     } 
+
 
 
     return 0;
