@@ -1,8 +1,10 @@
 #include "functions.h"
+#include "vector.h"
+
 
 void func_input_hands() {
     int m = 100, n = 0, pazymys, sum = 0, a, s;
-    vector<Studentas> studentai;
+    Vector<Studentas> studentai;
 
     while (n < m) {
         Studentas student;
@@ -98,7 +100,7 @@ void func_input_hands() {
 
 void func_generate_numbers() {
       int m = 100, n = 0, pazymys, sum = 0, a, s;
-    vector<Studentas> studentai;
+    Vector<Studentas> studentai;
 
     srand(time(0)); 
 
@@ -211,7 +213,7 @@ void func_generate_numbers() {
 void func_generate_names() {
     int m = 100, n = 0, pazymys, sum = 0, a, s, w;
     Studentas student;
-    vector<Studentas> studentai(m);
+    Vector<Studentas> studentai(m);
     string vard[] = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     string pav[] = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
 
@@ -577,7 +579,7 @@ void generate_new_file() {
     }
     sortedFile << "\tEgz." << endl;
 
-    vector<Studentas> students;
+    Vector<Studentas> students;
 
     for (int i = 1; i <= numStudents; ++i) {
         Studentas student;
@@ -625,7 +627,7 @@ void use_existing_file() {
     }
 
     cout << "VECTOR: " << endl;
-    vector<Studentas> students;
+    Vector<Studentas> students;
     Studentas studentas;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
@@ -690,8 +692,8 @@ void use_existing_file() {
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
     // Sukurkime naujus konteinerius kietuoliams ir vargsiukams
-    vector<Studentas> kietiakai;
-    vector<Studentas> vargsiukai;
+    Vector<Studentas> kietiakai;
+    Vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į kietuolius ir vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1074,7 +1076,7 @@ void use_existing_file_2(){
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-  vector<Studentas> vargsiukai;
+  Vector<Studentas> vargsiukai;
 
 // Perskirstome studentus į vargsiukus
 auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1356,7 +1358,7 @@ void use_existing_file_3(){
     ifstream fd(file_name);
     
     cout << "VECTOR: " << endl;
-    vector<Studentas> students;
+    Vector<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1431,7 +1433,7 @@ void use_existing_file_3(){
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-    vector<Studentas> vargsiukai;
+    Vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į vargsiukus naudodami std::remove_if
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1910,4 +1912,128 @@ void func_input_output() {
     }
     std::cout << std::endl;
     std::cout << "Egzamino rezultatas: " << student.getEgzaminas() << std::endl;
+}
+
+void func_vector(){
+
+    cout << "MAX_SIZE(): " << endl;
+    cout << endl;
+
+    Vector<char> p;
+    Vector<long> q;
+ 
+    cout.imbue(locale("C"));
+    cout << uppercase
+         << "p.max_size() = " << std::dec << p.max_size() << " = 0x"
+         << std::hex << p.max_size() << '\n'
+         << "q.max_size() = " << std::dec << q.max_size() << " = 0x"
+         << std::hex << q.max_size() << '\n';
+
+     cout << endl;
+// --------------------------------------------------------------------------
+    cout << "EMPTY(): "<< endl;
+    cout << endl;
+
+    cout << boolalpha;
+    Vector<int> numbers;
+    cout << "Initially, numbers.empty(): " << numbers.empty() << '\n';
+ 
+    numbers.push_back(42);
+    cout << "After adding elements, numbers.empty(): " << numbers.empty() << '\n';
+
+     cout << endl;
+// --------------------------------------------------------------------------
+    cout << "PUSH_BACK(): "<< endl;
+    cout << endl;
+
+    Vector<string> letters;
+ 
+    letters.push_back("abc");
+    string s{"def"};
+    letters.push_back(move(s));
+ 
+    std::cout << "std::vector letters holds: ";
+    for (auto&& e : letters)
+        cout << quoted(e) << ' ';
+ 
+    cout << "\nMoved-from string s holds: " << quoted(s) << '\n';
+    cout << endl;
+// --------------------------------------------------------------------------
+    cout << "OPERATOR=: "<< endl;
+    cout << endl;
+
+    Vector<int> foo (3,0);
+    Vector<int> bar (5,0);
+
+    bar = foo;
+    foo = Vector<int>();
+
+    cout << "Size of foo: " << int(foo.size()) << '\n';
+    cout << "Size of bar: " << int(bar.size()) << '\n';
+
+    cout << endl;
+// --------------------------------------------------------------------------
+
+    cout << "SWAP(): "<< endl;
+    cout << endl;
+
+    Vector<int> alice{1, 2, 3};
+    Vector<int> bob{7, 8, 9, 10};
+ 
+    auto print = [](const int& n) { cout << ' ' << n; };
+ 
+    // Print state before swap
+    cout << "Alice:";
+    for_each(alice.begin(), alice.end(), print);
+    cout << "\n" "Bob  :";
+    for_each(bob.begin(), bob.end(), print);
+    cout << '\n';
+ 
+    cout << "-- SWAP\n";
+    swap(alice, bob);
+ 
+    // Print state after swap
+    cout << "Alice:";
+    for_each(alice.begin(), alice.end(), print);
+    cout << "\n" "Bob  :";
+    for_each(bob.begin(), bob.end(), print);
+    cout << '\n';
+    cout << endl;
+
+}
+
+void func_time (){
+
+    auto start = std::chrono::steady_clock::now();
+    unsigned int sz = 100000000;  // 100000, 1000000, 10000000, 100000000
+    int std_vector = 0;
+    std::vector<int> v1;
+    for (int i = 1; i <= sz; ++i){
+        v1.push_back(i);
+        if (v1.capacity() == v1.size()){
+            std_vector++;
+        } 
+    }
+    auto end = std::chrono::steady_clock::now();
+
+    auto start_2 = std::chrono::steady_clock::now();
+    int Vector_2 = 0;
+    Vector<int> v2;
+    for (int i = 1; i <= sz; ++i){
+        v2.push_back(i);
+         if (v2.capacity() == v2.size()){
+            Vector_2++;
+        }
+    }
+    auto end_2 = std::chrono::steady_clock::now();
+
+    // Laukiam, kol procesorius laiko
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::chrono::duration<double> elapsed_seconds_2 = end_2 - start_2;
+
+    cout << "std::vector: " << elapsed_seconds.count() << "s\n";
+    cout << "std::vector atmintis perskirstyta: " << std_vector << " kartus" << endl;
+    cout << "Vector: " << elapsed_seconds_2.count() << "s\n";
+    cout << "Vector atmintis perskirstyta: " << Vector_2 << " kartus" << endl;
+
 }
