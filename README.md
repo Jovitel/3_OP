@@ -293,7 +293,8 @@ Taigi, pasirinkau Inno Setup Compiler.
 
 #### Rezultatai:
 
-<img src="\https://github.com/Jovitel/3_OP/assets/150922295/4f250011-c0ed-479e-9af2-62f0c850cdb6" width="700" />
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/4f250011-c0ed-479e-9af2-62f0c850cdb6" width="700" />
 
 <img src="https://github.com/Jovitel/3_OP/assets/150922295/31bf4956-d533-41bc-aada-5309c803a0a8" width="700" />
+
 
