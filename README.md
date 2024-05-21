@@ -236,3 +236,24 @@ Vector atmintis perskirstyta: 26 kartus
 
 Palyginant bendrą laiką, galima matyti, kad naudojant Vector užtrunkame mažiau laiko nei naudojant std::vector.
 
+# Testavimas:
+
+Naujos klasės tikrinimui naudojau catch testus.
+
+#### Rezultatai:
+
+```
+===============================================================================
+All tests passed (38 assertions in 1 test case)
+```
+
+# Doxygen dokumentacija:
+
+Dokumentacija buvo sukurta kaip ir v1.5 versijoje.
+
+Taip pat su Overleaf sukurtas PDF failas:
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/155a20ae-24ab-4bd1-81fb-dd826585f753" width="300" />
+
+
+
