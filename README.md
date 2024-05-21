@@ -262,7 +262,8 @@ Taip pat su Overleaf sukurtas PDF failas:
 3. Upload file
 4. Įkėliau Latex ZIP failą
 5. Parsisiunčiau PDF failą.
-   
+
+# Programos diegimo failas - setup.exe
 
 
 
