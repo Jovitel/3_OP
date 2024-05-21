@@ -270,3 +270,23 @@ Bandžiau naudoti Visual Studio ir parsisiųsti šį extension'ą, bet vis išme
 <img src="https://github.com/Jovitel/3_OP/assets/150922295/950eca15-917d-48fe-8a81-74cf090f757d" width="700" />
 
 Taigi, pasirinkau Inno Setup Compiler. 
+
+#### Eiga:
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/72fc4588-51fe-4bcf-a9a2-dd6a91f7d171" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/e5f7652f-b25f-4894-81b8-61ab3d48d754" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/b806474f-b90b-4030-a9da-9ad7fac25a1e" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/4b0ceccd-ee59-4d75-83ed-fafc13b829fc" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/0a1d74b0-b316-4181-93f8-02b5ed2a2a95" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/06be57a4-77b8-4be0-8fbd-bad1e8dabc90" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/4a54d084-7341-4165-823e-ca951cefec9a" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/a130140f-3d6d-4791-8a11-bd379157f300" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/6ead984b-ba99-435c-b5e4-8db9da9ae726" width="700" />
