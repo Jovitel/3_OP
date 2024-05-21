@@ -253,7 +253,16 @@ Dokumentacija buvo sukurta kaip ir v1.5 versijoje.
 
 Taip pat su Overleaf sukurtas PDF failas:
 
-<img src="https://github.com/Jovitel/3_OP/assets/150922295/155a20ae-24ab-4bd1-81fb-dd826585f753" width="300" />
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/155a20ae-24ab-4bd1-81fb-dd826585f753" width="700" />
+
+Eiga:
+
+1. Susikūriau Overleaf accountą.
+2. New project
+3. Upload file
+4. Įkėliau Latex ZIP failą
+5. Parsisiunčiau PDF failą.
+   
 
 
 
