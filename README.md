@@ -265,5 +265,6 @@ Taip pat su Overleaf sukurtas PDF failas:
 
 # Programos diegimo failas - setup.exe
 
+1. Parsisiunčiau šį extension'ą.
 
-
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/950eca15-917d-48fe-8a81-74cf090f757d" width="700" />
