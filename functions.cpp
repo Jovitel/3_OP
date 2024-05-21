@@ -59,7 +59,7 @@ void func_input_hands() {
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].getNd();
+        Vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
@@ -171,7 +171,7 @@ void func_generate_numbers() {
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].getNd();
+        Vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
@@ -213,7 +213,7 @@ void func_generate_numbers() {
 void func_generate_names() {
     int m = 100, n = 0, pazymys, sum = 0, a, s, w;
     Studentas student;
-    Vector<Studentas> studentai(m);
+    vector<Studentas> studentai(m);
     string vard[] = {"Jonas", "Juozas", "Ona", "Teresė", "Eglė", "Antanas", "Inga", "Eva", "Irma", "Jurga"};
     string pav[] = {"Kazlauskas", "Lapas", "Mileris", "Bondas", "Jonienė", "Milerienė", "Davida", "Garci", "Tulpienė", "Martinesa"};
 
@@ -303,7 +303,7 @@ void func_generate_names() {
     }
 
     for (int i = 0; i < n; i++) {
-        vector<int> pazymiai = studentai[i].getNd();
+        Vector<int> pazymiai = studentai[i].getNd();
 
         sort(pazymiai.begin(), pazymiai.end());
 
@@ -434,7 +434,7 @@ void func_input_file() {
 
         // Skaičiuojame medianą ir vidurkį
         for (int i = 0; i < studentai.size(); ++i) {
-            vector<int> pazymiai = studentai[i].getNd();
+            Vector<int> pazymiai = studentai[i].getNd();
             sort(pazymiai.begin(), pazymiai.end());
 
             int dydis = pazymiai.size();
@@ -579,7 +579,7 @@ void generate_new_file() {
     }
     sortedFile << "\tEgz." << endl;
 
-    Vector<Studentas> students;
+    vector<Studentas> students;
 
     for (int i = 1; i <= numStudents; ++i) {
         Studentas student;
@@ -627,7 +627,7 @@ void use_existing_file() {
     }
 
     cout << "VECTOR: " << endl;
-    Vector<Studentas> students;
+    vector<Studentas> students;
     Studentas studentas;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
@@ -692,8 +692,8 @@ void use_existing_file() {
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
     // Sukurkime naujus konteinerius kietuoliams ir vargsiukams
-    Vector<Studentas> kietiakai;
-    Vector<Studentas> vargsiukai;
+    vector<Studentas> kietiakai;
+    vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į kietuolius ir vargsiukus
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1076,7 +1076,7 @@ void use_existing_file_2(){
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-  Vector<Studentas> vargsiukai;
+  vector<Studentas> vargsiukai;
 
 // Perskirstome studentus į vargsiukus
 auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1358,7 +1358,7 @@ void use_existing_file_3(){
     ifstream fd(file_name);
     
     cout << "VECTOR: " << endl;
-    Vector<Studentas> students;
+    vector<Studentas> students;
     string line;
     int numMarks = 0; // Kintamasis saugantis namų darbų skaičių
 
@@ -1433,7 +1433,7 @@ void use_existing_file_3(){
     double seconds_sort = duration_sort.count() / 1000.0; // Konvertuojame milisekundes į sekundes
     cout << "Studentu rusiavimas didejimo tvarka:  " << seconds_sort << " s" << endl;
 
-    Vector<Studentas> vargsiukai;
+    vector<Studentas> vargsiukai;
 
     // Perskirstome studentus į vargsiukus naudodami std::remove_if
     auto start_split = chrono::steady_clock::now(); // Pradedame matuoti laiką
@@ -1760,33 +1760,28 @@ void func_generate() {
 void func_tests(){
     // KONSTRUKTORIUS
     {    
-        // Inicializuojame kintamuosius su testinėmis reikšmėmis
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
-        std::vector<int> nd = {2, 9, 7};
+        Vector<int> nd( {1, 2, 3} );
         int egzaminas = 4;
-        int nd_kiekis = 3;
         double gal_vid = 9.9;
         double gal_med = 7.5;
 
-        // Sukuriame studento objektą naudodami konstruktorių
-        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
+        Studentas studentas(vardas, pav, egzaminas, nd, gal_vid, gal_med); 
 
-        // Gauti duomenys iš studento objekto
         const std::string& get_vardas = studentas.getVardas();
         const std::string& get_pavarde = studentas.getPavarde();
-        const std::vector<int>& get_nd = studentas.getNd();
+        const Vector<int>& get_nd = studentas.getNd();
         int get_egzaminas = studentas.getEgzaminas();
         int get_nd_kiekis = studentas.getNdKiekis();
         double get_gal_vid = studentas.getGalutinisVid();
         double get_gal_med = studentas.getGalutineMed();
 
-        // Patikriname, ar gauti duomenys atitinka nurodytas reikšmes
         assert(get_vardas == vardas);
         assert(get_pavarde == pav);
         assert(get_nd == nd);
         assert(get_egzaminas == egzaminas);
-        assert(get_nd_kiekis == nd_kiekis);
+        assert(get_nd_kiekis == nd.size());
         assert(get_gal_vid == gal_vid);
         assert(get_gal_med == gal_med);
     }
@@ -1794,20 +1789,19 @@ void func_tests(){
     {
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
-        std::vector<int> nd = {2, 9, 7};
+        Vector<int> nd( {1, 2, 3} );
         int egzaminas = 4;
-        int nd_kiekis = 3;
         double gal_vid = 9.9;
         double gal_med = 7.5;
 
-        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
+        Studentas studentas(vardas, pav, egzaminas, nd, gal_vid, gal_med); 
         Studentas copy(studentas);
 
         assert(copy.getVardas() == vardas);
         assert(copy.getPavarde() == pav);
         assert(copy.getNd() == nd);
         assert(copy.getEgzaminas() == egzaminas);
-        assert(copy.getNdKiekis() == nd_kiekis);
+        assert(copy.getNdKiekis() == nd.size());
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
     }
@@ -1816,25 +1810,22 @@ void func_tests(){
     {
         std::string vardas = "Vardenis";
         std::string pav = "Pavardenis";
-        std::vector<int> nd = {2, 9, 7};
+        Vector<int> nd( {1, 2, 3} );
         int egzaminas = 4;
-        int nd_kiekis = 3;
         double gal_vid = 9.9;
         double gal_med = 7.5;
 
-        Studentas studentas(vardas, pav, egzaminas, nd, nd_kiekis, gal_vid, gal_med); 
+        Studentas studentas(vardas, pav, egzaminas, nd, gal_vid, gal_med); 
         Studentas copy(std::move(studentas)); 
 
-        // assert tikrina ar salyga yra teisinga
         assert(copy.getVardas() == vardas);
         assert(copy.getPavarde() == pav);
         assert(copy.getNd() == nd);
         assert(copy.getEgzaminas() == egzaminas);
-        assert(copy.getNdKiekis() == nd_kiekis);
+        assert(copy.getNdKiekis() == nd.size());
         assert(copy.getGalutinisVid() == gal_vid);
         assert(copy.getGalutineMed() == gal_med);
 
-        // Patikriname, ar perkeltas objektas yra tuščias
         assert(studentas.getVardas().empty());
         assert(studentas.getPavarde().empty());
         assert(studentas.getNd().empty());
@@ -1845,29 +1836,22 @@ void func_tests(){
     }
     // Destruktoriaus patikrinimas
     {
-    // Sukuriamas dinaminis studento objektas
-    Studentas* studentas = new Studentas();
+        Studentas* studentas = new Studentas();
 
-    // Pridedami pažymiai
-    studentas->addnd(8);
-    studentas->addnd(9);
-    studentas->addnd(10);
+        studentas->addnd(8);
+        studentas->addnd(9);
+        studentas->addnd(10);
 
-    // Patikrinama, ar studento objekto pažymiai ne tušti
-    assert(!studentas->getNd().empty()); 
+        assert(!studentas->getNd().empty()); 
 
-    // Studento objektas sunaikinamas
-    delete studentas; 
+        delete studentas; 
 
-    // Sukuriamas naujas studento objektas naudojant default konstruktorių
-    Studentas SStudentas;
+        Studentas SStudentas;
 
-    // Patikrinama, ar studento objekto pažymiai ne tušti
-    assert(SStudentas.getNd().empty());
+        assert(SStudentas.getNd().empty());
     }
 
-    cout << "Visi testai sekmingi." << endl;
-
+    std::cout << "Visi testai sekmingi." << endl;
 }
 
 void func_input_output() {
