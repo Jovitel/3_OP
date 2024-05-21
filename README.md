@@ -1,4 +1,4 @@
-![image](https://github.com/Jovitel/3_OP/assets/150922295/2115af43-420a-4061-9d79-28650e8d1661)//3 užduotis//
+//3 užduotis//
 
 Sukūriau Vector klasę, kuri yra pilnavertė alternatyva std::vector konteineriui, t.y. visi fonkciunalumai (Member types, Member functions, Non-member functions). Naudojausi: https://en.cppreference.com/w/cpp/container/vector
 
