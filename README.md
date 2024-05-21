@@ -1,4 +1,4 @@
-//3 užduotis//
+![image](https://github.com/Jovitel/3_OP/assets/150922295/2115af43-420a-4061-9d79-28650e8d1661)//3 užduotis//
 
 Sukūriau Vector klasę, kuri yra pilnavertė alternatyva std::vector konteineriui, t.y. visi fonkciunalumai (Member types, Member functions, Non-member functions). Naudojausi: https://en.cppreference.com/w/cpp/container/vector
 
@@ -290,3 +290,10 @@ Taigi, pasirinkau Inno Setup Compiler.
 <img src="https://github.com/Jovitel/3_OP/assets/150922295/a130140f-3d6d-4791-8a11-bd379157f300" width="700" />
 
 <img src="https://github.com/Jovitel/3_OP/assets/150922295/6ead984b-ba99-435c-b5e4-8db9da9ae726" width="700" />
+
+#### Rezultatai:
+
+<img src="\https://github.com/Jovitel/3_OP/assets/150922295/4f250011-c0ed-479e-9af2-62f0c850cdb6" width="700" />
+
+<img src="https://github.com/Jovitel/3_OP/assets/150922295/31bf4956-d533-41bc-aada-5309c803a0a8" width="700" />
+
